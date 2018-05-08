@@ -1,0 +1,131 @@
+<scroll-view scroll-y style="height: {{windowHeight}}px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+  <view class='container' style='height:300rpx;'>
+    <image class='blur' src='{{image_prefix+requestDishResult[0].IMAGE_PATH+image_suffix}}'></image>
+    <view class='dish_detail'>
+      <image class='dish_detail_image' style='' mode='scaleToFill' src='{{image_prefix+requestDishResult[0].IMAGE_PATH+image_suffix}}'></image>
+      <view class="weui-flex dish_detail_text">
+        <view class="detail_text" style="">菜名：{{requestDishResult[0].NAME}}</view>
+        <view class="dish_detail_text_minor" style="">热量：{{requestDishResult[0].calorie}} {{randomDish.calorieUnit}}</view>
+        <!-- <view class="dish_detail_text_minor" style="">口味：{{randomDish.taste}}</view> -->
+        <view class="dish_detail_text_minor" style="">菜系：{{requestDishResult[0].cuisine}}</view>
+        <view class="dish_detail_text_minor" style="">评分：{{requestDishResult[0].starRank}}</view>
+        <view class='' style='display:flex;'>
+          <block wx:for="{{scoreStars}}" wx:for-index="idx">
+            <view wx:if="{{scoreStars[idx]==0}}">
+              <image class="weui-flex__item" style="width: 30rpx" src="/images/star_e.png" mode="widthFix"></image>
+            </view>
+            <view wx:if="{{scoreStars[idx]==1}}">
+              <image class="weui-flex__item" style="width: 30rpx" src="/images/star_h.png" mode="widthFix"></image>
+            </view>
+            <view wx:if="{{scoreStars[idx]==2}}">
+              <image class="weui-flex__item" style="width: 30rpx" src="/images/star_f.png" mode="widthFix"></image>
+            </view>
+          </block>
+          <!-- <view class="detail_text" style="padding-left:10rpx;">{{randomDish.score}}</view> -->
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- <view class="weui-panel weui-panel_access">
+ <view class="weui-media-box weui-media-box_text">
+  <view class="weui-media-box__desc">{{randomDish.briefInfo}}</view>
+</view> 
+</view>  -->
+
+  <view class="weui-panel weui-panel_access" style='margin-top:0rpx;'>
+    <view class="weui-panel__hd">菜品简介：{{requestDishResult[0].briefInfo}}</view>
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_text">
+        <view style='display:flex;justify-content:space-around;align-items:center;'>
+          <view class="dish_important_text">{{canteen}}</view>
+          <view class="weui-flex" style='display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-end;'>
+            <view class="dish_important_text" wx:if="{{requestDishResult[0].isBreakfast==1}}">早餐</view>
+            <view class="dish_important_text" wx:if="{{requestDishResult[0].isLunch==1}}">午餐</view>
+            <view class="dish_important_text" wx:if="{{requestDishResult[0].isDinner==1}}">晚餐</view>
+          </view>
+          <view class="weui-flex" style='display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-end;'>
+            <view class="dish_important_text" wx:if="{{requestDishResult[0].isPriceAvailable==1}}">{{requestDishResult[0].price}} {{requestDishResult[0].priceUnit}}</view>
+            <view class="dish_important_text" wx:if="{{requestDishResult[0].isPriceAvailable==0}}">{{requestDishResult[0].priceLow}}~{{requestDishResult[0].priceHigh}}</view>
+            <view class="dish_important_text" wx:if="{{requestDishResult[0].isPriceAvailable==0}}">{{requestDishResult[0].priceUnit}}</view>
+          </view>
+          <view class="weui-flex" style='display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-end;'>
+            <view class="dish_important_text">{{requestDishResult[0].level}} 层</view>
+            <view class="dish_important_text">{{requestDishResult[0].window}} 号窗口</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-panel__hd">营养信息</view>
+  <view class="weui-panel__bd">
+    <view class="weui-media-box weui-media-box_text">
+      <view style='display:flex;justify-content:flex-start;flex-wrap:wrap;'>
+        <view class="dish_nutrition_text" wx:if="{{requestDishResult[0].isHighSugar==1}}">高糖</view>
+        <view class="dish_nutrition_text" wx:if="{{requestDishResult[0].isHighProtein==1}}">高蛋白</view>
+        <view class="dish_nutrition_text" wx:if="{{requestDishResult[0].isHighFat==1}}">高脂</view>
+        <view class="dish_nutrition_text" wx:if="{{requestDishResult[0].isHighVitamin==1}}">富含维他命</view>
+        <view class="dish_nutrition_text" wx:if="{{requestDishResult[0].isHighFiber==1}}">高纤维</view>
+        <view class="dish_nutrition_text" wx:if="{{requestDishResult[0].isHighOil==1}}">富油</view>
+        <view class="dish_nutrition_text" wx:if="{{requestDishResult[0].isHighCalcium==1}}">高钙</view>
+        <view class="dish_nutrition_text" wx:if="{{requestDishResult[0].isHighSalt==1}}">高盐</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-panel weui-panel_access" style='margin-top:0rpx;'>
+    <view style='display:flex;justify-content:space-between;align-items:center'>
+      <view class="weui-panel__hd">评价({{requestDishResult[0].starAllCount}})</view>
+      <view class="comment_write" bindtap='writeComment'>写短评</view>
+    </view>
+    <block wx:for="{{comments.studentID}}">
+      <navigator id="{{comments.studentID}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="none">
+        <view class="comment_box">
+          <view class="weui-flex" style='display:flex;justify-content:space-between;align-items:flex-end;'>
+            <!-- <image class="" style="width: 75rpx" src="/images/youtiao.jpg" mode="widthFix" bindtap="changeSort"></image> -->
+            <view class="weui-media-box__title comment_nickname" style='display:flex' bindtap='showUserDetail'>
+              <image class="weui-flex__item" style="width: 30rpx;margin-right:10rpx;" src="{{comments.studentHead[index]}}" mode="widthFix"></image>
+              <view>{{comments.studentNickname[index]}}</view>
+              <view>({{gradeList[comments.studentGrade[index]]}})</view>
+            </view>
+            <view class="weui-flex" style='display:flex;justify-content:flex-end;align-items:flex-end;'>
+              <block wx:for="{{comments.studentScore[index]}}" wx:for-index="idx">
+                <view wx:if="{{comments.studentScore[index][idx]==0}}">
+                  <image class="weui-flex__item" style="width: 25rpx" src="/images/star_e.png" mode="widthFix"></image>
+                </view>
+                <view wx:if="{{comments.studentScore[index][idx]==1}}">
+                  <image class="weui-flex__item" style="width: 25rpx" src="/images/star_h.png" mode="widthFix"></image>
+                </view>
+                <view wx:if="{{comments.studentScore[index][idx]==2}}">
+                  <image class="weui-flex__item" style="width: 25rpx" src="/images/star_f.png" mode="widthFix"></image>
+                </view>
+              </block>
+            </view>
+            <!-- <view class="weui-media-box__title comment_nickname">({{gradeList[comments.studentGrade[index]]}})</view> -->
+          </view>
+          <view class="weui-article__p comment_content">{{comments.studentComment[index]}}</view>
+          <view class="weui-flex" style='display:flex;justify-content:space-between;align-items:flex-end;'>
+            <view wx:if="{{comments.isUserFavoured[index]}}">
+              <image id="{{index}}" style="width: 35rpx; height: 35rpx;" src="/images/favour_f.png" mode="widthFix" bindtap="changeFavoured"></image>
+            </view>
+            <view wx:else>
+              <image id="{{index}}" style="width: 35rpx; height: 35rpx;" src="/images/favour_e.png" mode="widthFix" bindtap="changeFavoured"></image>
+            </view>
+            <view class="weui-cell__ft  comment_gradeanddate">{{comments.commentDate[index]}}</view>
+            <!-- <view class="weui-cell__ft  comment_gradeanddate">{{comments.commentDate[index]}}</view>  -->
+          </view>
+        </view>
+      </navigator>
+    </block>
+    <view wx:if="{{isRandom==1}}">
+      <view class="weui-loadmore">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+<view wx:if="{{isRandom==1}}">
+  <button class="weui-flex__item comment_btn" type="primary" bindtap="getRandomDish">再来一次</button>
+</view>

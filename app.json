@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/canteen/canteen",
+    "pages/random/random",
+    "pages/about/about",
+    "pages/chat/chat",
+    "pages/dishes/dishes",
+    "pages/comments/comments",
+    "pages/login/login",
+    "pages/about/detail/detail",
+    "pages/about/detail/changeDetail/changeDetail",
+    "pages/randomDish/randomDish",
+    "pages/comments/writeComment/writeComment",
+    "pages/about/showDetail/showDetail"
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "text": "菜品信息",
+        "pagePath": "pages/canteen/canteen",
+        "iconPath": "images/icons/food.png",
+        "selectedIconPath": "images/icons/food-selected.png"
+      },
+      {
+        "text": "随机选菜",
+        "pagePath": "pages/random/random",
+        "iconPath": "images/icons/dice.png",
+        "selectedIconPath": "images/icons/dice-selected.png"
+      },
+      {
+        "text": "吹水闲聊",
+        "pagePath": "pages/chat/chat",
+        "iconPath": "images/icons/chat.png",
+        "selectedIconPath": "images/icons/chat-selected.png"
+      },
+      {
+        "text": "关于",
+        "pagePath": "pages/about/about",
+        "iconPath": "images/icons/about.png",
+        "selectedIconPath": "images/icons/about-selected.png"
+      }
+    ],
+    "color": "#000",
+    "selectedColor": "#62b900"
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "清华去哪儿吃"
+  }
+}

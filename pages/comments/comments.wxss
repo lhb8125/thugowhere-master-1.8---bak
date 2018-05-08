@@ -1,0 +1,43 @@
+/* pages/comments/comments.wxss */
+.comment_box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* align-items: flex-start; */
+  padding-left: 10rpx;
+  padding-top: 0rpx;
+  margin-top: 0rpx;
+  /* padding-top: 10rpx; */
+}
+
+.comment_content{
+  font-size: 28rpx;
+  font-family: sans-serif;
+   padding-top: 16rpx; 
+}
+
+.comment_nickname{
+  font-size: 24rpx;
+  font-family: sans-serif;
+   padding-top: 0rpx; 
+   margin-top: 0rpx;
+}
+
+.comment_gradeanddate{
+  font-size: 28rpx;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: right;
+}
+
+.comment_btn{
+  /* height: 8%; */
+  width: 100%;
+  /* bottom: 0; */
+  /* top: 92%; */
+  z-index: 9999;
+  position: fixed;
+  height: 80rpx;
+  font-size:35rpx;
+  bottom: 0;
+}

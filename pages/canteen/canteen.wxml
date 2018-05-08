@@ -1,0 +1,33 @@
+<!--dishes/dishes.wxml-->
+<view class="page__bd">
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd">食堂列表</view>
+    <view class="weui-panel__bd">
+      <navigator id="zijing" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap='changePage'>
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image class="weui-media-box__thumb" src="/images/zijing.jpg" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">紫荆园</view>
+          <view class="weui-media-box__desc">杂英纷已积，含芳独暮春。</view>
+        </view>
+      </navigator>
+      <navigator id="taoli" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap='changePage'>
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image class="weui-media-box__thumb" src="/images/taoli.jpg" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">桃李园</view>
+          <view class="weui-media-box__desc">桃李不言，下自成蹊。</view>
+        </view>
+      </navigator>
+    </view>
+    <view class="weui-panel__ft">
+      <view class="weui-cell weui-cell_access weui-cell_link">
+        <view class="weui-cell__bd">查看更多</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
+    </view>
+    <!-- <map longitude="120" latifdsfkl;ksdfl;kxvxcvfsfsdfsdfsffsdfsfsdfsdude="37" scale='10'></map> -->
+  </view>
+</view>

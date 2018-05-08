@@ -1,0 +1,23 @@
+.input_text{
+  width: 250rpx;
+  height: 30rpx;
+  border-width: thin;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 8%;
+  text-align: center;
+  font-size: 24rpx;
+}
+
+.input_box{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.random_Btn{
+  margin-top: 5rpx;
+  height: 80rpx;
+  font-size:35rpx;
+}

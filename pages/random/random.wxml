@@ -1,0 +1,46 @@
+<view class="weui-panel weui-panel_access">
+  <view class="weui-panel__hd">限定条件</view>
+  <view class="weui-panel__bd">
+    <view class="weui-media-box weui-media-box_text">
+      <view class="weui-media-box__title weui-media-box__title_in-text">价格</view>
+      <view class='input_box'>
+        <input class=" input_text" type="number" placeholder="最小值" />
+        <view class="" style=''>-</view>
+        <input class=" input_text" type="number" placeholder="最大值" />
+      </view>
+      <view class="weui-media-box__title weui-media-box__title_in-text">评分</view>
+      <view class='input_box'>
+        <input class=" input_text" type="number" placeholder="最小值" />
+        <view class="" style=''>-</view>
+        <input class=" input_text" type="number" placeholder="最大值" />
+      </view>
+    </view>
+  </view>
+</view>
+<view class="weui-cells weui-cells_after-title">
+  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__bd">食堂</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access">
+      <picker value="{{canteen}}" range="{{canteenList}}" bindchange="changeCanteen">
+        {{canteenList[canteen]}}
+      </picker>
+    </view>
+  </navigator>
+  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__bd">口味</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access">
+      <picker value="{{taste}}" range="{{tasteList}}" bindchange="changeTaste">
+        {{tasteList[taste]}}
+      </picker>
+    </view>
+  </navigator>
+  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__bd">菜系</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access">
+      <picker value="{{cuisine}}" range="{{cuisineList}}" bindchange="changeCuisine">
+        {{cuisineList[cuisine]}}
+      </picker>
+    </view>
+  </navigator>
+</view>
+<button class="weui-flex__item random_Btn" type="primary" bindtap="generateRandom">随机选菜</button>

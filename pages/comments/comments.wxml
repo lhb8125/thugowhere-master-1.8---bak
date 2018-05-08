@@ -1,0 +1,72 @@
+ <view class="page__bd">
+  <view class="weui-panel weui-panel_access">
+    <!-- <view class="weui-panel__hd">评价</view> -->
+    <view class="weui-panel__bd">
+      <navigator id="zijing" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap='changePage'>
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image class="weui-media-box__thumb" src="{{path}}" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">{{name}}</view>
+          <view class="weui-media-box__desc">{{score}}</view>
+        </view>
+      </navigator>
+    </view>
+    <!-- <view class="weui-panel__ft">
+      <view class="weui-cell weui-cell_access weui-cell_link">
+        <view class="weui-cell__bd">查看更多</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
+    </view> -->
+    <!-- <map longitude="120" latifdsfkl;ksdfl;kxvxcvfsfsdfsdfsffsdfsfsdfsdude="37" scale='10'></map> -->
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">评价</view>
+      <block wx:for="{{comments.studentID}}">
+        <navigator id="{{comments.studentID}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="none">
+          <view class="comment_box">
+            <view class="weui-flex" style='display:flex;justify-content:space-between;align-items:flex-end;'>
+              <!-- <image class="" style="width: 75rpx" src="/images/youtiao.jpg" mode="widthFix" bindtap="changeSort"></image> -->
+              <view class="weui-media-box__title comment_nickname" style='display:flex'>
+                <image class="weui-flex__item" style="width: 30rpx;margin-right:10rpx;" src="{{comments.studentHead[index]}}" mode="widthFix"></image>
+                <view>{{comments.studentNickname[index]}}</view>
+                <view>({{gradeList[comments.studentGrade[index]]}})</view>
+              </view>
+              <view class="weui-flex" style='display:flex;justify-content:flex-end;align-items:flex-end;'>
+                <block wx:for="{{comments.studentScore[index]}}" wx:for-index="idx">
+                  <view wx:if="{{comments.studentScore[index][idx]==0}}">
+                    <image class="weui-flex__item" style="width: 25rpx" src="/images/star_e.png" mode="widthFix"></image>
+                  </view>
+                  <view wx:if="{{comments.studentScore[index][idx]==1}}">
+                    <image class="weui-flex__item" style="width: 25rpx" src="/images/star_h.png" mode="widthFix"></image>
+                  </view>
+                  <view wx:if="{{comments.studentScore[index][idx]==2}}">
+                    <image class="weui-flex__item" style="width: 25rpx" src="/images/star_f.png" mode="widthFix"></image>
+                  </view>
+                </block>
+              </view>
+              <!-- <view class="weui-media-box__title comment_nickname">({{gradeList[comments.studentGrade[index]]}})</view> -->
+            </view>
+            <view class="weui-article__p comment_content">{{comments.studentComment[index]}}</view>
+            <view class="weui-flex" style='display:flex;justify-content:space-between;align-items:flex-end;'>
+              <view wx:if="{{comments.isUserFavoured[index]}}">
+                <image id="{{index}}" style="width: 35rpx; height: 35rpx;" src="/images/favour_f.png" mode="widthFix" bindtap="changeFavoured"></image>
+              </view>
+              <view wx:else>
+                <image id="{{index}}" style="width: 35rpx; height: 35rpx;" src="/images/favour_e.png" mode="widthFix" bindtap="changeFavoured"></image>
+              </view>
+              <view class="weui-cell__ft  comment_gradeanddate">{{comments.commentDate[index]}}</view>
+              <!-- <view class="weui-cell__ft  comment_gradeanddate">{{comments.commentDate[index]}}</view>  -->
+            </view>
+          </view>
+        </navigator>
+      </block>
+      <view class="weui-panel__ft">
+        <view class="weui-cell weui-cell_access weui-cell_link">
+          <view class="weui-cell__bd">查看更多</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+      </view>
+      <button class="weui-flex__item comment_btn" type="primary" bindtap="typeComment">评价</button>
+    </view>
+  </view>
+</view> 

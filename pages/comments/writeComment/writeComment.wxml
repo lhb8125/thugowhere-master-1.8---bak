@@ -1,0 +1,22 @@
+<view class='page_bd'>
+  <view class="page_comment">
+    <view class="weui-flex" style='display:flex;justify-content:center;align-items:flex-end;'>
+      <block wx:for="{{star}}" wx:for-index="idx">
+        <view hidden='{{star[idx]==1 || star[idx]==2}}'>
+          <image class="weui-flex__item" style="width: 60rpx" src="/images/star_e.png" mode="widthFix" id="{{idx}}" bindtap="getScore"></image>
+        </view>
+        <view hidden='{{star[idx]==0 || star[idx]==2}}'>
+          <image class="weui-flex__item" style="width: 60rpx" src="/images/star_h.png" mode="widthFix" id="{{idx}}" bindtap="getScore"></image>
+        </view>
+        <view hidden='{{star[idx]==1 || star[idx]==0}}'>
+          <image class="weui-flex__item" style="width: 60rpx" src="/images/star_f.png" mode="widthFix" id="{{idx}}" bindtap="getScore"></image>
+        </view>
+      </block>
+    </view>
+    <view class="comment_box">
+      <textarea class="weui-textarea" bindinput="bindTextAreaBlur" placeholder="快来说说你的看法吧" maxlength='200' style="height:200rpx;auto-height:true;" />
+      <view class="weui-textarea-counter">{{wordCount}}/200</view>
+    </view>
+    <button class="weui-flex__item submit_btn" type="primary" bindtap="submitComment">提交</button>
+  </view>
+</view>

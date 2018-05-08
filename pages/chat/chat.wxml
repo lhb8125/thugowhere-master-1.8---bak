@@ -1,0 +1,6 @@
+<!--pages/chat/chat.wxml-->
+<view class='container'>
+  <text>开发中</text>
+  <text>显然，这个版块才是重点。
+  </text>
+</view>

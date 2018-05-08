@@ -1,0 +1,103 @@
+<!--pages/about/detail/detail.wxml-->
+<!-- <navigator id="name" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap='accountDetail'>
+    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+      <image class="weui-media-box__thumb" src="/images/head.jpg" />
+    </view>
+    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+      <view class="weui-media-box__title">{{userInfo.nickname}}</view>
+      <view class="weui-media-box__desc">{{userInfo.studentID}}</view>
+    </view>
+  </navigator> -->
+<view class='background'>
+  <view class='detail_head'>
+    <view class="weui-cells__title">详细信息</view>
+    <view class="weui-cells__title " wx:if="{{isChanged==0}}" style='color:blue;' bindtap="changeDetail">修改</view>
+  </view>
+  <view wx:if="{{isChanged==0}}">
+    <view class='detail_box'>
+      <view class="detail_item">昵称</view>
+      <view class="detail_text">{{userInfo.nickname}}</view>
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">姓名</view>
+      <view class="detail_text">{{userInfo.name}}</view>
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">家乡</view>
+      <view class="detail_text">{{hometownList[userInfo.hometown]}}</view>
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">专业</view>
+      <view class="detail_text">{{majorList[userInfo.major]}}</view>
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">年级</view>
+      <view class="detail_text">{{gradeList[userInfo.grade]}}</view>
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">爱好</view>
+      <view class="detail_text">{{userInfo.hobby}}</view>
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">手机</view>
+      <view class="detail_text">{{userInfo.phone}}</view>
+    </view>
+  </view>
+
+  <view wx:if="{{isChanged==1}}">
+    <view class='detail_box'>
+      <view class="detail_item">昵称</view>
+      <input class="detail_item detail_input" bindinput="nicknameInput" placeholder="{{userInfo.nickname}}" />
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">姓名</view>
+      <input class="detail_item  detail_input" bindinput="nameInput" placeholder="{{userInfo.name}}" />
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">家乡</view>
+      <picker value="{{userInfo.hometown}}" range="{{hometownList}}" bindchange="changeHometown">
+        <view class="detail_item detail_input">{{hometownList[userInfo.hometown]}}</view>
+      </picker>
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">专业</view>
+      <picker value="{{userInfo.major}}" range="{{majorList}}" bindchange="changeMajor">
+        <view class="detail_item detail_input">{{majorList[userInfo.major]}}</view>
+      </picker>
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">年级</view>
+      <picker value="{{userInfo.grade}}" range="{{gradeList}}" bindchange="changeGrade">
+        <view class="detail_item detail_input">{{gradeList[userInfo.grade]}}</view>
+      </picker>
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">爱好</view>
+      <input class="detail_item  detail_input" bindinput="hobbyInput" placeholder="{{userInfo.hobby}}" />
+    </view>
+    <view class='detail_box'>
+      <view class="detail_item">手机</view>
+      <input class="detail_item  detail_input" bindinput="phoneInput" placeholder="{{userInfo.phone}}" />
+    </view>
+    <button class="weui-btn" type="primary" bindtap="makeSure">完成</button>
+  </view>
+
+  <!-- <view class="weui-cell">
+    <view class="weui-cell__bd">姓名</view>
+    <view class="weui-cell__ft">{{userInfo.name}}</view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__bd">年级</view>
+    <view class="weui-cell__ft">{{gradeList[userInfo.grade]}}</view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__bd">爱好</view>
+    <view class="weui-cell__ft">{{userInfo.hobby}}</view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__bd">手机</view>
+    <view class="weui-cell__ft">{{userInfo.phone}}</view>
+  </view> -->
+  <!-- <button class="weui-btn" type="primary" bindtap="changeDetail">修改</button> -->
+  <!-- </view>  -->
+</view>

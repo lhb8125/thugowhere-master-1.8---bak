@@ -1,0 +1,131 @@
+.dish_detail_image {
+  width: 250rpx;
+  height: 250rpx;
+  /* z-index: 1000; */
+  margin-right: 40rpx;
+  margin-left: 40rpx;
+}
+
+.blur{
+  filter: blur(30px);
+  -webkit-filter: blur(20px);
+  background-repeat: repeat;
+  background-size: 100% 100%;
+  width: 750rpx;
+  height: 300rpx;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  position:absolute;
+   align-self: center; 
+  /* z-index: 0; */
+}
+
+.dish_detail{
+  /* z-index: 1000; */
+  width: 750rpx;
+  height: 300rpx;
+  display: flex;
+  top: 0;
+  left: 0;
+  position:absolute;
+  margin: 20rpx;
+  justify-content: flex-start;
+   align-items: flex-start; 
+}
+
+.dish_detail_text {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  font-size: 32rpx;
+  font-family: sans-serif;
+  color: black;
+  /* z-index: 1000; */
+  /* margin-right: 20rpx; */
+  /* margin-left: 40rpx; */
+}
+
+.dish_detail_text_minor{
+  font-size: 28rpx;
+}
+
+.dish_important_text {
+  font-size: 30rpx;
+  font-family: sans-serif;
+  color: red;
+   font-weight: bold; 
+  /* z-index: 1000; */
+  /* margin-right: 20rpx; */
+  /* margin-left: 40rpx; */
+}
+
+.dish_nutrition_text {
+  font-size: 30rpx;
+  font-family: sans-serif;
+  color: black;
+  /* font-weight: bold; */
+  /* z-index: 1000; */
+   margin-right: 20rpx; 
+   margin-left: 20rpx; 
+}
+
+.comment_box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* align-items: flex-start; */
+  padding-left: 10rpx;
+  padding-top: 0rpx;
+  margin-top: 0rpx;
+   /* z-index: 0;  */
+  /* padding-top: 10rpx; */
+}
+
+.comment_content{
+  font-size: 28rpx;
+  font-family: sans-serif;
+   padding-top: 16rpx; 
+}
+
+.comment_nickname{
+  font-size: 24rpx;
+  font-family: sans-serif;
+   padding-top: 0rpx; 
+   margin-top: 0rpx;
+}
+
+.comment_gradeanddate{
+  font-size: 28rpx;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: right;
+}
+
+.comment_btn{
+  width: 100%;
+  bottom: 0;
+  /* bottom: 0; */
+  /* z-index: 1000; */
+  position: fixed;
+  height: 80rpx;
+  font-size:35rpx;
+}
+
+.comment_hidden_btn{
+  height: 8%;
+  width: 100%;
+  bottom: 0;
+  top: 92%;
+  /* z-index: 1000; */
+  position: fixed;
+}
+
+.comment_write{
+  color: black;
+  font-weight: bold;
+  font-size: 29rpx;
+  padding-right: 30rpx;
+  font-family: sans-serif;
+  text-decoration-line: underline;
+}

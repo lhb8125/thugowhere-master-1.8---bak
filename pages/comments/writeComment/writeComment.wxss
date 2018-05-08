@@ -1,0 +1,43 @@
+/* pages/comments/writeComment/writeComment.wxss */
+
+page {
+  height: 100%;
+}
+
+.page_bd {
+  width: 100%;
+  height: 100%;
+  /* background: floralwhite; */
+  z-index: 0;
+}
+
+.page_comment {
+  top: 250rpx;
+  left: 150rpx;
+  width: 450rpx;
+   display: flex; 
+   flex-direction: column; 
+   justify-content: space-between; 
+  position: absolute;
+}
+
+.comment_box {
+  font-size: 28rpx;
+  font-family: sans-serif;
+  text-align: left;
+  border-width: thin;
+  border-style: solid;
+  border-color: black;
+  border-radius: 3%;
+  padding: 15rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  background: floralwhite;
+}
+
+.submit_btn{
+  width: 100%;
+  margin-top: 10rpx;
+  height: 70rpx;
+  font-size: 28rpx;
+}

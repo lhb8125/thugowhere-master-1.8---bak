@@ -1,0 +1,167 @@
+<!--pages/dishes/dishes.wxml-->
+<!-- <text>pages/dishes/dishes.wxml</text> -->
+<!-- <view wx:for="{{array}}">{{item}}</view>
+<view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="i">
+  <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="j">
+    <view wx:if="{{i <= j}}">
+      {{i}} * {{j}} = {{i * j}}
+    </view>
+  </view>
+</view> -->
+<!-- <switch wx:for="{{objectArray}}" wx:key="unique" style="display: block;"> {{item.id}} </switch>
+<button bindtap="switch"> Switch </button>
+<button bindtap="addToFront"> Add to the front </button>
+
+<switch wx:for="{{numberArray}}" wx:key="*this" style="display: block;"> {{item}} </switch>
+<button bindtap="addNumberToFront"> Add to the front </button> -->
+<template name="dishDetail">
+  <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:if='{{isShowDetail}}'>
+    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+      <image class="weui-media-box__thumb" src="{{path}}" />
+    </view>
+    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+      <view class="weui-media-box__title">{{name}}</view>
+      <view class="weui-media-box__desc">{{price}}</view>
+    </view>
+  </navigator>
+</template>
+
+<import src="../../public/toast.wxml" />
+
+<view class="page">
+  <view class="page__bd">
+    <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{isShowDetail}}"></view>
+    <view class="drawer_screen" data-status="close" wx:if="{{isShowDetail}}">
+      <image class="" style="width: 100%" src="{{image_prefix+database[dishDetailIndex].IMAGE_PATH+image_suffix}}" mode="scaleToFill" bindtap="changeSort"></image>
+      <view class="weui-flex" style='display:flex;justify-content:space-between;align-items=flex-end'>
+        <view class="weui-flex" style='display:flex;flex-direction:column;justify-content:space-around;align-items:flex-start;'>
+          <view class="detail_text" style="">菜名：{{database[dishDetailIndex].NAME}}</view>
+          <view class="detail_text" style="">热量：{{database[dishDetailIndex].calorie}} {{database[dishDetailIndex].calorieUnit}}</view>
+          <!-- <view class="detail_text" style="">口味：{{selectedDishes.taste[dishDetailIndex]}}</view> -->
+          <view class="detail_text" style="">菜系：{{database[dishDetailIndex].cuisine}}</view>
+        </view>
+        <view class="weui-flex" style='display:flex;flex-direction:column;justify-content:space-around;align-items:flex-end;'>
+          <view class="detail_text" style="">评分</view>
+          <view class="detail_score" style="">{{database[dishDetailIndex].starRank}}</view>
+          <view class="weui-flex" style='display:flex;justify-content:flex-end;padding-right:10px;'>
+            <block wx:for="{{scoreStars[dishDetailIndex]}}" wx:for-index="idx">
+              <view wx:if="{{scoreStars[dishDetailIndex][idx]==0}}">
+                <image class="weui-flex__item" style="width: 15px; height: 15px;" src="/images/star_e.png" mode="aspectFill"></image>
+              </view>
+              <view wx:if="{{scoreStars[dishDetailIndex][idx]==1}}">
+                <image class="weui-flex__item" style="width: 15px; height: 15px;" src="/images/star_h.png" mode="aspectFill"></image>
+              </view>
+              <view wx:if="{{scoreStars[dishDetailIndex][idx]==2}}">
+                <image class="weui-flex__item" style="width: 15px; height: 15px;" src="/images/star_f.png" mode="aspectFill"></image>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+      <view class="detail_text" style="">描述：{{database[dishDetailIndex].briefInfo}}</view>
+      <view class="weui-flex" style='display:flex;justify-content:space-around;'>
+        <view class="btn_ok" type="default" bindtap="cancelDetail">取消</view>
+        <view class="btn_ok" type="default" bindtap="showComments">查看评论</view>
+      </view>
+    </view>
+
+    <view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>实时搜索文本</view>
+        </view>
+      </navigator>
+      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>实时搜索文本</view>
+        </view>
+      </navigator>
+      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>实时搜索文本</view>
+        </view>
+      </navigator>
+      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>实时搜索文本</view>
+        </view>
+      </navigator>
+    </view>
+    <view class="weui-flex button-sp-area">
+      <view>
+        <button class="weui-flex__item button-size" type="default" size="mini" bindtap="changeTime">{{timeList[time]}}</button>
+      </view>
+      <view>
+        <button class="weui-flex__item button-size" type="default" size="mini" bindtap="changeFloor">{{floorList[floor]}}</button>
+      </view>
+      <view>
+        <button class="weui-flex__item button-size" type="default" size="mini" bindtap="changeTaste">口味</button>
+      </view>
+      <view>
+        <image class="weui-flex__item" style="width: 30px; height: 30px;" src="/images/sort.png" mode="aspectFill" bindtap="changeSort"></image>
+      </view>
+    </view>
+    <!-- <view class="button-sp-area">
+      <button class="weui-btn button-size" type="default" size="mini" bindtap="changeTime">{{timeList[time]}}</button>
+      <button class="weui-btn button-size" type="default" size="mini" bindtap="changeFloor">{{floorList[floor]}}</button>
+      <button class="weui-btn button-size" type="default" size="mini" bindtap="changeTaste">口味</button>
+    </view> -->
+    <!-- <image class="widget__arrow" style="width: 30px; height: 30px;" src="/images/sort.png" mode="aspectFill"></image>    -->
+    <scroll-view scroll-y style="height: 95vh;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-with-animation="true" scroll-top="{{scrollTop}}">
+      <block wx:for="{{database}}">
+        <navigator id="{{index}}" bindtap='showDetail' url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="{{image_prefix + item.IMAGE_PATH + image_suffix}}" />
+          </view>
+          <view class="weui-flex" style='width:100%;display:flex;flex-direction:column;justify-content:space-around'>
+            <view class="weui-media-box__title">{{item.NAME}}</view>
+            <view class="weui-media-box__desc">{{item.briefInfo}}</view>
+            <view class="weui-flex" style='display:flex;justify-content:space-between;align-items=flex-start'>
+              <view class="weui-media-box__desc" wx:if="{{item.isPriceAvailable==1}}">{{item.price}} 元/{{item.priceUnit}}</view>
+              <view class="weui-media-box__desc" wx:if="{{item.isPriceAvailable==0}}">{{item.priceLow}}~{{item.priceHigh}} 元/{{item.priceUnit}}</view>
+              <view class="weui-flex" style='display:flex;justify-content:flex-end'>
+                <block wx:for="{{scoreStars[index]}}" wx:for-index="idx">
+                  <view wx:if="{{scoreStars[index][idx]==0}}">
+                    <image class="weui-flex__item" style="width: 15px; height: 15px;" src="/images/star_e.png" mode="aspectFill"></image>
+                  </view>
+                  <view wx:if="{{scoreStars[index][idx]==1}}">
+                    <image class="weui-flex__item" style="width: 15px; height: 15px;" src="/images/star_h.png" mode="aspectFill"></image>
+                  </view>
+                  <view wx:if="{{scoreStars[index][idx]==2}}">
+                    <image class="weui-flex__item" style="width: 15px; height: 15px;" src="/images/star_f.png" mode="aspectFill"></image>
+                  </view>
+                </block>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </block>
+    </scroll-view>
+    <view class="weui-loadmore" hidden="{{isHideLoadMore==1}}">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+  </view>
+</view>
+
+<import src="../../src/wetoast.wxml" />
+<!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}" />
+
+ <image class="scrollToTop" src="/images/icons/top.png" mode="widthFix" bindtap="scrollToTop" wx:if='{{isShowTop==1}}'></image> 

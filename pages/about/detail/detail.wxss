@@ -1,0 +1,61 @@
+/* pages/about/detail/detail.wxss */
+.background{
+  background-color: whitesmoke;
+  width: 710rpx;
+  height: auto;
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  border-radius: 20rpx;
+}
+
+.detail_head{
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail_box{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 10rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.detail_item{
+  font-size: 32rpx;
+  font-family: sans-serif;
+  padding-left: 20rpx;
+  color: gray;
+}
+
+.detail_text{
+  font-size: 32rpx;
+  font-family: sans-serif;
+  padding-left: 20rpx;
+  color: black;
+}
+
+.detail_input{
+  width: 550rpx;
+  height: 50rpx;
+  border-color: black;
+  border-width: thin;
+  border-radius: 5rpx;
+  color: black;
+  background-color: white;
+  padding: 10rpx;
+  margin-left: 30rpx;
+}
+
+.detail_btn{
+  height: 60rpx;
+  margin: 20rpx;
+  color: green;
+}
+
+.detail_btn text{
+  vertical-align: middle;
+}

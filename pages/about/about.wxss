@@ -1,0 +1,71 @@
+
+
+.about-banner {
+  width: 375rpx;
+  height: 375rpx;
+  border-radius: 50%;
+}
+
+
+.nav-default {
+  color: blue
+}
+
+
+.nav-hover {
+  color: red; 
+}
+
+.background{
+  filter: blur(0px);
+  -webkit-filter: blur(15rpx);
+  background-repeat: repeat;
+  background-size: 100% 100%;
+  width: 750rpx;
+   height: 400rpx; 
+   top: 0;
+  left: 0;
+  overflow: hidden;
+  position:absolute;
+   align-self: center;
+   /* z-index: 0;  */
+}
+
+.head{
+  width: 180rpx;
+  position: absolute;
+  top: 50rpx;
+  left: 285rpx;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: green;
+  /* z-index: 1001; */
+}
+
+.detail_box{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 250rpx;
+  left:0rpx;
+  text-align: center;
+  padding-bottom: 10rpx;
+}
+
+.nickname{
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 40rpx;
+}
+
+.briefInfo{
+  font-family: sans-serif;
+  font-weight: normal;
+  font-size: 30rpx;
+  color: black
+}
+
+.quotation{
+  width: 40rpx;
+}
