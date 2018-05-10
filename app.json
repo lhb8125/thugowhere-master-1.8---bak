@@ -34,7 +34,7 @@
         "selectedIconPath": "images/icons/chat-selected.png"
       },
       {
-        "text": "关于",
+        "text": "我",
         "pagePath": "pages/about/about",
         "iconPath": "images/icons/about.png",
         "selectedIconPath": "images/icons/about-selected.png"

@@ -1,4 +1,9 @@
 // pages/comments/comments.js
+
+var util = require('../../utils/util.js')
+var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var config = require('../../config')
+
 Page({
 
   /**
@@ -22,6 +27,8 @@ Page({
     },
     gradeList:[]
   },
+
+  
 
   /**
    * 生命周期函数--监听页面加载

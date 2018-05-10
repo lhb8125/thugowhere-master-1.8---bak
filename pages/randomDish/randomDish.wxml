@@ -79,22 +79,24 @@
       <view class="weui-panel__hd">评价({{requestDishResult[0].starAllCount}})</view>
       <view class="comment_write" bindtap='writeComment'>写短评</view>
     </view>
-    <block wx:for="{{comments.studentID}}">
-      <navigator id="{{comments.studentID}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="none">
+    <block wx:for="{{comments}}">
+      <navigator id="{{item.studentID}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="none">
         <view class="comment_box">
           <view class="weui-flex" style='display:flex;justify-content:space-between;align-items:flex-end;'>
             <!-- <image class="" style="width: 75rpx" src="/images/youtiao.jpg" mode="widthFix" bindtap="changeSort"></image> -->
             <view class="weui-media-box__title comment_nickname" style='display:flex' bindtap='showUserDetail'>
-              <image class="weui-flex__item" style="width: 30rpx;margin-right:10rpx;" src="{{comments.studentHead[index]}}" mode="widthFix"></image>
-              <view>{{comments.studentNickname[index]}}</view>
-              <view>({{gradeList[comments.studentGrade[index]]}})</view>
+              <image class="weui-flex__item" style="width: 30rpx;margin-right:10rpx;" src="{{item.studentHead}}" mode="widthFix"></image>
+              <view>{{item.studentNickname}}</view>
+
+              <!--为啥要显示年级啊斌哥？<view>({{gradeList[comments.studentGrade[index]]}})</view>-->
+
             </view>
             <view class="weui-flex" style='display:flex;justify-content:flex-end;align-items:flex-end;'>
-              <block wx:for="{{comments.studentScore[index]}}" wx:for-index="idx">
-                <view wx:if="{{comments.studentScore[index][idx]==0}}">
+              <block wx:for="{{item.commentStar}}" wx:for-index="idx">
+                <view wx:if="{{item[idx]==0}}">
                   <image class="weui-flex__item" style="width: 25rpx" src="/images/star_e.png" mode="widthFix"></image>
                 </view>
-                <view wx:if="{{comments.studentScore[index][idx]==1}}">
+                <view wx:if="{{item[idx]==1}}">
                   <image class="weui-flex__item" style="width: 25rpx" src="/images/star_h.png" mode="widthFix"></image>
                 </view>
                 <view wx:if="{{comments.studentScore[index][idx]==2}}">
@@ -104,7 +106,7 @@
             </view>
             <!-- <view class="weui-media-box__title comment_nickname">({{gradeList[comments.studentGrade[index]]}})</view> -->
           </view>
-          <view class="weui-article__p comment_content">{{comments.studentComment[index]}}</view>
+          <view class="weui-article__p comment_content">{{item.commentBody}}</view>
           <view class="weui-flex" style='display:flex;justify-content:space-between;align-items:flex-end;'>
             <view wx:if="{{comments.isUserFavoured[index]}}">
               <image id="{{index}}" style="width: 35rpx; height: 35rpx;" src="/images/favour_f.png" mode="widthFix" bindtap="changeFavoured"></image>
@@ -112,7 +114,7 @@
             <view wx:else>
               <image id="{{index}}" style="width: 35rpx; height: 35rpx;" src="/images/favour_e.png" mode="widthFix" bindtap="changeFavoured"></image>
             </view>
-            <view class="weui-cell__ft  comment_gradeanddate">{{comments.commentDate[index]}}</view>
+            <view class="weui-cell__ft  comment_gradeanddate">{{item.commentDate}}</view>
             <!-- <view class="weui-cell__ft  comment_gradeanddate">{{comments.commentDate[index]}}</view>  -->
           </view>
         </view>

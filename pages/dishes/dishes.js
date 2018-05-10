@@ -571,7 +571,7 @@ Page({
       isShowDetail: false,
     })
     wx.navigateTo({
-      url: '/pages/randomDish/randomDish?isRandom=0&id=' + this.data.requestDishResult[this.data.dishDetailIndex].ID
+      url: '/pages/randomDish/randomDish?isRandom=0&id=' + this.data.requestDishResult[this.data.dishDetailIndex].ID + '&canteen=' + this.data.canteen
     })
     //确定用户吃哪顿饭
     // wx.showActionSheet({

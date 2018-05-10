@@ -1,4 +1,4 @@
- <view class="page__bd">
+<view class="page__bd">
   <view class="weui-panel weui-panel_access">
     <!-- <view class="weui-panel__hd">评价</view> -->
     <view class="weui-panel__bd">
@@ -69,4 +69,4 @@
       <button class="weui-flex__item comment_btn" type="primary" bindtap="typeComment">评价</button>
     </view>
   </view>
-</view> 
+</view>
