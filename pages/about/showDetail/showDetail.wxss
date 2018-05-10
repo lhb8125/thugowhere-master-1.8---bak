@@ -1,37 +1,33 @@
-
-
 .about-banner {
   width: 375rpx;
   height: 375rpx;
   border-radius: 50%;
 }
 
-
 .nav-default {
-  color: blue
+  color: blue;
 }
-
 
 .nav-hover {
-  color: red; 
+  color: red;
 }
 
-.background{
+.background {
   filter: blur(0px);
   -webkit-filter: blur(15rpx);
   background-repeat: repeat;
   background-size: 100% 100%;
   width: 750rpx;
-   height: 400rpx; 
-   top: 0;
+  height: 400rpx;
+  top: 0;
   left: 0;
   overflow: hidden;
-  position:absolute;
-   align-self: center;
-   /* z-index: 0;  */
+  position: absolute;
+  align-self: center;
+  /* z-index: 0;  */
 }
 
-.head{
+.head {
   width: 180rpx;
   position: absolute;
   top: 50rpx;
@@ -43,29 +39,66 @@
   /* z-index: 1001; */
 }
 
-.detail_box{
+.detail_box {
   width: 100%;
   height: auto;
   position: absolute;
   top: 250rpx;
-  left:0rpx;
+  left: 0rpx;
   text-align: center;
   padding-bottom: 10rpx;
 }
 
-.nickname{
+.nickname {
   font-family: sans-serif;
   font-weight: bold;
   font-size: 40rpx;
 }
 
-.briefInfo{
+.briefInfo {
   font-family: sans-serif;
   font-weight: normal;
   font-size: 30rpx;
-  color: black
+  color: black;
 }
 
-.quotation{
+.quotation {
   width: 40rpx;
+}
+
+.detail_fans_box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* border-top-style: solid; *//* border-bottom-style: solid; *//* border-top-width: 1px;   *//* border-bottom-width: 1px; */
+  opacity: 1;
+  background-color: white;
+  margin-top: 20rpx;
+  margin-bottom: 15rpx;
+}
+
+.detail_fans_txt {
+  font-size: 32rpx;
+  font-family: sans-serif;
+  color: grey;
+  /* font-weight: bold; *//* z-index: 1000; *//* margin-right: 20rpx; *//* margin-left: 40rpx; */
+}
+
+.detail_fans_number {
+  font-size: 32rpx;
+  font-family: sans-serif;
+  color: black;
+  font-weight: bold;
+  /* z-index: 1000; *//* margin-right: 20rpx; *//* margin-left: 40rpx; */
+}
+
+.detail_follow_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-radius: 10rpx;
+  border-width: thin;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
 }

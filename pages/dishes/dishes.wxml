@@ -164,4 +164,4 @@
 <!-- wetoast -->
 <template is="wetoast" data="{{...__wetoast__}}" />
 
- <image class="scrollToTop" src="/images/icons/top.png" mode="widthFix" bindtap="scrollToTop" wx:if='{{isShowTop==1}}'></image> 
+ <image class="scrollToTop" src="/images/icons/top.png" mode="widthFix" bindtap="scrollToTop" hidden='{{isShowTop==0}}'></image> 

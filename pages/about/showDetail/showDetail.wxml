@@ -15,6 +15,21 @@
     </view>
   </view>
 </view>
+
+<view class='detail_fans_box'>
+  <view style='display:flex;flex-direction:column;align-items:center;'>
+    <view class="detail_fans_number">35</view>
+    <view class='detail_follow_box' bindtap='changeFollowed'>
+      <image hidden="{{isFollowed==1}}" style='width:25rpx;margin:10rpx;' mode="widthFix" src="/images/icons/follow.png" />
+      <image hidden="{{isFollowed==0}}" style='width:25rpx;margin:10rpx;' mode="widthFix" src="/images/icons/followed.png" />
+      <view class="detail_fans_txt">粉丝</view>
+    </view>
+  </view>
+  <view style='display:flex;flex-direction:column;align-items:center;'>
+    <view class="detail_fans_number">10</view>
+    <view class="detail_fans_txt">关注</view>
+  </view>
+</view>
 <!-- <navigator id="nickname" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap='accountDetail'>
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
       <image class="weui-media-box__thumb" src="/images/head.jpg" />
@@ -59,7 +74,7 @@
       <view class="weui-cell__ft" style='font-family:sans-serif;font-size:32rpx;'>{{hometownList[userInfo.hometown]}}</view>
     </view>
     <view class="weui-cell">
-      <view class="weui-cell__bd" style='font-family:sans-serif;font-size:32rpx;'>年级</view>
+      <view class="weui-cell__bd" style='font-family:sans-serif;font-size:32rpx;'>专业</view>
       <view class="weui-cell__ft" style='font-family:sans-serif;font-size:32rpx;'>{{majorList[userInfo.major]}}</view>
     </view>
     <view class="weui-cell">

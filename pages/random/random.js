@@ -30,7 +30,7 @@ Page({
 
   generateRandom: function () {
     wx.navigateTo({
-      url: '/pages/randomDish/randomDish?isRandom=1',
+      url: '/pages/randomDish/randomDish?isRandom=1&canteen=zijing',
     })
   },
 
@@ -38,6 +38,7 @@ Page({
     this.setData({
       canteen: e.detail.value
     });
+    // console.log(this.data.canteenList[this.data.canteen])
   },
   changeTaste: function (e) {
     this.setData({

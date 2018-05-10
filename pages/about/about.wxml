@@ -12,7 +12,7 @@
 <view wx:if="{{!isRefuseLogin}}" class='container' style='height:400rpx;'>
 
   <!--这个渲染出来效果不对，你看看是咋回事 by mengql-->
-  <!--image class="background" mode="center" src="{{userInfo.avatarUrl}}" /-->
+  <image class="background" mode="widthFix" src="{{userInfo.avatarUrl}}" />
 
   <image class="head" mode="widthFix" bindtap="listenerButtonChooseImage" src="{{userInfo.avatarUrl}}" />
   <view class="detail_box">

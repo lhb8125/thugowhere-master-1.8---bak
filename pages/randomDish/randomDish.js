@@ -1,6 +1,7 @@
 var util = require('../../utils/util.js')
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
+let app = getApp()
 
 Page({
 
@@ -8,9 +9,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    database: [{ "ID": 1, "name": "油条", "canteen": "紫荆", "imagePath": "/images/youtiao.jpg", "isDishAvailable": 1, "briefInfo": "最纯粹的油条，最高级的享受", "cuisine": "全国", "isPriceAvailable": 1, "price": 1, "priceLow": null, "priceHigh": null, "priceUnit": "元/根", "calorie": 390, "calorieUnit": "kCal/100g", "isHighSugar": 0, "isHighProtein": 0, "isHighFat": 1, "isHighVitamin": 0, "isHighFiber": 0, "isHighCalcium": 0, "isHighOil": 1, "isHighSalt": 0, "isSour": 0, "isBitter": 0, "isSpicy": 0, "starRank": 3, "starAllCount": 10, "star1Count": 2, "star2Count": 2, "star3Count": 2, "star4Count": 2, "star5Count": 2, "floor": "1", "window": "9", "isBreakfast": 1, "isLunch": 0, "isDinner": 0, "isAssortedDish": 0 },
-      { "ID": 2, "name": "鸡蛋", "canteen": "桃李", "imagePath": "/images/egg.jpg", "isDishAvailable": 1, "briefInfo": "最纯粹的油条，最高级的享受", "cuisine": "全国", "isPriceAvailable": 1, "price": 1, "priceLow": null, "priceHigh": null, "priceUnit": "元/个", "calorie": 390, "calorieUnit": "kCal/100g", "isHighSugar": 0, "isHighProtein": 1, "isHighFat": 0, "isHighVitamin": 1, "isHighFiber": 0, "isHighCalcium": 0, "isHighOil": 1, "isHighSalt": 0, "isSour": 0, "isBitter": 0, "isSpicy": 0, "starRank": 4, "starAllCount": 10, "star1Count": 2, "star2Count": 2, "star3Count": 2, "star4Count": 2, "star5Count": 2, "floor": "1", "window": "3","isBreakfast": 1, "isLunch": 0, "isDinner": 0, "isAssortedDish": 0 },
-      { "ID": 3, "name": "麻辣香锅", "canteen": "丁香", "imagePath": "/images/xiangguo.jpg", "isDishAvailable": 1, "briefInfo": "最纯粹的油条，最高级的享受", "cuisine": "全国", "isPriceAvailable": 0, "price": null, "priceLow": 10, "priceHigh": 100, "priceUnit": "元/份", "calorie": 390, "calorieUnit": "kCal/100g", "isHighSugar": 1, "isHighProtein": 1, "isHighFat": 1, "isHighVitamin": 1, "isHighFiber": 1, "isHighCalcium": 1, "isHighOil": 1, "isHighSalt": 1, "isSour": 0, "isBitter": 0, "isSpicy": 0, "starRank": 5, "starAllCount": 10, "star1Count": 2, "star2Count": 2, "star3Count": 2, "star4Count": 2, "star5Count": 2, "floor": "1", "window": "10", "isBreakfast": 0, "isLunch": 1, "isDinner": 1, "isAssortedDish": 0 }],
     scoreStars: [],
     randomDish: {},
     randomIndex: 0,
@@ -35,6 +33,7 @@ Page({
     btnHeight:0,
     image_prefix: "https://tsingwind.top/weapp_img",
     image_suffix: "/1.jpg",
+    isCompleted:1,
   },
 
   //请求评论信息 by mengql
@@ -75,16 +74,19 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    new app.WeToast()
     console.log(that.data.isRandom)
     that.setData({
       // name: options.name,
       gradeList: getApp().globalData.gradeList,
       isRandom: options.isRandom,
-      dishID: options.id,
+      dishID: options.isRandom == 1 ? Math.round(Math.random() * 10)+1 : options.id,
       canteen: options.canteen
     })
     // that.getRandomDish()
     that.requestDishList()
+    console.log(that.data.dishID)
+    console.log(that.data.canteen)
     // that.getStars()
     that.requestCommentList()
     if (that.data.isRandom == 1) {
@@ -191,15 +193,17 @@ Page({
 
   getRandomDish: function () {
     var that = this;
-    wx.showToast({
-      title: '数据加载中',
-      icon: 'loading',
-      duration: 500
-    });
-    that.data.randomIndex = Math.round(Math.random() * (that.data.database.length - 1));
-    this.setData({
-      randomDish: that.data.database[that.data.randomIndex]
+    // wx.showToast({
+    //   title: '数据加载中',
+    //   icon: 'loading',
+    //   duration: 500
+    // });
+    // that.data.randomIndex = Math.round(Math.random() * (that.data.database.length - 1));
+    that.setData({
+      dishID: Math.round(Math.random() * 10) + 1
     })
+    that.requestDishList()
+    that.requestCommentList()
   },
 
   writeComment: function () {
@@ -217,9 +221,22 @@ Page({
   },
 
   lower: function (e) {
-    this.setData({
-      loadmore:1
-    })
+    var that = this
+    if (that.data.isCompleted == 0) {
+      that.setData({
+        loadmore: 1
+      })
+      setTimeout(function () {
+        that.setData({
+          loadmore: 0
+        })
+      }, 1000)
+    } else {
+      this.wetoast.toast({
+        title: '已加载全部评论',
+        duration: 1000
+      })
+    }
   },
 
   showUserDetail(){

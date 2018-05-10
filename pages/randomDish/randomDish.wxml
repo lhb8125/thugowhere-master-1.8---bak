@@ -5,7 +5,7 @@
       <image class='dish_detail_image' style='' mode='scaleToFill' src='{{image_prefix+requestDishResult[0].IMAGE_PATH+image_suffix}}'></image>
       <view class="weui-flex dish_detail_text">
         <view class="detail_text" style="">菜名：{{requestDishResult[0].NAME}}</view>
-        <view class="dish_detail_text_minor" style="">热量：{{requestDishResult[0].calorie}} {{randomDish.calorieUnit}}</view>
+        <view class="dish_detail_text_minor" style="">热量：{{requestDishResult[0].calorie}} {{requestDishResult[0].calorieUnit}}</view>
         <!-- <view class="dish_detail_text_minor" style="">口味：{{randomDish.taste}}</view> -->
         <view class="dish_detail_text_minor" style="">菜系：{{requestDishResult[0].cuisine}}</view>
         <view class="dish_detail_text_minor" style="">评分：{{requestDishResult[0].starRank}}</view>
@@ -45,7 +45,7 @@
             <view class="dish_important_text" wx:if="{{requestDishResult[0].isDinner==1}}">晚餐</view>
           </view>
           <view class="weui-flex" style='display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-end;'>
-            <view class="dish_important_text" wx:if="{{requestDishResult[0].isPriceAvailable==1}}">{{requestDishResult[0].price}} {{requestDishResult[0].priceUnit}}</view>
+            <view class="dish_important_text" wx:if="{{requestDishResult[0].isPriceAvailable==1}}">{{requestDishResult[0].price}} 元/{{requestDishResult[0].priceUnit}}</view>
             <view class="dish_important_text" wx:if="{{requestDishResult[0].isPriceAvailable==0}}">{{requestDishResult[0].priceLow}}~{{requestDishResult[0].priceHigh}}</view>
             <view class="dish_important_text" wx:if="{{requestDishResult[0].isPriceAvailable==0}}">{{requestDishResult[0].priceUnit}}</view>
           </view>
@@ -120,7 +120,7 @@
         </view>
       </navigator>
     </block>
-    <view wx:if="{{isRandom==1}}">
+    <view hidden="{{loadmore==0}}">
       <view class="weui-loadmore">
         <view class="weui-loading"></view>
         <view class="weui-loadmore__tips">正在加载</view>
@@ -131,3 +131,7 @@
 <view wx:if="{{isRandom==1}}">
   <button class="weui-flex__item comment_btn" type="primary" bindtap="getRandomDish">再来一次</button>
 </view>
+
+<import src="../../src/wetoast.wxml" />
+<!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}" />

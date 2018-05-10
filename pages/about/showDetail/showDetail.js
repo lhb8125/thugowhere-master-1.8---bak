@@ -17,8 +17,15 @@ Page({
     gradeList: [],
     hometownList: [],
     majorList: [],
+    isFollowed: 0,
   },
-  
+
+  changeFollowed: function () {
+    this.setData({
+      isFollowed: this.data.isFollowed == 1 ? 0 : 1
+    })
+  },
+
   onLoad: function () {
     this.setData({
       userInfo: getApp().globalData.userInfo,
