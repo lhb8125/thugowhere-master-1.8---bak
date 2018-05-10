@@ -24,7 +24,10 @@ var config = {
         uploadUrl: `${host}/weapp/upload`,
 
         // 获取菜品列表接口
-        dishlistUrl: `${host}/weapp/dishlist`
+        dishlistUrl: `${host}/weapp/dishlist`,
+
+        // 获取评论列表接口
+        commentlistUrl: `${host}/weapp/commentlist`
     }
 };
 

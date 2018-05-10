@@ -37,6 +37,39 @@ Page({
     image_suffix: "/1.jpg",
   },
 
+  //请求评论信息 by mengql
+
+  requestCommentList: function () {
+    util.showBusy('正在加载评论...')
+    var that = this
+    var options = {
+      url: config.service.commentlistUrl,
+
+      //需要在data里指定所有你需要的查询参数
+      data: {
+        canteen: that.data.canteen,
+        dishID: that.data.dishID
+      },
+      success(result) {
+        util.showSuccess('加载完成')
+        var objectArray = result.data.data
+        that.setData({
+          comments: objectArray
+        })
+      },
+      fail(error) {
+        util.showModel('加载失败，请检查网络', error);
+        console.log('request fail', error);
+      }
+    }
+    this.data.takeSession = false;
+    if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
+      qcloud.request(options)
+    } else {    // 使用 wx.request 则不带登录态
+      wx.request(options)
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -47,11 +80,13 @@ Page({
       // name: options.name,
       gradeList: getApp().globalData.gradeList,
       isRandom: options.isRandom,
-      dishID: options.id
+      dishID: options.id,
+      canteen: options.canteen
     })
     // that.getRandomDish()
     that.requestDishList()
     // that.getStars()
+    that.requestCommentList()
     if (that.data.isRandom == 1) {
       that.setData({
         btnHeight: 80

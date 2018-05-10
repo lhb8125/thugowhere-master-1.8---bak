@@ -3,14 +3,25 @@
         <view class="page__title">List</view>
         <view class="page__desc">列表</view>
     </view> -->
-<view class='container' style='height:400rpx;'>
-  <image class="background" mode="center" src="{{userInfo.head}}" />
-  <image class="head" mode="widthFix" bindtap="listenerButtonChooseImage" src="{{userInfo.head}}" />
+
+<view wx:if="{{isRefuseLogin}}" class='container'>
+  <text>您拒绝了小程序的登录请求，点击下面的按钮改变设置</text>
+  <button bindtap='reSetting'>重新设置</button>
+</view>
+
+<view wx:if="{{!isRefuseLogin}}" class='container' style='height:400rpx;'>
+
+  <!--这个渲染出来效果不对，你看看是咋回事 by mengql-->
+  <!--image class="background" mode="center" src="{{userInfo.avatarUrl}}" /-->
+
+  <image class="head" mode="widthFix" bindtap="listenerButtonChooseImage" src="{{userInfo.avatarUrl}}" />
   <view class="detail_box">
-    <view class="nickname">{{userInfo.nickname}}</view>
+    <view class="nickname">{{userInfo.nickName}}</view>
     <view class='' style='display:flex;justify-content:center;'>
       <image class="quotation" mode="widthFix" bindtap="listenerButtonChooseImage" src="/images/icons/quotation_L.png" />
-      <view class="briefInfo">{{userInfo.briefInfo}}</view>
+
+      <!--小程序登录接口无法拿到用户的一句话描述 by mengql-->
+      <view class="briefInfo">{{userInfo.province+ " " +userInfo.city}}</view>
       <image class="quotation" mode="widthFix" bindtap="listenerButtonChooseImage" src="/images/icons/quotation_R.png" />
     </view>
   </view>
