@@ -149,4 +149,5 @@ page, .page, .page__bd {
   right: 50rpx;
   width: 70rpx;
   opacity: 0.6;
+  z-index: 9999;
 }

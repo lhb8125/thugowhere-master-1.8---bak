@@ -53,13 +53,37 @@
       <view class="detail_item">姓名</view>
       <input class="detail_item  detail_input" bindinput="nameInput" placeholder="{{userInfo.name}}" />
     </view>
-    <view class='detail_box'>
-      <view class="detail_item">家乡</view>
-      <picker value="{{userInfo.hometown}}" range="{{hometownList}}" bindchange="changeHometown">
+    <!-- <view class='detail_box'> -->
+      <!-- <view class="detail_item">家乡</view> -->
+      <!-- <picker value="{{userInfo.hometown}}" range="{{hometownList}}" bindchange="changeHometown">
         <view class="detail_item detail_input">{{hometownList[userInfo.hometown]}}</view>
-      </picker>
-    </view>
-    <view class='detail_box'>
+      </picker> -->
+      <navigator url="" class='detail_box' hover-class="weui-cell_active">
+        <view class="detail_item">家乡</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">
+          <picker value="{{canteen}}" range="{{hometownList}}" bindchange="changeCanteen">
+            <view class="detail_item detail_picker">{{hometownList[userInfo.hometown]}}</view>
+          </picker>
+        </view>
+      </navigator>
+      <navigator url="" class='detail_box' hover-class="weui-cell_active">
+        <view class="detail_item">专业</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">
+          <picker value="{{canteen}}" range="{{hometownList}}" bindchange="changeCanteen">
+            <view class="detail_item detail_picker">{{majorList[userInfo.major]}}</view>
+          </picker>
+        </view>
+      </navigator>
+      <navigator url="" class='detail_box' hover-class="weui-cell_active">
+        <view class="detail_item">年级</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">
+          <picker value="{{canteen}}" range="{{hometownList}}" bindchange="changeCanteen">
+            <view class="detail_item detail_picker">{{gradeList[userInfo.grade]}}</view>
+          </picker>
+        </view>
+      </navigator>
+    <!-- </view> -->
+    <!-- <view class='detail_box'>
       <view class="detail_item">专业</view>
       <picker value="{{userInfo.major}}" range="{{majorList}}" bindchange="changeMajor">
         <view class="detail_item detail_input">{{majorList[userInfo.major]}}</view>
@@ -70,7 +94,7 @@
       <picker value="{{userInfo.grade}}" range="{{gradeList}}" bindchange="changeGrade">
         <view class="detail_item detail_input">{{gradeList[userInfo.grade]}}</view>
       </picker>
-    </view>
+    </view> -->
     <view class='detail_box'>
       <view class="detail_item">爱好</view>
       <input class="detail_item  detail_input" bindinput="hobbyInput" placeholder="{{userInfo.hobby}}" />
