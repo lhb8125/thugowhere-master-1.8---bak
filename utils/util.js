@@ -39,4 +39,39 @@ var showModel = (title, content) => {
     })
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel }
+
+var login = function() {
+
+  let app = getApp()
+
+  if (app.globalData.logged) return
+
+  var that = this
+
+  // 调用登录接口
+  wx.login({
+    success(result) {
+      if(result){
+        app.globalData.logged = true
+        wx.getSetting({
+          success: function (res) {
+            if (res.authSetting['scope.userInfo']) {
+              // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+              wx.getUserInfo({
+                success: function (res) {
+                  app.globalData.userInfo = res
+                }
+              })
+            }
+          }
+        })
+      }
+    },
+
+    fail(error) {
+      util.showModel('登录失败', error)
+    }
+  })
+}
+
+module.exports = { formatTime, showBusy, showSuccess, showModel,login }

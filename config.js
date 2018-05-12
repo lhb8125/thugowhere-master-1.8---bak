@@ -27,7 +27,10 @@ var config = {
         dishlistUrl: `${host}/weapp/dishlist`,
 
         // 获取评论列表接口
-        commentlistUrl: `${host}/weapp/commentlist`
+        commentlistUrl: `${host}/weapp/commentlist`,
+
+        //提交评论接口
+        commentSubmitUrl: `${host}/weapp/commentsubmit`
     }
 };
 

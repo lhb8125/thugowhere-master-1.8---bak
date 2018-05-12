@@ -17,8 +17,34 @@ Page({
     gradeList: [],
     hometownList: [],
     majorList: [],
+    isFollowed: 0,
+    animationData: {},
+    isPlus:0,
   },
-  
+
+  changeFollowed: function () {
+    this.setData({
+      isFollowed: this.data.isFollowed == 1 ? 0 : 1,
+      isPlus: this.data.isFollowed == 1 ? -1 : 1
+    })
+    var animation = wx.createAnimation({
+      duration: 1500,
+      timingFunction: 'ease',
+    })
+    this.animation = animation
+    animation.opacity(0).translate(0, -5).step()
+    this.setData({
+      animationData: animation.export()
+    })
+    setTimeout(function () {
+      animation.opacity(1).translate(0, 5).step()
+      this.setData({
+        animationData: animation.export(),
+        isPlus: 0
+      })
+    }.bind(this), 1000)
+  },
+
   onLoad: function () {
     this.setData({
       userInfo: getApp().globalData.userInfo,
@@ -26,5 +52,21 @@ Page({
       hometownList: getApp().globalData.hometownList,
       majorList: getApp().globalData.majorList
     });
+
+    // var animation = wx.createAnimation({
+    //   duration: 2000,
+    //   timingFunction: 'ease',
+    // })
+    // this.animation = animation
+    // animation.translate(0,-10).step()
+    // this.setData({
+    //   animationData: animation.export()
+    // })
+    // setTimeout(function () {
+    //   animation.translate(0,5).step()
+    //   this.setData({
+    //     animationData: animation.export()
+    //   })
+    // }.bind(this), 1000)
   }
 });

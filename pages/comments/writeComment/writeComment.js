@@ -1,4 +1,9 @@
 // pages/comments/writeComment/writeComment.js
+
+var util = require("../../../utils/util")
+var config = require("../../../config")
+var qcloud = require('../../../vendor/wafer2-client-sdk/index')
+
 Page({
   /**
    * 页面的初始数据
@@ -6,20 +11,28 @@ Page({
   data: {
     // score:[0,0,0,0,0],
     wordCount: 0,
+    commentBody:'',
     star: [0, 0, 0, 0, 0],
     starRank: 0,
+    dishID:{},
+    canteen:'',
+    takeSession: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      canteen:options.canteen,
+      dishID:options.dishID
+    })
   },
 
+  //修复了删除文字字数不变化的bug by mengql 
   bindTextAreaBlur: function (e) {
     this.setData({
-      wordCount: this.data.wordCount + 1
+      wordCount: e.detail.value.length
     })
     console.log(this.data.wordCount)
   },
@@ -33,9 +46,9 @@ Page({
     } else if (this.data.star[e.currentTarget.id] == 2) {
       score = parseInt(e.currentTarget.id) 
     }
-    // this.setData({
-    //   starRank: score
-    // })
+     this.setData({
+       starRank: score
+     })
     this.getStars(score)
   },
 
@@ -85,6 +98,43 @@ Page({
       that.setData({
         star: [0, 0, 0, 0, 0]
       })
+    }
+  },
+
+  //提交评论 by mengql
+
+  bindFormSubmit:function(e){
+    util.showBusy('正在提交...')
+    console.log(e.detail.value.textarea)
+    var that = this
+    var app = getApp()
+    console.log(app.globalData.userInfo)
+    var options = {
+      url: config.service.commentSubmitUrl,
+      login : true,
+      method: 'POST',
+      //需要在data里指定所有你需要的查询参数
+      data: {
+        canteen: that.data.canteen,
+        ID: that.data.dishID,
+        openid: app.globalData.userInfo.openId,
+        nickName: app.globalData.userInfo.nickName,
+        avatarUrl: app.globalData.userInfo.avatarUrl,
+        commentBody: e.detail.value.textarea,
+        commentStar: that.data.starRank
+      },
+      success(result) {
+        util.showSuccess('提交成功')
+      },
+      fail(error) {
+        util.showModel('提交失败', error);
+        console.log('request fail', error);
+      }
+    }
+    if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
+      qcloud.request(options)
+    } else {    // 使用 wx.request 则不带登录态
+      wx.request(options)
     }
   },
 

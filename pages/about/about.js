@@ -20,7 +20,9 @@ Page({
     // head: '/images/head.jpg',
     // phone: "18920533989",
     userInfo: [],
-    isRefuseLogin:false
+    isRefuseLogin: false,
+    canIUseInfo: wx.canIUse('button.open-type.getUserInfo')
+
   },
   showDetail: function () {
     wx.navigateTo({
@@ -46,18 +48,15 @@ Page({
     })
   },
 
-  reSetting: function(){
-    var that=this
-    wx.openSetting({
-      success:(res)=>{
-        if(res.authSetting["scope.userInfo"]){
-          app.globalData.isRefuseLogin = false
-          that.setData({"isRefuseLogin":false})
-          qcloud.setLoginUrl(config.service.loginUrl)
-          that.login()
-        }
-      }
-    })
+  bindGetUserInfo: function (e) {
+    if (e.detail.userInfo) {
+      this.setData({
+        "userInfo": e.detail.userInfo,
+        "isRefuseLogin": false
+      })
+      app.globalData.userInfo = e.detail.userInfo
+      app.globalData.logged = true
+    }
   },
 
   login: function () {
@@ -70,28 +69,35 @@ Page({
     qcloud.login({
       success(result) {
         if (result) {
-          util.showSuccess('登录成功')
+          util.showSuccess('登录1成功')
           app.globalData.userInfo = result
           app.globalData.logged = true
+
           that.setData({
-            "userInfo": app.globalData.userInfo
+            "userInfo": app.globalData.userInfo,
+            "isRefuseLogin": false
           });
+
         } else {
           // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
           qcloud.request({
             url: config.service.requestUrl,
-            login: true,
             success(result) {
-              util.showSuccess('登录成功')
-              app.globalData.userInfo = result
+              util.showSuccess('登录2成功')
+              app.globalData.userInfo = result.data.data
+              console.log(result)
               app.globalData.logged = true
+
               that.setData({
-                "userInfo": app.globalData.userInfo
+                "userInfo": app.globalData.userInfo,
+                "isRefuseLogin": false
               });
+
             },
 
             fail(error) {
-              //util.showModel('用户拒绝登录,返回首页', error)
+              util.showModel('请求失败', error)
+              console.log('request fail', error)
             }
           })
         }
@@ -99,25 +105,40 @@ Page({
 
       fail(error) {
         util.showModel('登录失败', error)
+        console.log('登录失败', error)
       }
     })
   },
 
   onLoad: function () {
 
-    this.setData({ 'isRefuseLogin': app.globalData.isRefuseLogin}) 
+    var that = this
+
     if (app.globalData.logged) {
-      console.log(app.globalData.userInfo)
-      this.setData({
-        "userInfo": app.globalData.userInfo
+      that.setData({
+        "userInfo": app.globalData.userInfo,
+        "isRefuseLogin": false
       });
     }
     else {
-      if(!this.data.isRefuseLogin)
-      {
-        qcloud.setLoginUrl(config.service.loginUrl)
-        this.login()
-      }
+      wx.getSetting({
+        success: function (res) {
+          if (res.authSetting['scope.userInfo']) {
+            // 已经授权，登录 获取头像昵称
+            that.login()
+          }
+          else {
+            that.setData({
+              "isRefuseLogin": true
+            });
+          }
+        },
+        fail: function () {
+          that.setData({
+            "isRefuseLogin": true
+          });
+        }
+      })
     }
   }
 });

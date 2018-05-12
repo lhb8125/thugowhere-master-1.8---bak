@@ -50,6 +50,18 @@
   margin-left: 30rpx;
 }
 
+.detail_picker{
+  width: 550rpx;
+  height: 50rpx;
+  border-color: black;
+  border-width: thin;
+  border-radius: 5rpx;
+  color: black;
+  /* background-color: white; */
+  padding: 10rpx;
+  margin-left: 30rpx;
+}
+
 .detail_btn{
   height: 60rpx;
   margin: 20rpx;

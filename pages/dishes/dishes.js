@@ -24,30 +24,6 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     numberArray: [1, 2, 3],
-    // kaoyu: {
-    //   name: "烤鱼",
-    //   times: 1,
-    //   floor: 2,
-    //   path: '/images/kaoyu.jpg',
-    //   price: 18
-    // },
-    // xiangguo: {
-    //   name: "麻辣香锅",
-    //   times: 2,
-    //   floor: 1,
-    //   path: '/images/xiangguo.jpg',
-    //   price: 8
-    // },
-    // youtiao: {
-    //   name: "油条",
-    //   times: 0,
-    //   floor: 1,
-    //   path: '/images/youtiao.jpg',
-    //   price: 1
-    // },
-    // database: [{ "ID": 1, "name": "油条", "canteen": "紫荆", "imagePath": "/images/youtiao.jpg", "isDishAvailable": 1, "briefInfo": "最纯粹的油条，最高级的享受", "cuisine": "全国", "isPriceAvailable": 1, "price": 1, "priceLow": null, "priceHigh": null, "priceUnit": "元/根", "calorie": 390, "calorieUnit": "kCal/100g", "isHighSugar": 0, "isHighProtein": 0, "isHighFat": 1, "isHighVitamin": 0, "isHighFiber": 0, "isHighCalcium": 0, "isHighOil": 1, "isHighSalt": 0, "isSour": 0, "isBitter": 0, "isSpicy": 0, "starRank": 3, "starAllCount": 10, "star1Count": 2, "star2Count": 2, "star3Count": 2, "star4Count": 2, "star5Count": 2, "floor": "1", "isBreakfast": 1, "isLunch": 0, "isDinner": 0, "isAssortedDish": 0 },
-    //   { "ID": 2, "name": "鸡蛋", "canteen": "桃李","imagePath": "/images/egg.jpg", "isDishAvailable": 1, "briefInfo": "最纯粹的油条，最高级的享受", "cuisine": "全国", "isPriceAvailable": 1, "price": 1, "priceLow": null, "priceHigh": null, "priceUnit": "元/个", "calorie": 390, "calorieUnit": "kCal/100g", "isHighSugar": 0, "isHighProtein": 0, "isHighFat": 1, "isHighVitamin": 0, "isHighFiber": 0, "isHighCalcium": 0, "isHighOil": 1, "isHighSalt": 0, "isSour": 0, "isBitter": 0, "isSpicy": 0, "starRank": 4, "starAllCount": 10, "star1Count": 2, "star2Count": 2, "star3Count": 2, "star4Count": 2, "star5Count": 2, "floor": "1", "isBreakfast": 1, "isLunch": 0, "isDinner": 0, "isAssortedDish": 0 },
-    //   { "ID": 3, "name": "麻辣香锅", "canteen": "丁香", "imagePath": "/images/xiangguo.jpg", "isDishAvailable": 1, "briefInfo": "最纯粹的油条，最高级的享受", "cuisine": "全国", "isPriceAvailable": 1, "price": 1, "priceLow": null, "priceHigh": null, "priceUnit": "元/份", "calorie": 390, "calorieUnit": "kCal/100g", "isHighSugar": 0, "isHighProtein": 0, "isHighFat": 1, "isHighVitamin": 0, "isHighFiber": 0, "isHighCalcium": 0, "isHighOil": 1, "isHighSalt": 0, "isSour": 0, "isBitter": 0, "isSpicy": 0, "starRank": 5, "starAllCount": 10, "star1Count": 2, "star2Count": 2, "star3Count": 2, "star4Count": 2, "star5Count": 2, "floor": "1", "isBreakfast": 1, "isLunch": 0, "isDinner": 0, "isAssortedDish": 0 }],
     database: [],
     image_prefix: "https://tsingwind.top/weapp_img",
     image_suffix: "/1.jpg",
@@ -83,14 +59,6 @@ Page({
       calory: []
     },
     star: [],
-    // dishDetail:{
-    //   name: "油条",
-    //   calory: 100,
-    //   taste: "油腻",
-    //   cuisine: "不限",
-    //   score: 4.5,
-    //   description: "一种古老的中式面食，长条形中空的油炸食品，口感松脆有韧劲。"
-    // },
     dishDetailIndex: "0",
     inputShowed: false,
     inputVal: "",
@@ -504,25 +472,6 @@ Page({
     }  
   },
 
-  // upper:function(){
-  //   // this.onPullDownRefresh()
-  //   var that = this
-  //   console.log("upper")
-  //     wx.showToast({
-  //       title: '数据加载中',
-  //       icon: 'loading',
-  //       duration: 3000,
-  //       mask: true,
-  //       complete: function () { 
-  //         that.setData({
-  //           isCompleted:0,
-  //           requestTimes:0,
-  //           database:[]
-  //         })
-  //         that.requestDishList();
-  //        }
-  //     });
-  // },
 
   /**
    * 用户点击右上角分享

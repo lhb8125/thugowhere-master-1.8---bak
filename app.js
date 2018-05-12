@@ -1,4 +1,7 @@
 let { WeToast } = require('src/wetoast.js')
+var qcloud = require('./vendor/wafer2-client-sdk/index')
+var config = require('./config')
+var util = require('./utils/util')
 
 App({
   WeToast,
@@ -10,6 +13,8 @@ App({
     canteenList: ["不限", "紫荆", "桃李"],
     tasteList: ["不限", "油腻", "清淡", "麻辣", "香辣",],
     cuisineList: ["不限","川菜", "京菜", "鲁菜", "东北菜", "淮扬菜", "粤菜", "云贵风味", "西北风味",],
+    
+    /*
     userInfo:{
       nickname: "斌",
       name: "刘宏斌",
@@ -22,11 +27,62 @@ App({
       phone: "18920533989",
       briefInfo: "我就是我，不一样的烟火"
     }
+    */
+
+    userInfo:{},
+    logged:false
   },
+
+  login: function () {
+    if (this.globalData.logged) return
+
+    var that = this
+
+    // 调用登录接口
+    qcloud.login({
+      success(result) {
+        if (result) {
+          util.showSuccess('登录1成功')
+          that.globalData.userInfo = result
+          that.globalData.logged = true
+        } else {
+          // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
+          qcloud.request({
+            url: config.service.requestUrl,
+            success(result) {
+              util.showSuccess('登录2成功')
+              that.globalData.userInfo = result.data.data
+              that.globalData.logged = true
+            },
+            fail(error) {
+              util.showModel('请求失败', error)
+            }
+          })
+        }
+      },
+
+      fail(error) {
+        util.showModel('登录失败', error)
+      }
+    })
+  },
+
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () {
+
+    qcloud.setLoginUrl(config.service.loginUrl)
+
+    var that = this
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，登录 获取头像昵称
+          that.login()
+        }
+      }
+    });
     
   },
 
