@@ -1,4 +1,8 @@
-// pages/about/detail/detail.js
+var util = require('../../../utils/util.js')
+var qcloud = require('../../../vendor/wafer2-client-sdk/index')
+var config = require('../../../config')
+let app = getApp()
+
 Page({
 
   /**
@@ -17,6 +21,7 @@ Page({
     hometownList:[],
     majorList:[],
     isChanged: 0,
+    canteen:"zijing"
   },
   changeDetail: function () {
     // wx.navigateTo({
@@ -79,6 +84,44 @@ Page({
       hometownList: getApp().globalData.hometownList,
       majorList: getApp().globalData.majorList
     });
+    console.log(this.data.userInfo)
+    this.requestCommentList()
+  },
+
+  requestCommentList: function () {
+    util.showBusy('正在加载评论...')
+    var that = this
+    var options = {
+      url: config.service.commentlistUrl,
+      //需要在data里指定所有你需要的查询参数
+      data: {
+        canteen: that.data.canteen,
+        
+        dishID:2,
+        studentID:2016010000
+      },
+      success(result) {
+        util.showSuccess('加载完成')
+        var objectArray = result.data.data
+        that.setData({
+          comments: objectArray
+        })
+        console.log(objectArray)
+        console.log(that.data.userInfo.openId)
+        // that.getCommentStars()
+        // console.log(that.data.commentStars)
+      },
+      fail(error) {
+        util.showModel('加载失败，请检查网络', error);
+        console.log('request fail', error);
+      }
+    }
+    this.data.takeSession = false;
+    if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
+      qcloud.request(options)
+    } else {    // 使用 wx.request 则不带登录态
+      wx.request(options)
+    }
   },
 
   /**

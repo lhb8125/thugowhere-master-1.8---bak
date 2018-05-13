@@ -12,6 +12,7 @@ Page({
     scoreStars: [],
     randomDish: {},
     randomIndex: 0,
+    commentStars:[],
     comments: {
       studentID: ["2016210222", "2016310333", "2016010000"],
       studentNickname: ["张三", "李四", "wangwu",],
@@ -47,7 +48,7 @@ Page({
       //需要在data里指定所有你需要的查询参数
       data: {
         canteen: that.data.canteen,
-        dishID: that.data.dishID
+        dishID: that.data.dishID,
       },
       success(result) {
         util.showSuccess('加载完成')
@@ -55,6 +56,9 @@ Page({
         that.setData({
           comments: objectArray
         })
+        console.log(that.data.comments)
+        that.getCommentStars()
+        console.log(that.data.commentStars)
       },
       fail(error) {
         util.showModel('加载失败，请检查网络', error);
@@ -66,6 +70,62 @@ Page({
       qcloud.request(options)
     } else {    // 使用 wx.request 则不带登录态
       wx.request(options)
+    }
+  },
+
+  getCommentStars: function () {
+    var that = this;
+    var starRank;
+    for (var i = 0; i < that.data.comments.length; i++) {
+      starRank = that.data.comments[i].commentStar;
+      var scoreStars = 'commentStars[' + i + ']'
+      // console.log(i)
+      // console.log(that.data.requestDishResult[i].starRank)
+      if (starRank >= 4.8) {
+        that.setData({
+          [scoreStars]: [2, 2, 2, 2, 2]
+        })
+      } else if (starRank >= 4.3 && starRank < 4.8) {
+        that.setData({
+          [scoreStars]: [2, 2, 2, 2, 1]
+        })
+      } else if (starRank >= 3.8 && starRank < 4.3) {
+        that.setData({
+          [scoreStars]: [2, 2, 2, 2, 0]
+        })
+      } else if (starRank >= 3.3 && starRank < 3.8) {
+        that.setData({
+          [scoreStars]: [2, 2, 2, 1, 0]
+        })
+      } else if (starRank >= 2.8 && starRank < 3.3) {
+        that.setData({
+          [scoreStars]: [2, 2, 2, 0, 0]
+        })
+      } else if (starRank >= 2.3 && starRank < 2.8) {
+        that.setData({
+          [scoreStars]: [2, 2, 1, 0, 0]
+        })
+      } else if (starRank >= 1.8 && starRank < 2.3) {
+        that.setData({
+          [scoreStars]: [2, 2, 0, 0, 0]
+        })
+      } else if (starRank >= 1.3 && starRank < 1.8) {
+        that.setData({
+          [scoreStars]: [2, 1, 0, 0, 0]
+        })
+      } else if (starRank >= 0.8 && starRank < 1.3) {
+        that.setData({
+          [scoreStars]: [2, 0, 0, 0, 0]
+        })
+      } else if (starRank >= 0.3 && starRank < 0.8) {
+        that.setData({
+          [scoreStars]: [1, 0, 0, 0, 0]
+        })
+      } else if (starRank < 0.3) {
+        that.setData({
+          [scoreStars]: [0, 0, 0, 0, 0]
+        })
+      }
     }
   },
 
@@ -126,7 +186,7 @@ Page({
         that.setData({
           requestDishResult: objectArray
         })
-        that.getStars();
+        that.getStars(that.data.requestDishResult[0].starRank);
         console.log(that.data.requestDishResult)
       },
       fail(error) {
@@ -142,49 +202,49 @@ Page({
     }
   },
 
-  getStars: function () {
+  getStars: function (starRank) {
     var that = this;
-    if (that.data.requestDishResult[0].starRank >= 4.8) {
+    if (starRank >= 4.8) {
       that.setData({
         scoreStars: [2, 2, 2, 2, 2]
       })
-    } else if (that.data.requestDishResult[0].starRank >= 4.3 && that.data.requestDishResult[0].starRank < 4.8) {
+    } else if (starRank >= 4.3 && starRank < 4.8) {
       that.setData({
         scoreStars: [2, 2, 2, 2, 1]
       })
-    } else if (that.data.requestDishResult[0].starRank >= 3.8 && that.data.requestDishResult[0].starRank < 4.3) {
+    } else if (starRank >= 3.8 && starRank < 4.3) {
       that.setData({
         scoreStars: [2, 2, 2, 2, 0]
       })
-    } else if (that.data.requestDishResult[0].starRank >= 3.3 && that.data.requestDishResult[0].starRank < 3.8) {
+    } else if (starRank >= 3.3 && starRank < 3.8) {
       that.setData({
         scoreStars: [2, 2, 2, 1, 0]
       })
-    } else if (that.data.requestDishResult[0].starRank >= 2.8 && that.data.requestDishResult[0].starRank < 3.3) {
+    } else if (starRank >= 2.8 && starRank < 3.3) {
       that.setData({
         scoreStars: [2, 2, 2, 0, 0]
       })
-    } else if (that.data.requestDishResult[0].starRank >= 2.3 && that.data.requestDishResult[0].starRank < 2.8) {
+    } else if (starRank >= 2.3 && starRank < 2.8) {
       that.setData({
         scoreStars: [2, 2, 1, 0, 0]
       })
-    } else if (that.data.requestDishResult[0].starRank >= 1.8 && that.data.requestDishResult[0].starRank < 2.3) {
+    } else if (starRank >= 1.8 && starRank < 2.3) {
       that.setData({
         scoreStars: [2, 2, 0, 0, 0]
       })
-    } else if (that.data.requestDishResult[0].starRank >= 1.3 && that.data.requestDishResult[0].starRank < 1.8) {
+    } else if (starRank >= 1.3 && starRank < 1.8) {
       that.setData({
         scoreStars: [2, 1, 0, 0, 0]
       })
-    } else if (that.data.requestDishResult[0].starRank >= 0.8 && that.data.requestDishResult[0].starRank < 1.3) {
+    } else if (starRank >= 0.8 && starRank < 1.3) {
       that.setData({
         scoreStars: [2, 0, 0, 0, 0]
       })
-    } else if (that.data.requestDishResult[0].starRank >= 0.3 && that.data.requestDishResult[0].starRank < 0.8) {
+    } else if (starRank >= 0.3 && starRank < 0.8) {
       that.setData({
         scoreStars: [1, 0, 0, 0, 0]
       })
-    } else if (that.data.requestDishResult[0].starRank < 0.3) {
+    } else if (starRank < 0.3) {
       that.setData({
         scoreStars: [0, 0, 0, 0, 0]
       })
@@ -266,7 +326,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.requestCommentList()
   },
 
   /**

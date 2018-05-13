@@ -30,6 +30,12 @@ Page({
     })
   },
 
+  showComments: function () {
+    wx.navigateTo({
+      url: '/pages/comments/myComments/myComments'
+    })
+  },
+
   listenerButtonChooseImage: function () {
     var that = this;
     wx.chooseImage({

@@ -61,7 +61,7 @@
       <navigator url="" class='detail_box' hover-class="weui-cell_active">
         <view class="detail_item">家乡</view>
         <view class="weui-cell__ft weui-cell__ft_in-access">
-          <picker value="{{canteen}}" range="{{hometownList}}" bindchange="changeCanteen">
+          <picker value="{{userInfo.hometown}}" range="{{hometownList}}" bindchange="changeCanteen">
             <view class="detail_item detail_picker">{{hometownList[userInfo.hometown]}}</view>
           </picker>
         </view>
@@ -69,7 +69,7 @@
       <navigator url="" class='detail_box' hover-class="weui-cell_active">
         <view class="detail_item">专业</view>
         <view class="weui-cell__ft weui-cell__ft_in-access">
-          <picker value="{{canteen}}" range="{{hometownList}}" bindchange="changeCanteen">
+          <picker value="{{userInfo.major}}" range="{{hometownList}}" bindchange="changeCanteen">
             <view class="detail_item detail_picker">{{majorList[userInfo.major]}}</view>
           </picker>
         </view>
@@ -77,7 +77,7 @@
       <navigator url="" class='detail_box' hover-class="weui-cell_active">
         <view class="detail_item">年级</view>
         <view class="weui-cell__ft weui-cell__ft_in-access">
-          <picker value="{{canteen}}" range="{{hometownList}}" bindchange="changeCanteen">
+          <picker value="{{userInfo.grade}}" range="{{hometownList}}" bindchange="changeCanteen">
             <view class="detail_item detail_picker">{{gradeList[userInfo.grade]}}</view>
           </picker>
         </view>

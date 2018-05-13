@@ -11,9 +11,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    timeList: ["早餐", "午餐", "晚餐"],
-    floorList: ["地下", "一层", "二层", "三层", "四层"],
-    sortList: ["按窗口排序", "按评价排序", "按价格排序"],
+    // timeList: ["早餐", "午餐", "晚餐"],
+    // floorList: ["地下", "一层", "二层", "三层", "四层"],
+    // sortList: ["按窗口排序", "按评价排序", "按价格排序"],
     canteen: 0,
     floor: 1,
     time: 0,
@@ -29,35 +29,35 @@ Page({
     image_suffix: "/1.jpg",
     scoreStars: [],
     dishesCount: 4,
-    dishes: {
-      id: ["kaoyu", "xianguo", "youtiao", "egg"],
-      name: ["烤鱼", "麻辣香锅", "油条", "鸡蛋"],
-      time: [1, 2, 0, 0],
-      floor: [2, 1, 1, 1],
-      path: ['/images/kaoyu.jpg', '/images/xiangguo.jpg', '/images/youtiao.jpg', '/images/egg.jpg'],
-      price: [18, 8, 1, 0.5],
-      scoreStars: [[2, 2, 2, 2, 0], [2, 2, 2, 2, 2], [2, 2, 2, 1, 0], [2, 2, 2, 2, 0]],
-      score: [4.0, 5.0, 4.2, 4.5, 3.7],
-      description: ["一种发源于重庆巫溪县，而发扬于万州的特色美食，在流传过程中，融合腌、烤、炖三种烹饪工艺技术，充分借鉴传统渝菜及重庆火锅用料特点，是口味奇绝、营养丰富的风味小吃。", "清芬的香锅最好吃", "一种古老的中式面食，长条形中空的油炸食品，口感松脆有韧劲。", "健康，含有丰富的蛋白质"],
-      cuisine: ["川菜", "川菜", "不限", "不限"],
-      taste: ["香辣", "麻辣", "油腻", "清淡"],
-      calory: [200, 250, 180, 30]
-    },
+    // dishes: {
+    //   id: ["kaoyu", "xianguo", "youtiao", "egg"],
+    //   name: ["烤鱼", "麻辣香锅", "油条", "鸡蛋"],
+    //   time: [1, 2, 0, 0],
+    //   floor: [2, 1, 1, 1],
+    //   path: ['/images/kaoyu.jpg', '/images/xiangguo.jpg', '/images/youtiao.jpg', '/images/egg.jpg'],
+    //   price: [18, 8, 1, 0.5],
+    //   scoreStars: [[2, 2, 2, 2, 0], [2, 2, 2, 2, 2], [2, 2, 2, 1, 0], [2, 2, 2, 2, 0]],
+    //   score: [4.0, 5.0, 4.2, 4.5, 3.7],
+    //   description: ["一种发源于重庆巫溪县，而发扬于万州的特色美食，在流传过程中，融合腌、烤、炖三种烹饪工艺技术，充分借鉴传统渝菜及重庆火锅用料特点，是口味奇绝、营养丰富的风味小吃。", "清芬的香锅最好吃", "一种古老的中式面食，长条形中空的油炸食品，口感松脆有韧劲。", "健康，含有丰富的蛋白质"],
+    //   cuisine: ["川菜", "川菜", "不限", "不限"],
+    //   taste: ["香辣", "麻辣", "油腻", "清淡"],
+    //   calory: [200, 250, 180, 30]
+    // },
     selectedDishesCount: 0,
-    selectedDishes: {
-      id: [],
-      name: [],
-      time: [],
-      floor: [],
-      path: [],
-      price: [],
-      scoreStars: [],
-      score: [],
-      description: [],
-      cuisine: [],
-      taste: [],
-      calory: []
-    },
+    // selectedDishes: {
+    //   id: [],
+    //   name: [],
+    //   time: [],
+    //   floor: [],
+    //   path: [],
+    //   price: [],
+    //   scoreStars: [],
+    //   score: [],
+    //   description: [],
+    //   cuisine: [],
+    //   taste: [],
+    //   calory: []
+    // },
     star: [],
     dishDetailIndex: "0",
     inputShowed: false,
@@ -69,10 +69,17 @@ Page({
     // isbottom: 0,
     // isTop: 0,
     isCompleted: 0,
-    isHideLoadMore:1,
+    isHideLoadMore: 1,
     // toView:0,
-    scrollTop:0,
-    isShowTop:0,
+    scrollTop: 0,
+    isShowTop: 0,
+    isShowFilter: 0,
+    canteenList:[],
+    tasteList:[],
+    cuisineList:[],
+    filterCanteen:0,
+    filterTaste:0,
+    filterCuisine:0,
   },
 
   /**
@@ -84,6 +91,9 @@ Page({
     // floor = options.floor;
     this.setData({
       canteen: options.canteen,
+      canteenList: getApp().globalData.canteenList,
+      tasteList: getApp().globalData.tasteList,
+      cuisineList: getApp().globalData.cuisineList,
     })
     that.requestDishList();
     new app.WeToast()
@@ -275,6 +285,35 @@ Page({
 
   },
 
+  changeCanteen: function (e) {
+    this.setData({
+      canteen: e.detail.value
+    });
+    // console.log(this.data.canteenList[this.data.canteen])
+  },
+  changeTaste: function (e) {
+    this.setData({
+      taste: e.detail.value
+    });
+  },
+  changeCuisine: function (e) {
+    this.setData({
+      cuisine: e.detail.value
+    });
+  },
+
+  showFilter: function () {
+    this.setData({
+      isShowFilter: this.data.isShowFilter == 1 ? 0 : 1
+    })
+  },
+
+  performFilter:function(){
+    this.setData({
+      isShowFilter:0,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -452,24 +491,24 @@ Page({
     // }
   },
 
-  scrollToTop:function(){
+  scrollToTop: function () {
     console.log("scrollToTop")
     this.setData({
-      scrollTop:0,
+      scrollTop: 0,
     })
   },
 
-  scroll:function(e){
+  scroll: function (e) {
     console.log(e.detail)
-    if(e.detail.scrollTop>300){
+    if (e.detail.scrollTop > 300) {
       this.setData({
-        isShowTop:1
+        isShowTop: 1
       })
     } else {
       this.setData({
         isShowTop: 0
       });
-    }  
+    }
   },
 
 
