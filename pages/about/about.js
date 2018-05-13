@@ -50,12 +50,7 @@ Page({
 
   bindGetUserInfo: function (e) {
     if (e.detail.userInfo) {
-      this.setData({
-        "userInfo": e.detail.userInfo,
-        "isRefuseLogin": false
-      })
-      app.globalData.userInfo = e.detail.userInfo
-      app.globalData.logged = true
+      this.login()
     }
   },
 

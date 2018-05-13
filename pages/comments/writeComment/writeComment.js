@@ -124,7 +124,22 @@ Page({
         commentStar: that.data.starRank
       },
       success(result) {
-        util.showSuccess('提交成功')
+        wx.hideToast()
+        if (result.data.data.returnCode==0){
+        util.showSuccess('评论提交成功')
+        }
+        else if (result.data.data.returnCode == 1){
+          wx.showModal({
+            title: '用户信息错误',
+            content: '您的登录状态有问题，建议尝试退出重新登录',
+          })
+        }
+        else if (result.data.data.returnCode == 2) {
+          wx.showModal({
+            title: '不能重复评论',
+            content: '您已经评论过这道菜了，去别的菜看一看吧~',
+          })
+        }
       },
       fail(error) {
         util.showModel('提交失败', error);
