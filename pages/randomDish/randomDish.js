@@ -207,9 +207,18 @@ Page({
   },
 
   writeComment: function () {
-    wx.navigateTo({
-      url: '/pages/comments/writeComment/writeComment',
-    })
+    if(app.globalData.logged){
+      wx.navigateTo({
+        url: '/pages/comments/writeComment/writeComment?canteen='+this.data.canteen+
+        '&dishID='+this.data.dishID,
+      })
+    }
+    else{
+      wx.showModal({
+        title: '您尚未登录',
+        content: '请返回主页，点击右下角“我”进行设置',
+      })
+    }
   },
 
   changeFavoured: function (e) {

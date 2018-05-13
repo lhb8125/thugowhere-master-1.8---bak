@@ -13,10 +13,12 @@
         </view>
       </block>
     </view>
-    <view class="comment_box">
-      <textarea class="weui-textarea" bindinput="bindTextAreaBlur" placeholder="快来说说你的看法吧" maxlength='200' style="height:200rpx;auto-height:true;" />
-      <view class="weui-textarea-counter">{{wordCount}}/200</view>
-    </view>
-    <button class="weui-flex__item submit_btn" type="primary" bindtap="submitComment">提交</button>
+    <form bindsubmit="bindFormSubmit">
+      <view class="comment_box">
+        <textarea class="weui-textarea" name="textarea" bindinput="bindTextAreaBlur" placeholder="快来说说你的看法吧" maxlength='200' style="height:200rpx;auto-height:true;" />
+        <view class="weui-textarea-counter">{{wordCount}}/200</view>
+      </view>
+      <button class="weui-flex__item submit_btn" form-type="submit">提交</button>
+    </form>
   </view>
 </view>

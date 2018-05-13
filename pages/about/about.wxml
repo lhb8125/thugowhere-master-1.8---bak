@@ -4,9 +4,13 @@
         <view class="page__desc">列表</view>
     </view> -->
 
+
 <view wx:if="{{isRefuseLogin}}" class='container'>
-  <text>您拒绝了小程序的登录请求，点击下面的按钮改变设置</text>
-  <button bindtap='reSetting'>重新设置</button>
+  <view wx:if="{{canIUseInfo}}">
+    <text>要使用个人中心，请点击下面的按钮进行设置</text>
+    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+  </view>
+  <view wx:else>请升级微信版本</view>
 </view>
 
 <view wx:if="{{!isRefuseLogin}}" class='container' style='height:400rpx;'>
