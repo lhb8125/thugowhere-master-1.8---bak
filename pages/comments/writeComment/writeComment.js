@@ -11,11 +11,11 @@ Page({
   data: {
     // score:[0,0,0,0,0],
     wordCount: 0,
-    commentBody:'',
+    commentBody: '',
     star: [0, 0, 0, 0, 0],
     starRank: 0,
-    dishID:{},
-    canteen:'',
+    dishID: {},
+    canteen: '',
     takeSession: true
   },
 
@@ -24,8 +24,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      canteen:options.canteen,
-      dishID:options.dishID
+      canteen: options.canteen,
+      dishID: options.dishID
     })
   },
 
@@ -34,7 +34,7 @@ Page({
     this.setData({
       wordCount: e.detail.value.length
     })
-    console.log(this.data.wordCount)
+    console.log(this.data.value)
   },
 
   getScore: function (e) {
@@ -44,11 +44,11 @@ Page({
     } else if (this.data.star[e.currentTarget.id] == 1) {
       score = parseInt(e.currentTarget.id) + 1.0
     } else if (this.data.star[e.currentTarget.id] == 2) {
-      score = parseInt(e.currentTarget.id) 
+      score = parseInt(e.currentTarget.id)
     }
-     this.setData({
-       starRank: score
-     })
+    this.setData({
+      starRank: score
+    })
     this.getStars(score)
   },
 
@@ -103,7 +103,7 @@ Page({
 
   //提交评论 by mengql
 
-  bindFormSubmit:function(e){
+  bindFormSubmit: function (e) {
     util.showBusy('正在提交...')
     console.log(e.detail.value.textarea)
     var that = this
@@ -111,7 +111,7 @@ Page({
     console.log(app.globalData.userInfo)
     var options = {
       url: config.service.commentSubmitUrl,
-      login : true,
+      login: true,
       method: 'POST',
       //需要在data里指定所有你需要的查询参数
       data: {
@@ -125,10 +125,13 @@ Page({
       },
       success(result) {
         wx.hideToast()
-        if (result.data.data.returnCode==0){
-        util.showSuccess('评论提交成功')
+        if (result.data.data.returnCode == 0) {
+          util.showSuccess('评论提交成功')
+          wx.navigateBack({
+            delta: 1
+          })
         }
-        else if (result.data.data.returnCode == 1){
+        else if (result.data.data.returnCode == 1) {
           wx.showModal({
             title: '用户信息错误',
             content: '您的登录状态有问题，建议尝试退出重新登录',

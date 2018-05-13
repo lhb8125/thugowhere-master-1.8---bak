@@ -11,7 +11,8 @@
     "pages/about/detail/changeDetail/changeDetail",
     "pages/randomDish/randomDish",
     "pages/comments/writeComment/writeComment",
-    "pages/about/showDetail/showDetail"
+    "pages/about/showDetail/showDetail",
+    "pages/comments/myComments/myComments"
   ],
   "tabBar": {
     "list": [

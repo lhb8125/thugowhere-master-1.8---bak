@@ -1,0 +1,49 @@
+/* pages/comments/myComments/myComments.wxss */
+.background{
+  background-color: whitesmoke;
+  width: auto;
+  height: auto;
+  /* position: absolute; */
+  /* top: 20rpx; */
+  /* left: 20rpx; */
+  border-radius: 20rpx;
+  margin-right: 30rpx;
+  margin-left: 30rpx;
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+  /* padding: 20rpx; */
+}
+
+.dish_name{
+  font-family: sans-serif;
+  font-size: 32rpx;
+  font-weight: bold;
+  padding: 20rpx;
+}
+
+.dish_comment{
+  font-family: sans-serif;
+  font-size: 28rpx;
+  font-weight: normal;
+  padding: 20rpx;
+  padding-top: 0rpx;
+}
+
+.comment_gradeanddate{
+  font-size: 28rpx;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: right;
+}
+
+.favour_box{
+  margin: 20rpx;
+  width: 650rpx;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-style: solid;
+  border-color: black;
+  border-width: thin;
+  border-radius: 10rpx;
+}

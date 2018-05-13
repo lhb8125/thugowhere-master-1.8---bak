@@ -151,3 +151,81 @@ page, .page, .page__bd {
   opacity: 0.6;
   z-index: 9999;
 }
+
+.config_box{
+  width: 100%;
+  height: 80rpx;
+  border-bottom-width: thin;
+  /* border-top-width: thin; */
+  border-bottom-style: solid;
+  border-color: gainsboro;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.text_box{
+  width: 140rpx;
+  height: auto;
+  border-style: solid;
+  border-radius: 10rpx;
+  border-color: gainsboro;
+  border-width: thin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 10rpx; */
+}
+
+.config_text{
+  font-family: sans-serif;
+  font-size: 30rpx;
+  /* margin: 10rpx; */
+   margin-left: 10rpx; 
+   margin-right: 10rpx; 
+}
+
+.filter_box{
+  position: fixed;
+  top: 180rpx;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1000;
+  /* border-style: solid; */
+  /* border-radius: 20rpx; */
+  /* border-width: thin; */
+  background-color: whitesmoke;
+}
+
+.input_text{
+  width: 250rpx;
+  height: 30rpx;
+  border-width: thin;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 8%;
+  text-align: center;
+  font-size: 24rpx;
+}
+
+.input_box{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.random_Btn{
+  margin-top: 5rpx;
+  height: 80rpx;
+  font-size:35rpx;
+}
+
+.comment_write{
+  color: green;
+  font-weight: bold;
+  font-size: 29rpx;
+  padding-right: 30rpx;
+  font-family: sans-serif;
+}

@@ -28,7 +28,7 @@ Page({
       isPlus: this.data.isFollowed == 1 ? -1 : 1
     })
     var animation = wx.createAnimation({
-      duration: 1500,
+      duration: 1000,
       timingFunction: 'ease',
     })
     this.animation = animation

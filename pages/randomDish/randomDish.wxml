@@ -92,14 +92,14 @@
 
             </view>
             <view class="weui-flex" style='display:flex;justify-content:flex-end;align-items:flex-end;'>
-              <block wx:for="{{item.commentStar}}" wx:for-index="idx">
-                <view wx:if="{{item[idx]==0}}">
+              <block wx:for="{{commentStars[index]}}" wx:for-index="idx">
+                <view wx:if="{{commentStars[index][idx]==0}}">
                   <image class="weui-flex__item" style="width: 25rpx" src="/images/star_e.png" mode="widthFix"></image>
                 </view>
-                <view wx:if="{{item[idx]==1}}">
+                <view wx:if="{{commentStars[index][idx]==1}}">
                   <image class="weui-flex__item" style="width: 25rpx" src="/images/star_h.png" mode="widthFix"></image>
                 </view>
-                <view wx:if="{{comments.studentScore[index][idx]==2}}">
+                <view wx:if="{{commentStars[index][idx]==2}}">
                   <image class="weui-flex__item" style="width: 25rpx" src="/images/star_f.png" mode="widthFix"></image>
                 </view>
               </block>

@@ -15,7 +15,6 @@
 
 <view wx:if="{{!isRefuseLogin}}" class='container' style='height:400rpx;'>
 
-  <!--这个渲染出来效果不对，你看看是咋回事 by mengql-->
   <image class="background" mode="widthFix" src="{{userInfo.avatarUrl}}" />
 
   <image class="head" mode="widthFix" bindtap="listenerButtonChooseImage" src="{{userInfo.avatarUrl}}" />
@@ -75,11 +74,11 @@
     <view class="weui-cell__bd">我的信息</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
-  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+  <navigator url="" bindtap="showComments" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__hd">
       <image src="/images/about/friend.png" style="margin-right: 5px;vertical-align: middle;width:40rpx; height: 40rpx;"></image>
     </view>
-    <view class="weui-cell__bd">我的</view>
+    <view class="weui-cell__bd">我的评论</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
   <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
