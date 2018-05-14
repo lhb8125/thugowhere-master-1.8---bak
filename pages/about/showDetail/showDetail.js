@@ -19,35 +19,44 @@ Page({
     majorList: [],
     isFollowed: 0,
     animationData: {},
-    isPlus:0,
+    isPlus: 0,
+    isFirstAction: 1,
   },
 
   changeFollowed: function () {
-    this.setData({
-      isFollowed: this.data.isFollowed == 1 ? 0 : 1,
-      isPlus: this.data.isFollowed == 1 ? -1 : 1
-    })
-    var animation = wx.createAnimation({
-      duration: 1000,
-      timingFunction: 'ease',
-    })
-    this.animation = animation
-    animation.opacity(0).translate(0, -5).step()
-    this.setData({
-      animationData: animation.export()
-    })
-    setTimeout(function () {
-      animation.opacity(1).translate(0, 5).step()
+    if (this.data.isFirstAction == 1) {
       this.setData({
-        animationData: animation.export(),
-        isPlus: 0
+        isFollowed: this.data.isFollowed == 1 ? 0 : 1,
+        isPlus: this.data.isFollowed == 1 ? -1 : 1,
+        isFirstAction: 0
       })
-    }.bind(this), 1000)
+      var animation = wx.createAnimation({
+        duration: 1000,
+        timingFunction: 'ease',
+      })
+      this.animation = animation
+      animation.opacity(0).translate(0, -5).step()
+      this.setData({
+        animationData: animation.export()
+      })
+      setTimeout(function () {
+        animation.opacity(1).translate(0, 5).step()
+        this.setData({
+          animationData: animation.export(),
+          isPlus: 0
+        })
+      }.bind(this), 1000)
+      setTimeout(function () {
+        this.setData({
+          isFirstAction: 1
+        })
+      }.bind(this), 1000)
+    }
   },
 
   onLoad: function () {
     this.setData({
-      userInfo: getApp().globalData.userInfo,
+      userInfo: getApp().globalData.someoneInfo,
       gradeList: getApp().globalData.gradeList,
       hometownList: getApp().globalData.hometownList,
       majorList: getApp().globalData.majorList

@@ -70,7 +70,9 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* border-top-style: solid; *//* border-bottom-style: solid; *//* border-top-width: 1px;   *//* border-bottom-width: 1px; */
+  /* border-top-style: solid; */
+  /* border-top-width: 1px; */
+  /* border-color: smoke; */
   opacity: 1;
   background-color: white;
   margin-top: 20rpx;

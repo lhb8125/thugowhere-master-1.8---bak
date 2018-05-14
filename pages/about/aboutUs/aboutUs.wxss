@@ -1,0 +1,24 @@
+/* pages/about/aboutUs/aboutUs.wxss */
+.weui-footer{
+    margin-bottom: 50px;
+}
+.weui-footer_fixed-bottom{
+    margin-bottom: 0;
+}
+
+.box{
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 50rpx;
+}
+
+.aboutUs_txt{
+  text-indent: 40rpx;
+  font-size: 28rpx;
+  font-family: sans-serif;
+  padding-top: 50rpx;
+}

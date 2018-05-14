@@ -29,44 +29,20 @@
     </view>
   </view>
 </view>
-<!-- <navigator id="nickname" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap='accountDetail'>
-    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-      <image class="weui-media-box__thumb" src="/images/head.jpg" />
-    </view>
-    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-      <view class="weui-media-box__title">{{userInfo.nickname}}</view>
-      <view class="weui-media-box__desc">{{userInfo.studentID}}</view>
-    </view>
-  </navigator> -->
-<!-- <view class="page__bd">
-    <view class="weui-cells__title">带说明的列表项</view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell">
-        <view class="weui-cell__bd">标题文字</view>
-        <view class="weui-cell__ft">说明文字</view>
-      </view>
-    </view>
 
-    <view class="weui-cells__title">带图标、说明的列表项</view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell">
-        <view class="weui-cell__hd">
-          <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
-        </view>
-        <view class="weui-cell__bd">标题文字</view>
-        <view class="weui-cell__ft">说明文字</view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__hd">
-          <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
-        </view>
-        <view class="weui-cell__bd">标题文字</view>
-        <view class="weui-cell__ft">说明文字</view>
-      </view>
-    </view> -->
-
-<!-- <view class="weui-cells__title">带跳转的列表项</view> -->
-<view class="weui-cells weui-cells_after-title" style='margin:0rpx;padding:0rpx;'>
+<view class="weui-cells weui-cells_after-title">
+  <view style='display:flex;justify-content:space-around;padding:10rpx;'>
+    <view style='display:flex;flex-direction:column;align-items:center;'>
+      <view class="detail_fans_number">35</view>
+      <view class="detail_fans_txt">粉丝</view>
+    </view>
+    <view style='display:flex;flex-direction:column;align-items:center;'>
+      <view class="detail_fans_number">10</view>
+      <view class="detail_fans_txt">关注</view>
+    </view>
+  </view>
+  <!-- <view class="weui-cells__title">带跳转的列表项</view> -->
+  <!-- <view class="weui-cells weui-cells_after-title" style='margin:0rpx;padding:0rpx;'> -->
   <navigator id="detail" bindtap="showDetail" url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__hd">
       <image src="/images/about/information.png" style="margin-right: 5px;vertical-align: middle;width:40rpx; height: 40rpx;"></image>
@@ -85,7 +61,7 @@
     <view class="weui-cell__hd">
       <image src="/images/about/favorite.png" style="margin-right: 5px;vertical-align: middle;width:40rpx; height: 40rpx;"></image>
     </view>
-    <view class="weui-cell__bd">我的收藏</view>
+    <view class="weui-cell__bd">我的菜</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
   <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
@@ -95,7 +71,7 @@
     <view class="weui-cell__bd">设置</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
-  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+  <navigator url="/pages/about/aboutUs/aboutUs" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__hd">
       <image src="/images/about/about.png" style="margin-right: 5px;vertical-align: middle;width:40rpx; height: 40rpx;"></image>
     </view>
