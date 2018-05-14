@@ -26,10 +26,13 @@ var config = {
         // 获取菜品列表接口
         dishlistUrl: `${host}/weapp/dishlist`,
 
-        // 获取评论列表接口
+        // 获取菜品评论列表接口
         commentlistUrl: `${host}/weapp/commentlist`,
 
-        //提交评论接口
+        // 获取个人评论列表接口
+        personalCommentlistUrl: `${host}/weapp/personalcommentlist`,
+
+        // 提交评论接口
         commentSubmitUrl: `${host}/weapp/commentsubmit`
     }
 };
