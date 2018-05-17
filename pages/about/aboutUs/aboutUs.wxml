@@ -1,0 +1,16 @@
+<view class="page">
+<view class='box'>
+<image src="/images/icons/eat.png" style="margin-right: 5px;vertical-align: middle;width:250rpx;" 
+mode='widthFix'></image>
+<view class='aboutUs_txt'>“清华去哪吃”是由清华大学和北京师范大学的学生兴趣团队共同开发的面向清华大学学生食堂的饮食类应用。</view>
+<view class='aboutUs_txt'>民以食为天，我们开发此应用的初衷在于完善同学们日常生活数字化的最后一块拼图，饮食也可以像学习、娱乐、出行一样实现智能化与可视化。</view>
+<view class='aboutUs_txt'>在这里，你可以浏览清华各大食堂的各式各样的菜品，对自己吃过的菜发表评论，同时亦可以查看他人的评论，尝试一下自己未尝试过的“网红菜”，当然也可以通过随机方式决定今天要去吃的菜。</view>
+<view class='aboutUs_txt'>你是一个十足的吃货吗，来这里成为大V证明自己吧！</view>
+</view>
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-footer__links">
+      <navigator url="" class="weui-footer__link">Developed by 杂学家、斌、一川</navigator>
+    </view>
+    <view class="weui-footer__text">Copyright © 斯坦福桥摆大巴</view>
+  </view>
+</view>

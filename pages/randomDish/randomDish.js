@@ -12,7 +12,7 @@ Page({
     scoreStars: [],
     randomDish: {},
     randomIndex: 0,
-    commentStars:[],
+    commentStars: [],
     comments: {
       studentID: ["2016210222", "2016310333", "2016010000"],
       studentNickname: ["张三", "李四", "wangwu",],
@@ -25,16 +25,18 @@ Page({
       isUserFavoured: [false, false, false],
     },
     gradeList: [],
-    isRandom:1,
+    isRandom: 1,
     dishID: 0,
     canteen: "zijing",
-    windowHeight:0,
-    loadmore:0,
-    refresh:0,
-    btnHeight:0,
+    windowHeight: 0,
+    loadmore: 0,
+    refresh: 0,
+    btnHeight: 0,
     image_prefix: "https://tsingwind.top/weapp_img",
     image_suffix: "/1.jpg",
-    isCompleted:1,
+    isCompleted: 1,
+    isFavoured: 0,
+    favourWidth:"100%",
   },
 
   //请求评论信息 by mengql
@@ -140,7 +142,7 @@ Page({
       // name: options.name,
       gradeList: getApp().globalData.gradeList,
       isRandom: options.isRandom,
-      dishID: options.isRandom == 1 ? Math.round(Math.random() * 10)+1 : options.id,
+      dishID: options.isRandom == 1 ? Math.round(Math.random() * 10) + 1 : options.id,
       canteen: options.canteen
     })
     // that.getRandomDish()
@@ -151,7 +153,8 @@ Page({
     that.requestCommentList()
     if (that.data.isRandom == 1) {
       that.setData({
-        btnHeight: 80
+        btnHeight: 80,
+        favourWidth: "50%",
       })
     }
     // 获取系统信息
@@ -266,14 +269,20 @@ Page({
     that.requestCommentList()
   },
 
+  addFavouriteDish: function () {
+    this.setData({
+      isFavoured: this.data.isFavoured == 1 ? 0 : 1
+    })
+  },
+
   writeComment: function () {
-    if(app.globalData.logged){
+    if (app.globalData.logged) {
       wx.navigateTo({
-        url: '/pages/comments/writeComment/writeComment?canteen='+this.data.canteen+
-        '&dishID='+this.data.dishID,
+        url: '/pages/comments/writeComment/writeComment?canteen=' + this.data.canteen +
+        '&dishID=' + this.data.dishID,
       })
     }
-    else{
+    else {
       wx.showModal({
         title: '您尚未登录',
         content: '请返回主页，点击右下角“我”进行设置',
@@ -308,7 +317,7 @@ Page({
     }
   },
 
-  showUserDetail(){
+  showUserDetail() {
     console.log("showUserDetail")
     wx.navigateTo({
       url: '/pages/about/showDetail/showDetail',

@@ -74,12 +74,13 @@ Page({
     scrollTop: 0,
     isShowTop: 0,
     isShowFilter: 0,
-    canteenList:[],
-    tasteList:[],
-    cuisineList:[],
-    filterCanteen:0,
-    filterTaste:0,
-    filterCuisine:0,
+    canteenList: [],
+    tasteList: [],
+    cuisineList: [],
+    filterCanteen: 0,
+    filterTaste: 0,
+    filterCuisine: 0,
+    sortOrder: 1,
   },
 
   /**
@@ -308,10 +309,27 @@ Page({
     })
   },
 
-  performFilter:function(){
+  performFilter: function () {
     this.setData({
-      isShowFilter:0,
+      isShowFilter: 0,
     })
+  },
+
+  changeSort: function (e) {
+    console.log(e)
+    if (e.currentTarget.id == "window") {
+      this.setData({
+        sortOrder: this.data.sortOrder == 1 ? 2 : 1
+      })
+    } else if (e.currentTarget.id == "score") {
+      this.setData({
+        sortOrder: this.data.sortOrder == 3 ? 4 : 3
+      })
+    } else if (e.currentTarget.id == "price") {
+      this.setData({
+        sortOrder: this.data.sortOrder == 5 ? 6 : 5
+      })
+    }
   },
 
   /**

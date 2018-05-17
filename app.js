@@ -14,8 +14,7 @@ App({
     tasteList: ["不限", "油腻", "清淡", "麻辣", "香辣",],
     cuisineList: ["不限","川菜", "京菜", "鲁菜", "东北菜", "淮扬菜", "粤菜", "云贵风味", "西北风味",],
     
-    /*
-    userInfo:{
+    someoneInfo:{
       nickname: "斌",
       name: "刘宏斌",
       studentID: "2016210481",
@@ -26,8 +25,7 @@ App({
       head: '/images/head.jpg',
       phone: "18920533989",
       briefInfo: "我就是我，不一样的烟火"
-    }
-    */
+    },
 
     userInfo:{},
     logged:false

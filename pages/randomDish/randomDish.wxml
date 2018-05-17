@@ -128,8 +128,18 @@
     </view>
   </view>
 </scroll-view>
+
+<!-- <button class="weui-flex__item comment_btn" type="primary" bindtap="getRandomDish">再来一次</button> -->
+<view class='favour_box' style='width:{{favourWidth}};' bindtap="addFavouriteDish">
+  <image hidden='{{isFavoured==1}}' style="width: 35rpx;" src="/images/icons/heart_e.png" mode="widthFix"></image>
+  <image hidden='{{isFavoured==0}}' style="width: 35rpx;" src="/images/icons/heart_f.png" mode="widthFix"></image>
+  <view class='config_txt'>我中意肋</view>
+</view>
 <view wx:if="{{isRandom==1}}">
-  <button class="weui-flex__item comment_btn" type="primary" bindtap="getRandomDish">再来一次</button>
+  <view class='oneMoreTime_box' bindtap="getRandomDish">
+    <image style="width: 35rpx;" src="/images/icons/oneMoreTime.png" mode="widthFix"></image>
+    <view class='config_txt'>再来一次</view>
+  </view>
 </view>
 
 <import src="../../src/wetoast.wxml" />
