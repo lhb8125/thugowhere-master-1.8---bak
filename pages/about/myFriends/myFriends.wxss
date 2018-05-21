@@ -1,0 +1,18 @@
+/* pages/about/myFriends/myFriends.wxss */
+
+.box {
+  display: flex;
+  align-items: center;
+}
+
+.nickname {
+  font-family: sans-serif;
+  font-size: 30rpx;
+}
+
+.image {
+  margin-right: 5px;
+  vertical-align: middle;
+  width: 35px;
+  height: 35px;
+}
