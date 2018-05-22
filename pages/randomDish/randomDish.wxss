@@ -21,6 +21,10 @@
   /* z-index: 0; */
 }
 
+.upvoteCount{
+  font-size: 20px
+}
+
 .dish_detail {
   /* z-index: 1000; */
   width: 750rpx;

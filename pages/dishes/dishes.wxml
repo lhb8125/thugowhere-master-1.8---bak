@@ -208,8 +208,8 @@
             <view class="weui-media-box__title">{{item.NAME}}</view>
             <view class="weui-media-box__desc">{{item.briefInfo}}</view>
             <view class="weui-flex" style='display:flex;justify-content:space-between;align-items=flex-start'>
-              <view class="weui-media-box__desc" wx:if="{{item.isPriceAvailable==1}}">{{item.price}} 元/{{item.priceUnit}}</view>
-              <view class="weui-media-box__desc" wx:if="{{item.isPriceAvailable==0}}">{{item.priceLow}}~{{item.priceHigh}} 元/{{item.priceUnit}}</view>
+              <view class="weui-media-box__desc" wx:if="{{item.price!=null}}">{{item.price}} 元/{{item.priceUnit}}</view>
+              <view class="weui-media-box__desc" wx:if="{{item.price==null}}">{{item.priceLow}}~{{item.priceHigh}} 元/{{item.priceUnit}}</view>
               <view class="weui-flex" style='display:flex;justify-content:flex-end'>
                 <block wx:for="{{scoreStars[index]}}" wx:for-index="idx">
                   <view wx:if="{{scoreStars[index][idx]==0}}">

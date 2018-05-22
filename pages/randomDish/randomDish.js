@@ -14,6 +14,7 @@ Page({
     randomIndex: 0,
     commentStars: [],
     comments: {
+      /*
       studentID: ["2016210222", "2016310333", "2016010000"],
       studentNickname: ["张三", "李四", "wangwu",],
       studentHead: ["/images/head/zhangsan.jpg", "/images/head/lisi.jpg", "/images/head/wangwu.jpg",],
@@ -23,11 +24,13 @@ Page({
       studentScore: [[2, 2, 2, 2, 0], [2, 2, 2, 2, 2], [2, 2, 2, 1, 0]],
       studentComment: ["油条的叫法各地不一，东北和华北很多地区称油条为“馃子”；安徽一些地区称“油果子”；广州及周边地区称油炸鬼；潮汕地区等地称油炸果；浙江地区有天罗筋的称法（天罗即丝瓜，老丝瓜干燥后剥去壳会留下丝瓜筋，其形状与油条极像，遂称油条为天罗筋）。", "好吃，很脆！", "还可以吧。。"],
       isUserFavoured: [false, false, false],
+      */
     },
     gradeList: [],
     isRandom: 1,
     dishID: 0,
-    canteen: "zijing",
+    canteen: "",
+    canteen_zh: "",
     windowHeight: 0,
     loadmore: 0,
     refresh: 0,
@@ -36,7 +39,9 @@ Page({
     image_suffix: "/1.jpg",
     isCompleted: 1,
     isFavoured: 0,
-    favourWidth:"100%",
+    favourWidth: "100%",
+    isVoteListNeeded: false,
+    voteList: {}
   },
 
   //请求评论信息 by mengql
@@ -51,16 +56,27 @@ Page({
       data: {
         canteen: that.data.canteen,
         dishID: that.data.dishID,
+        openid: getApp().globalData.userInfo.openId,
+        isVoteListNeeded: that.data.isVoteListNeeded
       },
       success(result) {
         util.showSuccess('加载完成')
-        var objectArray = result.data.data
-        that.setData({
-          comments: objectArray
-        })
-        console.log(that.data.comments)
+        var resBundle = result.data.data
+        console.log(resBundle)
+        if (that.data.isVoteListNeeded) {
+          that.setData({
+            comments: resBundle.res,
+            voteList: resBundle.votedlist
+          })
+          wx.setStorageSync('voteList', resBundle.votedlist)
+        }
+        else {
+          that.setData({
+            comments: resBundle.res
+          })
+        }
+        that.getUpvoted()
         that.getCommentStars()
-        console.log(that.data.commentStars)
       },
       fail(error) {
         util.showModel('加载失败，请检查网络', error);
@@ -72,6 +88,20 @@ Page({
       qcloud.request(options)
     } else {    // 使用 wx.request 则不带登录态
       wx.request(options)
+    }
+  },
+
+  getUpvoted: function () {
+    for (let item of this.data.comments) {
+      item.isUpvoted = false
+    }
+    if (JSON.stringify(this.data.voteList) != '{}') {
+      let voteList = this.data.voteList
+      for (let item of this.data.comments) {
+        if (voteList.includes(item.COMMENT_ID)) {
+          item.isUpvoted = true
+        }
+      }
     }
   },
 
@@ -143,13 +173,32 @@ Page({
       gradeList: getApp().globalData.gradeList,
       isRandom: options.isRandom,
       dishID: options.isRandom == 1 ? Math.round(Math.random() * 10) + 1 : options.id,
-      canteen: options.canteen
+      canteen: options.canteen,
+      canteen_zh: util.canteenTable[options.canteen]
     })
-    // that.getRandomDish()
+
+    // 获取用户的点赞列表，优先从缓存中读取 by mengql
+    var votelist = wx.getStorageSync('voteList')
+    if (votelist) {
+      this.setData({
+        voteList: votelist,
+        isVoteListNeeded: false
+      })
+    }
+    else {
+      if (getApp().globalData.logged) {
+        this.setData({
+          isVoteListNeeded: true
+        })
+      }
+      else {
+        this.setData({
+          isVoteListNeeded: false
+        })
+      }
+    }
+
     that.requestDishList()
-    console.log(that.data.dishID)
-    console.log(that.data.canteen)
-    // that.getStars()
     that.requestCommentList()
     if (that.data.isRandom == 1) {
       that.setData({
@@ -157,12 +206,10 @@ Page({
         favourWidth: "50%",
       })
     }
+
     // 获取系统信息
     wx.getSystemInfo({
       success: function (res) {
-        // console.log(res);
-        // console.log('height=' + res.windowHeight);
-        // console.log('width=' + res.windowWidth);
         that.setData({
           windowHeight: res.windowHeight - res.windowWidth / 750 * that.data.btnHeight
         })
@@ -296,6 +343,37 @@ Page({
     this.setData({
       [isUserFavoured]: !this.data.comments.isUserFavoured[e.currentTarget.id],
     })
+
+    var that = this
+    var options = {
+      url: config.service.commentlistUrl,
+
+      //需要在data里指定所有你需要的查询参数
+      data: {
+        canteen: that.data.canteen,
+        dishID: that.data.dishID,
+      },
+      success(result) {
+        util.showSuccess('加载完成')
+        var objectArray = result.data.data
+        that.setData({
+          comments: objectArray
+        })
+        console.log(that.data.comments)
+        that.getCommentStars()
+        console.log(that.data.commentStars)
+      },
+      fail(error) {
+        util.showModel('加载失败，请检查网络', error);
+        console.log('request fail', error);
+      }
+    }
+    this.data.takeSession = false;
+    if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
+      qcloud.request(options)
+    } else {    // 使用 wx.request 则不带登录态
+      wx.request(options)
+    }
   },
 
   lower: function (e) {
