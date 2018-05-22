@@ -17,7 +17,7 @@
 }
 
 .random_Btn{
-  margin-top: 5rpx;
-  height: 80rpx;
+  margin-top: 10rpx;
+  height: 90rpx;
   font-size:35rpx;
 }

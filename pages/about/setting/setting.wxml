@@ -1,0 +1,41 @@
+<view class="weui-cells__title">可以访问我的以下信息：</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_switch" style='height:65rpx;'>
+    <view class="weui-cell__bd">我的信息</view>
+    <view class="weui-cell__ft">
+      <switch checked />
+    </view>
+  </view>
+  <view class="weui-cell weui-cell_switch" style='height:65rpx;'>
+    <view class="weui-cell__bd">我的评论</view>
+    <view class="weui-cell__ft">
+      <switch checked />
+    </view>
+  </view>
+  <view class="weui-cell weui-cell_switch" style='height:65rpx;'>
+    <view class="weui-cell__bd">我的收藏</view>
+    <view class="weui-cell__ft">
+      <switch checked />
+    </view>
+  </view>
+  <view class="weui-cell weui-cell_switch" style='height:65rpx;'>
+    <view class="weui-cell__bd">我的粉丝与关注</view>
+    <view class="weui-cell__ft">
+      <switch checked />
+    </view>
+  </view>
+</view>
+
+<!-- <view class="weui-cells__title">带跳转的列表项</view> -->
+<view style='margin-top:50rpx;'>
+<view class="weui-cells weui-cells_after-title">
+  <navigator url="/pages/about/setting/feedback/feedback" class="weui-cell weui-cell_access" style='height:50rpx;' hover-class="weui-cell_active">
+    <view class="weui-cell__bd">意见反馈</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access">让我们更好</view>
+  </navigator>
+  <navigator url="/pages/about/aboutUs/aboutUs" class="weui-cell weui-cell_access" style='height:50rpx;' hover-class="weui-cell_active">
+    <view class="weui-cell__bd">关于我们</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </navigator>
+</view>
+</view>

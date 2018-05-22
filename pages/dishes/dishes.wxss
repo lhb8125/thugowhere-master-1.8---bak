@@ -152,6 +152,15 @@ page, .page, .page__bd {
   z-index: 9999;
 }
 
+/* .feedback{
+  position: absolute;
+  bottom: 50rpx;
+  right: 50rpx;
+  width: 85rpx;
+  opacity: 0.8;
+  z-index: 9999;
+} */
+
 .config_box{
   width: 100%;
   height: 80rpx;

@@ -80,11 +80,11 @@
       <view class="comment_write" bindtap='writeComment'>写短评</view>
     </view>
     <block wx:for="{{comments}}">
-      <navigator id="{{item.studentID}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="none">
+      <navigator id="{{item.studentID}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="navigator-hover" bindtap='showUserDetail'>
         <view class="comment_box">
           <view class="weui-flex" style='display:flex;justify-content:space-between;align-items:flex-end;'>
             <!-- <image class="" style="width: 75rpx" src="/images/youtiao.jpg" mode="widthFix" bindtap="changeSort"></image> -->
-            <view class="weui-media-box__title comment_nickname" style='display:flex' bindtap='showUserDetail'>
+            <view class="weui-media-box__title comment_nickname" style='display:flex'>
               <image class="weui-flex__item" style="width: 30rpx;margin-right:10rpx;" src="{{item.studentHead}}" mode="widthFix"></image>
               <view>{{item.studentNickname}}</view>
 

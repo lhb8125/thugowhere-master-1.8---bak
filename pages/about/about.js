@@ -54,6 +54,12 @@ Page({
     })
   },
 
+  showSetting: function () {
+    wx.navigateTo({
+      url: '/pages/about/setting/setting'
+    })
+  },
+
   listenerButtonChooseImage: function () {
     var that = this;
     wx.chooseImage({

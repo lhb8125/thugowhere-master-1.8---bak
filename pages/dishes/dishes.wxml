@@ -249,3 +249,5 @@
 <template is="wetoast" data="{{...__wetoast__}}" />
 
 <image class="scrollToTop" src="/images/icons/top.png" mode="widthFix" bindtap="scrollToTop" hidden='{{isShowTop==0}}'></image>
+
+<!-- <image class="feedback" src="/images/icons/feedback.png" mode="widthFix" bindtap="scrollToTop"></image> -->
