@@ -39,6 +39,13 @@ var showModel = (title, content) => {
     })
 }
 
+var canteenTable ={
+  zijing:'紫荆',
+  taoli:'桃李',
+  dingxiang:'丁香',
+  lanyuan:'澜园',
+  zhilan:'芝兰'
+}
 
 var login = function() {
 
@@ -74,4 +81,4 @@ var login = function() {
   })
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel,login }
+module.exports = { formatTime, showBusy, showSuccess, showModel,login,canteenTable }
