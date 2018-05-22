@@ -1,0 +1,37 @@
+<!--pages/comments/myComments/myComments.wxml-->
+<view class="weui-panel weui-panel_access">
+  <view class="weui-panel__hd">我的收藏({{dishCount}})</view>
+  <view class="weui-panel__bd">
+    <block wx:for="{{requestDishResult}}">
+      <view class="background" id="{{index}}" bindtap='showDish' hover-class="weui-cell_active">
+       <image class="weui-flex__item" style="width: 180rpx;margin:10rpx;" src="{{image_prefix + item.IMAGE_PATH + image_suffix}}" mode="widthFix"></image>
+        <view style='width:480rpx;'>
+          <view class="dish_name">{{item.NAME}}</view>
+          <view class="dish_comment">{{item.briefInfo}}</view>
+          <view class="weui-flex" style='display:flex;justify-content:space-between;align-items:center;'>
+            <view class="dish_comment">{{item.price}} 元/{{item.priceUnit}}</view>
+            <view class="weui-flex" style='display:flex;justify-content:flex-end;align-items:flex-end;margin-right:20rpx;'>
+              <block wx:for="{{scoreStars[index]}}" wx:for-index="idx">
+                <view wx:if="{{scoreStars[index][idx]==0}}">
+                  <image class="weui-flex__item" style="width: 25rpx" src="/images/star_e.png" mode="widthFix"></image>
+                </view>
+                <view wx:if="{{scoreStars[index][idx]==1}}">
+                  <image class="weui-flex__item" style="width: 25rpx" src="/images/star_h.png" mode="widthFix"></image>
+                </view>
+                <view wx:if="{{scoreStars[index][idx]==2}}">
+                  <image class="weui-flex__item" style="width: 25rpx" src="/images/star_f.png" mode="widthFix"></image>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!-- <view class="weui-panel__ft">
+    <view class="weui-cell weui-cell_access weui-cell_link">
+      <view class="weui-cell__bd">查看更多</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+  </view> -->
+</view>

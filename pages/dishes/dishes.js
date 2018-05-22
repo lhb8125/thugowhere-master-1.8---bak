@@ -11,9 +11,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // timeList: ["早餐", "午餐", "晚餐"],
-    // floorList: ["地下", "一层", "二层", "三层", "四层"],
-    // sortList: ["按窗口排序", "按评价排序", "按价格排序"],
+    timeList: ["早餐", "午餐", "晚餐"],
+    floorList: ["地下", "一层", "二层", "三层", "四层"],
+    sortList: ["窗口", "评价", "价格"],
     canteen: 0,
     floor: 1,
     time: 0,
@@ -241,45 +241,31 @@ Page({
     });
   },
   changeTime: function (e) {
-    var that = this;
-    wx.showActionSheet({
-      itemList: this.data.timeList,
-      success: function (res) {
-        if (!res.cancel) {
-          that.setData({
-            time: res.tapIndex
-          });
-          that.getDishes();
-        }
-      }
+    // var that = this;
+    // wx.showActionSheet({
+    //   itemList: this.data.timeList,
+    //   success: function (res) {
+    //     if (!res.cancel) {
+    //       that.setData({
+    //         time: res.tapIndex
+    //       });
+    //       that.getDishes();
+    //     }
+    //   }
+    // });
+    this.setData({
+      time: e.detail.value
     });
   },
   changeFloor: function (e) {
-    var that = this;
-    wx.showActionSheet({
-      itemList: this.data.floorList,
-      success: function (res) {
-        if (!res.cancel) {
-          that.setData({
-            floor: res.tapIndex
-          });
-          that.getDishes();
-        }
-      }
+    this.setData({
+      floor: e.detail.value
     });
   },
   changeSort: function (e) {
-    var that = this;
-    wx.showActionSheet({
-      itemList: this.data.sortList,
-      success: function (res) {
-        if (!res.cancel) {
-          that.setData({
-            sort: res.tapIndex
-          });
-          that.getDishes();
-        }
-      }
+    console.log("sort")
+    this.setData({
+      sort: e.detail.value
     });
   },
   preventTouchMove: function () {
@@ -315,22 +301,22 @@ Page({
     })
   },
 
-  changeSort: function (e) {
-    console.log(e)
-    if (e.currentTarget.id == "window") {
-      this.setData({
-        sortOrder: this.data.sortOrder == 1 ? 2 : 1
-      })
-    } else if (e.currentTarget.id == "score") {
-      this.setData({
-        sortOrder: this.data.sortOrder == 3 ? 4 : 3
-      })
-    } else if (e.currentTarget.id == "price") {
-      this.setData({
-        sortOrder: this.data.sortOrder == 5 ? 6 : 5
-      })
-    }
-  },
+  // changeSort: function (e) {
+  //   console.log(e)
+  //   if (e.currentTarget.id == "window") {
+  //     this.setData({
+  //       sortOrder: this.data.sortOrder == 1 ? 2 : 1
+  //     })
+  //   } else if (e.currentTarget.id == "score") {
+  //     this.setData({
+  //       sortOrder: this.data.sortOrder == 3 ? 4 : 3
+  //     })
+  //   } else if (e.currentTarget.id == "price") {
+  //     this.setData({
+  //       sortOrder: this.data.sortOrder == 5 ? 6 : 5
+  //     })
+  //   }
+  // },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

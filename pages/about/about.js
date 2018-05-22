@@ -36,6 +36,30 @@ Page({
     })
   },
 
+  showDishes: function () {
+    wx.navigateTo({
+      url: '/pages/dishes/myDishes/myDishes'
+    })
+  },
+
+  showFollower: function () {
+    wx.navigateTo({
+      url: '/pages/about/myFriends/myFriends'
+    })
+  },
+
+  showFollowing: function () {
+    wx.navigateTo({
+      url: '/pages/about/myFriends/myFriends'
+    })
+  },
+
+  showSetting: function () {
+    wx.navigateTo({
+      url: '/pages/about/setting/setting'
+    })
+  },
+
   listenerButtonChooseImage: function () {
     var that = this;
     wx.chooseImage({

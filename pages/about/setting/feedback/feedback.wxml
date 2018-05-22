@@ -1,0 +1,42 @@
+<!-- <view class="weui-cells__title">请输入您的反馈意见</view> -->
+<view class='page'>
+  <view class="weui-cells weui-cells_after-title" style='margin-top:20rpx;'>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">问题类型</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access">
+        <picker value="{{problem}}" range="{{problemList}}" bindchange="changeProblem">
+          {{problemList[problem]}}
+        </picker>
+      </view>
+    </navigator>
+  </view>
+
+  <view class="weui-cells weui-cells_after-title" style='margin-top:40rpx;'>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <textarea class="weui-textarea" name="textarea" bindinput="bindTextAreaBlur" placeholder="请输入您的反馈意见（200字以内）" maxlength='200' style="height:200rpx;auto-height:true;" />
+        <view class="weui-textarea-counter">{{wordCount}}/200</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells weui-cells_after-title upload_image" style='margin-top:40rpx;'>
+    <block wx:for="{{pic}}">
+      <image class="weui-flex__item image" style="width: 130rpx;height:120rpx;" src="{{item}}" mode="scaleToFill"></image>
+    </block>
+    <image class="weui-flex__item image" style="width: 130rpx;height:120rpx;" src="/images/icons/upload_pic.png" mode="scaleToFillx" bindtap='listenerButtonChooseImage'></image>
+  </view>
+
+  <view class="weui-cells weui-cells_after-title" style='margin-top:40rpx;'>
+     <view class="weui-cell input_box"> 
+      <view class="weui-cell__bd">手机号码</view>
+       <input class="weui-input" type='number' placeholder="18920533989" /> 
+     </view> 
+     <view class="weui-cell input_box"> 
+      <view class="weui-cell__bd">邮箱</view>
+      <input class="weui-input" type='text' placeholder="lhb8125@gmail.com" />
+     </view>
+  </view>
+
+  <button class="weui-btn" type="primary" style='margin-top:40rpx;' disabled='{{wordCount==0}}'>提交</button>
+</view>

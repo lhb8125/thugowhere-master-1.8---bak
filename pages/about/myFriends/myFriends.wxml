@@ -1,0 +1,22 @@
+<!-- <view class="weui-cells__title">带图标、说明、跳转的列表项</view> -->
+<view class="weui-cells weui-cells_after-title">
+  <navigator url="" class="weui-cell weui-cell_access box" hover-class="weui-cell_active">
+    <view class="weui-cell__hd">
+      <image class='image' src="/images/head/bear.jpg"></image>
+    </view>
+    <view class="weui-cell__bd nickname">熊瞎子</view>
+    <!-- <view class="weui-cell__ft weui-cell__ft_in-access">说明文字</view> -->
+  </navigator>
+  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__hd">
+      <image class='image' src="/images/head/dog.jpg"></image>
+    </view>
+    <view class="weui-cell__bd nickname" >腻狗子</view>
+  </navigator>
+  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__hd">
+      <image class='image' src="/images/head/lisi.jpg" style="image"></image>
+    </view>
+    <view class="weui-cell__bd nickname">小白兔</view>
+  </navigator>
+</view>

@@ -32,11 +32,11 @@
 
 <view class="weui-cells weui-cells_after-title">
   <view style='display:flex;justify-content:space-around;padding:10rpx;'>
-    <view style='display:flex;flex-direction:column;align-items:center;'>
+    <view style='display:flex;flex-direction:column;align-items:center;' bindtap='showFollower'>
       <view class="detail_fans_number">35</view>
       <view class="detail_fans_txt">粉丝</view>
     </view>
-    <view style='display:flex;flex-direction:column;align-items:center;'>
+    <view style='display:flex;flex-direction:column;align-items:center;' bindtap='showFollowing'>
       <view class="detail_fans_number">10</view>
       <view class="detail_fans_txt">关注</view>
     </view>
@@ -57,27 +57,27 @@
     <view class="weui-cell__bd">我的评论</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
-  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+  <navigator url="" bindtap="showDishes" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__hd">
       <image src="/images/about/favorite.png" style="margin-right: 5px;vertical-align: middle;width:40rpx; height: 40rpx;"></image>
     </view>
-    <view class="weui-cell__bd">我的菜</view>
+    <view class="weui-cell__bd">我的收藏</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
-  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+  <navigator url="" bindtap="showSetting" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__hd">
       <image src="/images/about/setting.png" style="margin-right: 5px;vertical-align: middle;width:40rpx; height: 40rpx;"></image>
     </view>
     <view class="weui-cell__bd">设置</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
-  <navigator url="/pages/about/aboutUs/aboutUs" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+  <!-- <navigator url="/pages/about/aboutUs/aboutUs" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__hd">
       <image src="/images/about/about.png" style="margin-right: 5px;vertical-align: middle;width:40rpx; height: 40rpx;"></image>
     </view>
     <view class="weui-cell__bd">关于</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
+  </navigator> -->
 </view>
 
 <!-- <view class="weui-cells__title">带说明、跳转的列表项</view>

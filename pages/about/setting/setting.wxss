@@ -1,0 +1,16 @@
+/* pages/about/setting/setting.wxss */
+page {  
+  display: block;  
+  min-height: 100%;  
+  background-color: whitesmoke;  
+}  
+
+/* .background{
+  background-color: whitesmoke;
+  width: 710rpx;
+  height: auto;
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  border-radius: 20rpx;
+} */

@@ -104,21 +104,30 @@
       </navigator>
     </view>
     <view class='config_box'>
-      <view id='window' class='text_box' bindtap='changeSort'>
-        <view class='config_text'>窗口</view>
-        <image hidden='{{!(sortOrder==1)}}' style="width: 30rpx;" src="/images/icons/arrow_up.png" mode="widthFix"></image>
-        <image hidden='{{!(sortOrder==2)}}' style="width: 30rpx;" src="/images/icons/arrow_down.png" mode="widthFix"></image>
+      <view id='window' class='text_box'>
+        <!-- <view class='config_text'>窗口</view> -->
+        <picker class='config_text' value="{{time}}" range="{{timeList}}" bindchange="changeTime">
+          {{timeList[time]}}
+        </picker>
+        <!-- <image hidden='{{!(sortOrder==1)}}' style="width: 30rpx;" src="/images/icons/arrow_up.png" mode="widthFix"></image>
+        <image hidden='{{!(sortOrder==2)}}' style="width: 30rpx;" src="/images/icons/arrow_down.png" mode="widthFix"></image> -->
 
       </view>
-      <view id='score' class='text_box' bindtap='changeSort'>
-        <view class='config_text'>评价</view>
-        <image hidden='{{!(sortOrder==3)}}' style="width: 30rpx;" src="/images/icons/arrow_up.png" mode="widthFix"></image>
-        <image hidden='{{!(sortOrder==4)}}' style="width: 30rpx;" src="/images/icons/arrow_down.png" mode="widthFix"></image>
+      <view id='score' class='text_box'>
+        <!-- <view class='config_text'>评价</view> -->
+        <picker class='config_text' value="{{floor}}" range="{{floorList}}" bindchange="changeFloor">
+          {{floorList[floor]}}
+        </picker>
+        <!-- <image hidden='{{!(sortOrder==3)}}' style="width: 30rpx;" src="/images/icons/arrow_up.png" mode="widthFix"></image>
+        <image hidden='{{!(sortOrder==4)}}' style="width: 30rpx;" src="/images/icons/arrow_down.png" mode="widthFix"></image> -->
       </view>
-      <view id='price' class='text_box' bindtap='changeSort'>
-        <view class='config_text'>价格</view>
-        <image hidden='{{!(sortOrder==5)}}' style="width: 30rpx;" src="/images/icons/arrow_up.png" mode="widthFix"></image>
-        <image hidden='{{!(sortOrder==6)}}' style="width: 30rpx;" src="/images/icons/arrow_down.png" mode="widthFix"></image>
+      <view id='price' class='text_box'>
+        <!-- <view class='config_text'>价格</view> -->
+        <picker class='config_text' value="{{sort}}" range="{{sortList}}" bindchange="changeSort">
+          {{sortList[sort]}}
+        </picker>
+          <image style="width: 25rpx;" src="/images/icons/sort.png" mode="widthFix"></image> 
+        <!-- <image hidden='{{!(sortOrder==6)}}' style="width: 30rpx;" src="/images/icons/arrow_down.png" mode="widthFix"></image>  -->
       </view>
       <view class='text_box' bindtap='showFilter'>
         <view class='config_text'>筛选</view>
@@ -240,3 +249,5 @@
 <template is="wetoast" data="{{...__wetoast__}}" />
 
 <image class="scrollToTop" src="/images/icons/top.png" mode="widthFix" bindtap="scrollToTop" hidden='{{isShowTop==0}}'></image>
+
+<!-- <image class="feedback" src="/images/icons/feedback.png" mode="widthFix" bindtap="scrollToTop"></image> -->

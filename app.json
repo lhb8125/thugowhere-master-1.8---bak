@@ -13,7 +13,11 @@
     "pages/comments/writeComment/writeComment",
     "pages/about/showDetail/showDetail",
     "pages/comments/myComments/myComments",
-    "pages/about/aboutUs/aboutUs"
+    "pages/about/aboutUs/aboutUs",
+    "pages/dishes/myDishes/myDishes",
+    "pages/about/myFriends/myFriends",
+    "pages/about/setting/setting",
+    "pages/about/setting/feedback/feedback"
   ],
   "tabBar": {
     "list": [

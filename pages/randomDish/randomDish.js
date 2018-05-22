@@ -34,7 +34,7 @@ Page({
     windowHeight: 0,
     loadmore: 0,
     refresh: 0,
-    btnHeight: 0,
+    btnHeight: 80,
     image_prefix: "https://tsingwind.top/weapp_img",
     image_suffix: "/1.jpg",
     isCompleted: 1,
@@ -202,7 +202,7 @@ Page({
     that.requestCommentList()
     if (that.data.isRandom == 1) {
       that.setData({
-        btnHeight: 80,
+        // btnHeight: 80,
         favourWidth: "50%",
       })
     }
