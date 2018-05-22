@@ -38,7 +38,7 @@
     <view class="weui-panel__bd">
       <view class="weui-media-box weui-media-box_text">
         <view style='display:flex;justify-content:space-around;align-items:center;'>
-          <view class="dish_important_text">{{canteen}}</view>
+          <view class="dish_important_text">{{canteen_zh}}</view>
           <view class="weui-flex" style='display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-end;'>
             <view class="dish_important_text" wx:if="{{requestDishResult[0].isBreakfast==1}}">早餐</view>
             <view class="dish_important_text" wx:if="{{requestDishResult[0].isLunch==1}}">午餐</view>
@@ -74,7 +74,7 @@
     </view>
   </view>
 
-  <view class="weui-panel weui-panel_access" style='margin-top:0rpx;'>
+  <view class="weui-panel weui-panel_access" style='margin-top:0rpx;margin-bottom:90rpx'>
     <view style='display:flex;justify-content:space-between;align-items:center'>
       <view class="weui-panel__hd">评价({{requestDishResult[0].starAllCount}})</view>
       <view class="comment_write" bindtap='writeComment'>写短评</view>
@@ -107,12 +107,14 @@
             <!-- <view class="weui-media-box__title comment_nickname">({{gradeList[comments.studentGrade[index]]}})</view> -->
           </view>
           <view class="weui-article__p comment_content">{{item.commentBody}}</view>
-          <view class="weui-flex" style='display:flex;justify-content:space-between;align-items:flex-end;'>
-            <view wx:if="{{comments.isUserFavoured[index]}}">
+          <view class="weui-flex" style="display:flex;justify-content:space-between;align-items:flex-end;">
+            <view class="upvoteCount" wx:if="{{item.isUpvoted}}">
               <image id="{{index}}" style="width: 35rpx; height: 35rpx;" src="/images/favour_f.png" mode="widthFix" bindtap="changeFavoured"></image>
+              <text>{{item.upvoteCount}}</text>
             </view>
-            <view wx:else>
+            <view class="upvoteCount" wx:else>
               <image id="{{index}}" style="width: 35rpx; height: 35rpx;" src="/images/favour_e.png" mode="widthFix" bindtap="changeFavoured"></image>
+              <text>{{item.upvoteCount}}</text>
             </view>
             <view class="weui-cell__ft  comment_gradeanddate">{{item.commentDate}}</view>
             <!-- <view class="weui-cell__ft  comment_gradeanddate">{{comments.commentDate[index]}}</view>  -->
