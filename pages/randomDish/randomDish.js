@@ -41,7 +41,7 @@ Page({
     isFavoured: 0,
     favourWidth: "100%",
     isVoteListNeeded: false,
-    voteList: {}
+    voteList: []
   },
 
   //请求评论信息 by mengql
@@ -68,7 +68,7 @@ Page({
             comments: resBundle.res,
             voteList: resBundle.votedlist
           })
-          wx.setStorageSync('voteList', resBundle.votedlist)
+          wx.setStorageSync('votelist', resBundle.votedlist)
         }
         else {
           that.setData({
@@ -83,23 +83,30 @@ Page({
         console.log('request fail', error);
       }
     }
-    this.data.takeSession = false;
-    if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
-      qcloud.request(options)
-    } else {    // 使用 wx.request 则不带登录态
-      wx.request(options)
-    }
+    wx.request(options)
   },
 
+
+//消除时区转换带来的日期错误（不是最好的解决方案) by mengql
+  getRightDate: function () {
+
+  },
+
+
   getUpvoted: function () {
-    for (let item of this.data.comments) {
-      item.isUpvoted = false
+    var length = this.data.comments.length
+    for (let i = 0; i < length; i++) {
+      this.setData({
+        ['comments[' + i + '].isUpvoted']: false
+      })
     }
-    if (JSON.stringify(this.data.voteList) != '{}') {
+    if (JSON.stringify(this.data.voteList) != '[]') {
       let voteList = this.data.voteList
-      for (let item of this.data.comments) {
-        if (voteList.includes(item.COMMENT_ID)) {
-          item.isUpvoted = true
+      for (let i = 0; i < length; i++) {
+        if (voteList.includes(this.data.comments[i].COMMENT_ID)) {
+          this.setData({
+            ['comments[' + i + '].isUpvoted']: true
+          })
         }
       }
     }
@@ -178,12 +185,13 @@ Page({
     })
 
     // 获取用户的点赞列表，优先从缓存中读取 by mengql
-    var votelist = wx.getStorageSync('voteList')
+    var votelist = wx.getStorageSync('votelist')
     if (votelist) {
       this.setData({
         voteList: votelist,
         isVoteListNeeded: false
       })
+      this.getUpvoted()
     }
     else {
       if (getApp().globalData.logged) {
@@ -244,12 +252,7 @@ Page({
         console.log('request fail', error);
       }
     }
-    this.data.takeSession = false;
-    if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
-      qcloud.request(options)
-    } else {    // 使用 wx.request 则不带登录态
-      wx.request(options)
-    }
+    wx.request(options)
   },
 
   getStars: function (starRank) {
@@ -337,42 +340,66 @@ Page({
     }
   },
 
-  changeFavoured: function (e) {
-    console.log(e.currentTarget.id)
-    var isUserFavoured = 'comments.isUserFavoured[' + e.currentTarget.id + ']'
-    this.setData({
-      [isUserFavoured]: !this.data.comments.isUserFavoured[e.currentTarget.id],
-    })
-
+  // 将点赞状态上传到服务器 by mengql
+  postUpvote: function (commentID, isDelete, tempVotelist) {
     var that = this
     var options = {
-      url: config.service.commentlistUrl,
-
+      url: config.service.postUpvoteUrl,
+      login: true,
+      method: 'POST',
       //需要在data里指定所有你需要的查询参数
       data: {
-        canteen: that.data.canteen,
-        dishID: that.data.dishID,
+        commentID: commentID,
+        openid: getApp().globalData.userInfo.openId,
+        isDelete: isDelete
       },
       success(result) {
-        util.showSuccess('加载完成')
-        var objectArray = result.data.data
-        that.setData({
-          comments: objectArray
+        util.showSuccess('点赞完成')
+        wx.setStorage({
+          key: 'votelist',
+          data: tempVotelist,
         })
-        console.log(that.data.comments)
-        that.getCommentStars()
-        console.log(that.data.commentStars)
       },
       fail(error) {
-        util.showModel('加载失败，请检查网络', error);
-        console.log('request fail', error);
+        util.showModel('点赞失败，请检查网络', error);
       }
     }
-    this.data.takeSession = false;
-    if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
-      qcloud.request(options)
-    } else {    // 使用 wx.request 则不带登录态
-      wx.request(options)
+    qcloud.request(options)
+  },
+
+  // 更改点赞状态 by mengql
+  changeUpvoted: function (e) {
+    var that = this
+    if (getApp().globalData.logged) {
+      var i = e.currentTarget.id
+      var tempVotelist = that.data.voteList
+      var isDelete
+      if (that.data.comments[i].isUpvoted) {
+        that.setData({
+          ['comments[' + i + '].isUpvoted']: false,
+          ['comments[' + i + '].upvoteCount']: that.data.comments[i].upvoteCount - 1
+        })
+        tempVotelist.splice(tempVotelist.indexOf(that.data.comments[i].COMMENT_ID), 1)
+        isDelete = true
+      }
+      else {
+        that.setData({
+          ['comments[' + i + '].isUpvoted']: true,
+          ['comments[' + i + '].upvoteCount']: that.data.comments[i].upvoteCount + 1
+        })
+        tempVotelist.push(that.data.comments[i].COMMENT_ID)
+        isDelete = false
+      }
+      that.setData({
+        voteList: tempVotelist
+      })
+      that.postUpvote(that.data.comments[i].COMMENT_ID, isDelete, tempVotelist)
+    }
+    else {
+      wx.showModal({
+        title: '您尚未登录',
+        content: '未登录状态下无法对评论点赞，请返回主页，点击右下角“我”进行设置',
+      })
     }
   },
 
