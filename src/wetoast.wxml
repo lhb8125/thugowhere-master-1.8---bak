@@ -1,7 +1,7 @@
 <!-- wetoast.wxml -->
 <template name="wetoast">
 	<view class="wetoast {{reveal ? 'wetoast_show' : ''}}">
-		<view class="wetoast__mask"></view>
+		<!-- <view class="wetoast__mask"></view> -->
 		<view class="wetoast__bd" animation="{{animationData}}">
 			<!-- <block wx:if="{{img}}">
 				<view class="wetoast__bd__img {{imgClassName || ''}}">

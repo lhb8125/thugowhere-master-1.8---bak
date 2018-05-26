@@ -45,9 +45,9 @@
             <view class="dish_important_text" wx:if="{{requestDishResult[0].isDinner==1}}">晚餐</view>
           </view>
           <view class="weui-flex" style='display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-end;'>
-            <view class="dish_important_text" wx:if="{{requestDishResult[0].isPriceAvailable==1}}">{{requestDishResult[0].price}} 元/{{requestDishResult[0].priceUnit}}</view>
-            <view class="dish_important_text" wx:if="{{requestDishResult[0].isPriceAvailable==0}}">{{requestDishResult[0].priceLow}}~{{requestDishResult[0].priceHigh}}</view>
-            <view class="dish_important_text" wx:if="{{requestDishResult[0].isPriceAvailable==0}}">{{requestDishResult[0].priceUnit}}</view>
+            <view class="dish_important_text" wx:if="{{requestDishResult[0].price==null}}">{{requestDishResult[0].priceLow}}~{{requestDishResult[0].priceHigh}} 元/{{requestDishResult[0].priceUnit}}</view>
+            <view class="dish_important_text" wx:else>{{requestDishResult[0].price}} 元/{{requestDishResult[0].priceUnit}}</view>
+            <!-- <view class="dish_important_text" wx:if="{{requestDishResult[0].isPriceAvailable==0}}">{{requestDishResult[0].priceUnit}}</view> -->
           </view>
           <view class="weui-flex" style='display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-end;'>
             <view class="dish_important_text">{{requestDishResult[0].level}} 层</view>
@@ -76,15 +76,27 @@
 
   <view class="weui-panel weui-panel_access" style='margin-top:0rpx;margin-bottom:90rpx'>
     <view style='display:flex;justify-content:space-between;align-items:center'>
-      <view class="weui-panel__hd">评价({{requestDishResult[0].starAllCount}})</view>
+      <view class="weui-panel__hd" style='font-size:26rpx;'>评价({{requestDishResult[0].starAllCount}})</view>
       <view class="comment_write" bindtap='writeComment'>写短评</view>
     </view>
+    <view class="weui-media-box weui-media-box_text">
+      <view style='display:flex;.justify-content:flex-start;align-items:center;'>
+        <view class='comment_config' style='color:{{sortTimeColor}};' bindtap='sortTime'>最新</view>
+        <view class='comment_config' style='color:{{sortHotColor}};' bindtap='sortHot'>最热</view>
+         <view class='' style='margin:20rpx;'></view> 
+        <view class='comment_config' style='color:{{sortAllColor}};' bindtap='sortAll'>全部</view>
+        <view class='comment_config' style='color:{{sortGoodColor}};' bindtap='sortGood'>好评</view>
+        <view class='comment_config' style='color:{{sortMediumColor}};' bindtap='sortMedium'>中评</view>
+        <view class='comment_config' style='color:{{sortBadColor}};' bindtap='sortBad'>差评</view>
+      </view>
+    </view>
     <block wx:for="{{comments}}">
-      <navigator id="{{item.studentID}}" url="" class="weui-media-box weui-media-box_appmsg">
+      <view class="background" id="{{index}}" hover-class="weui-cell_active" bindtap='showUserDetail' style='background-color:{{bkgColorList[index]}}'>
+        <!-- <navigator id="{{item.studentID}}" url="" class="weui-media-box weui-media-box_appmsg"> -->
         <view class="comment_box">
           <view class="weui-flex" style='display:flex;justify-content:space-between;align-items:flex-end;'>
             <!-- <image class="" style="width: 75rpx" src="/images/youtiao.jpg" mode="widthFix" bindtap="changeSort"></image> -->
-            <view class="weui-media-box__title comment_nickname" style='display:flex' bindtap='showUserDetail'>
+            <view class="weui-media-box__title comment_nickname" style='display:flex'>
               <image class="weui-flex__item" style="width: 30rpx;margin-right:10rpx;" src="{{item.studentHead}}" mode="widthFix"></image>
               <view>{{item.studentNickname}}</view>
 
@@ -108,19 +120,17 @@
           </view>
           <view class="weui-article__p comment_content">{{item.commentBody}}</view>
           <view class="weui-flex" style="display:flex;justify-content:space-between;align-items:flex-end;">
-            <view class="upvoteCount" wx:if="{{item.isUpvoted}}">
-              <image id="{{index}}" style="width: 35rpx; height: 35rpx;" src="/images/favour_f.png" mode="widthFix" bindtap="changeUpvoted"></image>
-              <text>{{item.upvoteCount}}</text>
-            </view>
-            <view class="upvoteCount" wx:else>
-              <image id="{{index}}" style="width: 35rpx; height: 35rpx;" src="/images/favour_e.png" mode="widthFix" bindtap="changeUpvoted"></image>
-              <text>{{item.upvoteCount}}</text>
+            <view class="upvoteCount" id="{{index}}" catchtap="changeUpvoted" style='border-color:{{voteColorList[index]}}'>
+              <image hidden="{{!item.isUpvoted}}" style="width: 25rpx; height: 25rpx;" src="/images/favour_f.png" mode="widthFix"></image>
+              <image hidden="{{item.isUpvoted}}" style="width: 25rpx; height: 25rpx;" src="/images/favour_e.png" mode="widthFix"></image>
+              <view style='margin-left:20rpx;color:{{voteColorList[index]}}'>{{item.upvoteCount}}</view>
             </view>
             <view class="weui-cell__ft  comment_gradeanddate">{{item.commentDate}}</view>
             <!-- <view class="weui-cell__ft  comment_gradeanddate">{{comments.commentDate[index]}}</view>  -->
           </view>
         </view>
-      </navigator>
+        <!-- </navigator> -->
+      </view>
     </block>
     <view hidden="{{loadmore==0}}">
       <view class="weui-loadmore">

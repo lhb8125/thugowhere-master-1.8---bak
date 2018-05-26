@@ -21,8 +21,36 @@
   /* z-index: 0; */
 }
 
+.background{
+  background-color: lightyellow;
+  width: 680rpx;
+  height: auto;
+  /* position: absolute; */
+  /* top: 20rpx; */
+  /* left: 20rpx; */
+  border-radius: 20rpx;
+  margin: 30rpx;
+  margin-top: 0rpx;
+   padding: 15rpx; 
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+
 .upvoteCount{
-  font-size: 16px
+  font-size: 28rpx;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 25rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-top: 0rpx;
+  padding-bottom: 0rpx;
+  margin-top: 0rpx;
+  margin-bottom: 0rpx;
 }
 
 .dish_detail {
@@ -121,10 +149,22 @@
 .comment_write {
   color: black;
   font-weight: bold;
-  font-size: 29rpx;
+  font-size: 28rpx;
   padding-right: 30rpx;
   font-family: sans-serif;
   text-decoration-line: underline;
+}
+
+.comment_config {
+  color: lightgrey;
+  font-size: 26rpx;
+  margin-right: 20rpx;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  font-family: sans-serif;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 20rpx;
 }
 
 .oneMoreTime_box {
