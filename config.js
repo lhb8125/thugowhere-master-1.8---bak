@@ -34,7 +34,10 @@ var config = {
         personalCommentlistUrl: `${host}/weapp/personalcommentlist`,
 
         // 提交评论接口
-        commentSubmitUrl: `${host}/weapp/commentsubmit`
+        commentSubmitUrl: `${host}/weapp/commentsubmit`,
+
+        // 提交点赞接口
+        postUpvoteUrl: `${host}/weapp/postupvote`
     }
 };
 
