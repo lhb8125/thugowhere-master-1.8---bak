@@ -87,7 +87,7 @@ Page({
   },
 
 
-//消除时区转换带来的日期错误（不是最好的解决方案) by mengql
+  //消除时区转换带来的日期错误（不是最好的解决方案) by mengql
   getRightDate: function () {
 
   },
@@ -208,6 +208,7 @@ Page({
 
     that.requestDishList()
     that.requestCommentList()
+    that.setIsFavoured()
     if (that.data.isRandom == 1) {
       that.setData({
         // btnHeight: 80,
@@ -319,10 +320,56 @@ Page({
     that.requestCommentList()
   },
 
+  //加载时设置菜品的收藏状态 by mengql
+  setIsFavoured: function () {
+    var dishStr = this.data.canteen + this.data.dishID.toString()
+    if (app.globalData.favouredlist.includes(dishStr)) {
+      this.setData({ isFavoured: 1 })
+    }
+    else {
+      this.setData({ isFavoured: 0 })
+    }
+  },
+
   addFavouriteDish: function () {
     this.setData({
       isFavoured: this.data.isFavoured == 1 ? 0 : 1
     })
+    var that = this
+    var dishStr = this.data.canteen + this.data.dishID.toString()
+    var tempFavouredlist = app.globalData.favouredlist
+    var isDelete
+    if (this.data.isFavoured){
+      isDelete = false
+      tempFavouredlist.push(dishStr)
+    }
+    else{
+      isDelete = true
+      tempFavouredlist.splice(tempFavouredlist.indexOf(dishStr), 1)
+    }
+    var options = {
+      url: config.service.postFavourUrl,
+      login: true,
+      method: 'POST',
+      //需要在data里指定所有你需要的查询参数
+      data: {
+        openid: app.globalData.userInfo.openId,
+        canteen:this.data.canteen,
+        dishID:this.data.dishID,
+        isDelete: isDelete
+      },
+      success(result) {
+        util.showSuccess('成功收藏')
+        wx.setStorage({
+          key: 'favouredlist',
+          data: tempFavouredlist,
+        })
+      },
+      fail(error) {
+        util.showModel('收藏失败，请检查网络', error);
+      }
+    }
+    qcloud.request(options)
   },
 
   writeComment: function () {

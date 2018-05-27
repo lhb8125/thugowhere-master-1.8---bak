@@ -37,7 +37,13 @@ var config = {
         commentSubmitUrl: `${host}/weapp/commentsubmit`,
 
         // 提交点赞接口
-        postUpvoteUrl: `${host}/weapp/postupvote`
+        postUpvoteUrl: `${host}/weapp/postupvote`,
+
+        // 请求收藏夹接口
+        favouredlistUrl: `${host}/weapp/favouredlist`,
+
+        // 提交收藏接口
+        postFavourUrl: `${host}/weapp/postfavour`,
     }
 };
 
