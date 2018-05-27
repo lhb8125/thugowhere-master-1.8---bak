@@ -17,18 +17,20 @@
 </view>
 
 <view class='detail_fans_box'>
-  <view style='display:flex;flex-direction:column;align-items:flex-end;'>
-    <view style='display:flex;justify-content:flex-end;align-items:flex-start;'>
+  <view style='display:flex;justify-content:flex-end;align-items:flex-start;'>
+    <view style='display:flex;flex-direction:column;align-items:center;'>
       <view class="detail_fans_number">35</view>
-      <image animation="{{animationData}}" hidden="{{isPlus==0 ||isPlus==-1}}" style='width:40rpx;margin-left:10rpx;' mode="widthFix" src="/images/icons/plus_1.png" />
-      <image animation="{{animationData}}" hidden="{{isPlus==1 ||isPlus==-1}}" style='width:40rpx;margin-left:10rpx;' mode="widthFix" src="/images/icons/empty.png" />
-      <image animation="{{animationData}}" hidden="{{isPlus==0 ||isPlus==1}}" style='width:40rpx;margin-left:10rpx;' mode="widthFix" src="/images/icons/minus_1.png" />
-    </view>
-    <view class='detail_follow_box' bindtap='changeFollowed'>
-      <image hidden="{{isFollowed==1}}" style='width:25rpx;margin:10rpx;' mode="widthFix" src="/images/icons/follow.png" />
-      <image hidden="{{isFollowed==0}}" style='width:25rpx;margin:10rpx;' mode="widthFix" src="/images/icons/followed.png" />
       <view class="detail_fans_txt">粉丝</view>
     </view>
+    <image animation="{{animationData}}" hidden="{{isPlus==0 ||isPlus==-1}}" style='width:40rpx;margin-left:10rpx;' mode="widthFix" src="/images/icons/plus_1.png" />
+    <image animation="{{animationData}}" hidden="{{isPlus==1 ||isPlus==-1}}" style='width:40rpx;margin-left:10rpx;' mode="widthFix" src="/images/icons/empty.png" />
+    <image animation="{{animationData}}" hidden="{{isPlus==0 ||isPlus==1}}" style='width:40rpx;margin-left:10rpx;' mode="widthFix" src="/images/icons/minus_1.png" />
+    <!-- <view style='display:flex;flex-direction:column;align-items:center;'> -->
+    <!-- <view class='detail_follow_box' bindtap='changeFollowed'> -->
+    <!-- <image hidden="{{isFollowed==1}}" style='width:25rpx;margin:10rpx;' mode="widthFix" src="/images/icons/follow.png" /> -->
+    <!-- <image hidden="{{isFollowed==0}}" style='width:25rpx;margin:10rpx;' mode="widthFix" src="/images/icons/followed.png" /> -->
+    <!-- <view class="detail_fans_txt">粉丝</view> -->
+    <!-- </view> -->
   </view>
   <view style='display:flex;flex-direction:column;align-items:center;'>
     <view class="detail_fans_number">10</view>
@@ -94,34 +96,7 @@
   </view>
 </view>
 
-<!-- <view class="weui-cells__title">带说明、跳转的列表项</view>
-    <view class="weui-cells weui-cells_after-title">
-      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">cell standard</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access">说明文字</view>
-      </navigator>
-      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">cell standard</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access">说明文字</view>
-      </navigator>
-    </view>
-
-    <view class="weui-cells__title">带图标、说明、跳转的列表项</view>
-    <view class="weui-cells weui-cells_after-title">
-      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-        <view class="weui-cell__hd">
-          <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
-        </view>
-        <view class="weui-cell__bd">cell standard</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access">说明文字</view>
-      </navigator>
-      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-        <view class="weui-cell__hd">
-          <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
-        </view>
-        <view class="weui-cell__bd">cell standard</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access">说明文字</view>
-      </navigator>
-    </view> -->
-<!-- </view> -->
-<!-- </view> -->
+<view class='favour_box' bindtap="changeFollowed">
+  <image style="width: 35rpx;" src="/images/icons/heart_e.png" mode="widthFix"></image>
+  <view class='config_txt'>关注</view>
+</view>

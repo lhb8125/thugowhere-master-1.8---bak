@@ -104,3 +104,25 @@
   padding-left: 10rpx;
   padding-right: 10rpx;
 }
+
+.favour_box {
+  width: 100%;
+  height: 90rpx;
+  position: absolute;
+  bottom: 0rpx;
+  left: 0rpx;
+  background-color: whitesmoke;
+  border-style: solid;
+  border-width: 0.5rpx;
+  border-bottom-style: none;
+  border-left-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.config_txt {
+  font-size: 28rpx;
+  margin: 15rpx;
+  font-family: sans-serif;
+}

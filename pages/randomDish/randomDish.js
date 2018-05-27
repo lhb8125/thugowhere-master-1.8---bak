@@ -41,7 +41,17 @@ Page({
     isFavoured: 0,
     favourWidth: "100%",
     isVoteListNeeded: false,
-    voteList: []
+    voteList: [],
+    voteColorList:[],
+    bkgColorList: [],
+    sortOrder:0,
+    commentFilter: 0,
+    sortTimeColor:"red",
+    sortHotColor: "lightgrey",
+    sortAllColor: "red",
+    sortGoodColor: "lightgrey",
+    sortMediumColor: "lightgrey",
+    sortBadColor: "lightgrey",
   },
 
   //请求评论信息 by mengql
@@ -97,7 +107,8 @@ Page({
     var length = this.data.comments.length
     for (let i = 0; i < length; i++) {
       this.setData({
-        ['comments[' + i + '].isUpvoted']: false
+        ['comments[' + i + '].isUpvoted']: false,
+        ['voteColorList[' + i + ']']: "black"
       })
     }
     if (JSON.stringify(this.data.voteList) != '[]') {
@@ -105,7 +116,8 @@ Page({
       for (let i = 0; i < length; i++) {
         if (voteList.includes(this.data.comments[i].COMMENT_ID)) {
           this.setData({
-            ['comments[' + i + '].isUpvoted']: true
+            ['comments[' + i + '].isUpvoted']: true,
+            ['voteColorList[' + i + ']']: "red"
           })
         }
       }
@@ -401,7 +413,7 @@ Page({
         isDelete: isDelete
       },
       success(result) {
-        util.showSuccess('点赞完成')
+        // util.showSuccess('点赞完成')
         wx.setStorage({
           key: 'votelist',
           data: tempVotelist,
@@ -421,10 +433,13 @@ Page({
       var i = e.currentTarget.id
       var tempVotelist = that.data.voteList
       var isDelete
+      // console.log(that.data.comments[i].isUpvoted)
+      // console.log(that.data.comments[i].upvoteCount)
       if (that.data.comments[i].isUpvoted) {
         that.setData({
           ['comments[' + i + '].isUpvoted']: false,
-          ['comments[' + i + '].upvoteCount']: that.data.comments[i].upvoteCount - 1
+          ['comments[' + i + '].upvoteCount']: that.data.comments[i].upvoteCount - 1,
+          ['voteColorList[' + i + ']']: "black"
         })
         tempVotelist.splice(tempVotelist.indexOf(that.data.comments[i].COMMENT_ID), 1)
         isDelete = true
@@ -432,7 +447,8 @@ Page({
       else {
         that.setData({
           ['comments[' + i + '].isUpvoted']: true,
-          ['comments[' + i + '].upvoteCount']: that.data.comments[i].upvoteCount + 1
+          ['comments[' + i + '].upvoteCount']: that.data.comments[i].upvoteCount + 1,
+          ['voteColorList[' + i + ']']: "red"
         })
         tempVotelist.push(that.data.comments[i].COMMENT_ID)
         isDelete = false
@@ -469,10 +485,69 @@ Page({
     }
   },
 
-  showUserDetail() {
+  showUserDetail(e) {
     console.log("showUserDetail")
+    this.setData({
+      ['bkgColorList[' + e.currentTarget.id + ']']:"lightgrey"
+    })
     wx.navigateTo({
       url: '/pages/about/showDetail/showDetail',
+    })
+  },
+
+  sortTime:function(){
+    this.setData({
+      sortTimeColor: "red",
+      sortHotColor: "lightgrey",
+      sortOrder:0
+    })
+  },
+
+  sortHot: function () {
+    this.setData({
+      sortHotColor: "red",
+      sortTimeColor: "lightgrey",
+      sortOrder: 1
+    })
+  },
+
+  sortAll: function () {
+    this.setData({
+      sortAllColor: "red",
+      sortAllColor: "lightgrey",
+      sortMediumColor: "lightgrey",
+      sortBadColor: "lightgrey",
+      commentFilter: 0
+    })
+  },
+
+  sortGood: function () {
+    this.setData({
+      sortGoodColor: "red",
+      sortAllColor: "lightgrey",
+      sortMediumColor: "lightgrey",
+      sortBadColor: "lightgrey",
+      commentFilter: 1
+    })
+  },
+
+  sortMedium: function () {
+    this.setData({
+      sortMediumColor: "red",
+      sortAllColor: "lightgrey",
+      sortGoodColor: "lightgrey",
+      sortBadColor: "lightgrey",
+      commentFilter: 2
+    })
+  },
+
+  sortBad: function () {
+    this.setData({
+      sortBadColor: "red",
+      sortAllColor: "lightgrey",
+      sortMediumColor: "lightgrey",
+      sortGoodColor: "lightgrey",
+      commentFilter: 3
     })
   },
 
@@ -488,6 +563,9 @@ Page({
    */
   onShow: function () {
     this.requestCommentList()
+    this.setData({
+      bkgColorList: "lightyellow"
+    })
   },
 
   /**
