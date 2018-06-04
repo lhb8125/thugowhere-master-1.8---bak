@@ -102,6 +102,7 @@ Page({
             "userInfo": app.globalData.userInfo,
             "isRefuseLogin": false
           });
+          app.getFavouredList()
 
         } else {
           // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
@@ -117,7 +118,7 @@ Page({
                 "userInfo": app.globalData.userInfo,
                 "isRefuseLogin": false
               });
-
+              app.getFavouredList()
             },
 
             fail(error) {
@@ -149,7 +150,7 @@ Page({
       wx.getSetting({
         success: function (res) {
           if (res.authSetting['scope.userInfo']) {
-            // 已经授权，登录 获取头像昵称
+            // 已经授权，登录 获取头像昵称 获取个人收藏
             that.login()
           }
           else {
