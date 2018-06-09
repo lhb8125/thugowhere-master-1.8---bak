@@ -23,22 +23,10 @@
         <view class="dish_comment">{{item.commentBody}}</view>
         <view class="weui-flex" style='display:flex;justify-content:space-between;align-items:flex-end;margin-left:20rpx;margin-right:20rpx;'>
           <view class="weui-cell__ft  comment_gradeanddate">{{item.commentDate}}</view>
-          <view id="{{item.commentID}}" class="weui-cell__ft  comment_delete" bindtap='deleteComment'>删除</view>
+          <view id="{{index}}" class="weui-cell__ft  comment_delete" bindtap='deleteComment'>删除</view>
         </view>
 
-        <view style='display:flex;justify-content:flex-start;align-items:center'>
-          <image style="width: 35rpx; height: 35rpx;margin-left:20rpx;" src="/images/favour_f.png" mode="widthFix" bindtap="changeFavoured"></image>
-          <view class='favour_box'>
-            <image id="{{index}}" style="width: 40rpx; height: 35rpx;margin:10rpx;" src="/images/head.jpg" mode="widthFix" bindtap="changeFavoured"></image>
-          </view>
-        </view>
       </view>
     </block>
   </view>
-  <!-- <view class="weui-panel__ft">
-    <view class="weui-cell weui-cell_access weui-cell_link">
-      <view class="weui-cell__bd">查看更多</view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-    </view>
-  </view> -->
 </view>

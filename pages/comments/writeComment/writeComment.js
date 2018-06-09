@@ -34,7 +34,6 @@ Page({
     this.setData({
       wordCount: e.detail.value.length
     })
-    console.log(this.data.value)
   },
 
   getScore: function (e) {
@@ -105,10 +104,8 @@ Page({
 
   bindFormSubmit: function (e) {
     util.showBusy('正在提交...')
-    console.log(e.detail.value.textarea)
     var that = this
     var app = getApp()
-    console.log(app.globalData.userInfo)
     var options = {
       url: config.service.commentSubmitUrl,
       login: true,
@@ -146,7 +143,6 @@ Page({
       },
       fail(error) {
         util.showModel('提交失败', error);
-        console.log('request fail', error);
       }
     }
     if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
