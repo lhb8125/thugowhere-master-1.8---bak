@@ -3,14 +3,18 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = 'https://wznbuvtu.qcloud.la';
-//var host = 'https://weapp.tsingwind.top';
+//var host = 'https://wznbuvtu.qcloud.la';
+var host = 'https://weapp.tsingwind.top';
+
 
 var config = {
 
     // 下面的地址配合云端 Demo 工作
     service: {
         host,
+
+        image_prefix: "http://image.tsingwind.top",
+        image_suffix: "/1.jpg",
 
         // 登录地址，用于建立会话
         loginUrl: `${host}/weapp/login`,
@@ -36,6 +40,9 @@ var config = {
         // 提交评论接口
         commentSubmitUrl: `${host}/weapp/commentsubmit`,
 
+        // 删除评论接口
+        commentDeleteUrl: `${host}/weapp/commentdelete`,
+
         // 提交点赞接口
         postUpvoteUrl: `${host}/weapp/postupvote`,
 
@@ -44,6 +51,9 @@ var config = {
 
         // 提交收藏接口
         postFavourUrl: `${host}/weapp/postfavour`,
+
+        // 请求收藏夹菜品详细信息接口
+        favoureddishesUrl: `${host}/weapp/favoureddishes`,
     }
 };
 
