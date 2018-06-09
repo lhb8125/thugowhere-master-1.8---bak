@@ -35,23 +35,13 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    // console.log(options.name)
     that.setData({
       name: options.name,
       gradeList: getApp().globalData.gradeList
     })
-    
-    //初始化楼层数组以供显示
-    // for (var i = 0; i < options.floor; i++) {
-    //   var item = 'tabs[' + i + ']'    //这里使array的下标可以动态改变
-    //   that.setData({
-    //     [item]: i + 1    //注意：这里item必须要加[]，至于为什么我也不明白
-    //   })
-    // }
   },
 
   changeFavoured:function(e){
-    console.log(e.currentTarget.id)
     var isUserFavoured = 'comments.isUserFavoured[' + e.currentTarget.id + ']'
     this.setData({
       [isUserFavoured]: !this.data.comments.isUserFavoured[e.currentTarget.id],

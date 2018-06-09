@@ -9,14 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // nickname: "斌",
-    // name: "刘宏斌",
-    // studentID: "2016210481",
-    // grade: "硕二",
-    // hobby: "足球",
-    // head: '/images/head.jpg',
-    // phone: "18920533989"
     userInfo: [],
+    userDefinedInfo:{},
     gradeList: [],
     hometownList:[],
     majorList:[],
@@ -80,11 +74,11 @@ Page({
   onLoad: function (options) {
     this.setData({
       userInfo: getApp().globalData.userInfo,
+      userDefinedInfo: getApp().globalData.userDefinedInfo,
       gradeList: getApp().globalData.gradeList,
       hometownList: getApp().globalData.hometownList,
       majorList: getApp().globalData.majorList
     });
-    console.log(this.data.userInfo)
     this.requestCommentList()
   },
 
@@ -106,14 +100,9 @@ Page({
         that.setData({
           comments: objectArray
         })
-        console.log(objectArray)
-        console.log(that.data.userInfo.openId)
-        // that.getCommentStars()
-        // console.log(that.data.commentStars)
       },
       fail(error) {
         util.showModel('加载失败，请检查网络', error);
-        console.log('request fail', error);
       }
     }
     this.data.takeSession = false;

@@ -22,12 +22,6 @@
         </view>
       </navigator>
     </view>
-    <view class="weui-panel__ft">
-      <view class="weui-cell weui-cell_access weui-cell_link">
-        <view class="weui-cell__bd">查看更多</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      </view>
-    </view>
     <!-- <map longitude="120" latifdsfkl;ksdfl;kxvxcvfsfsdfsdfsffsdfsfsdfsdude="37" scale='10'></map> -->
   </view>
 </view>

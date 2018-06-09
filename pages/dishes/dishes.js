@@ -25,39 +25,10 @@ Page({
     sliderLeft: 0,
     numberArray: [1, 2, 3],
     database: [],
-    image_prefix: "https://tsingwind.top/weapp_img",
-    image_suffix: "/1.jpg",
+    image_prefix: config.service.image_prefix,
+    image_suffix: config.service.image_suffix,
     scoreStars: [],
     dishesCount: 4,
-    // dishes: {
-    //   id: ["kaoyu", "xianguo", "youtiao", "egg"],
-    //   name: ["烤鱼", "麻辣香锅", "油条", "鸡蛋"],
-    //   time: [1, 2, 0, 0],
-    //   floor: [2, 1, 1, 1],
-    //   path: ['/images/kaoyu.jpg', '/images/xiangguo.jpg', '/images/youtiao.jpg', '/images/egg.jpg'],
-    //   price: [18, 8, 1, 0.5],
-    //   scoreStars: [[2, 2, 2, 2, 0], [2, 2, 2, 2, 2], [2, 2, 2, 1, 0], [2, 2, 2, 2, 0]],
-    //   score: [4.0, 5.0, 4.2, 4.5, 3.7],
-    //   description: ["一种发源于重庆巫溪县，而发扬于万州的特色美食，在流传过程中，融合腌、烤、炖三种烹饪工艺技术，充分借鉴传统渝菜及重庆火锅用料特点，是口味奇绝、营养丰富的风味小吃。", "清芬的香锅最好吃", "一种古老的中式面食，长条形中空的油炸食品，口感松脆有韧劲。", "健康，含有丰富的蛋白质"],
-    //   cuisine: ["川菜", "川菜", "不限", "不限"],
-    //   taste: ["香辣", "麻辣", "油腻", "清淡"],
-    //   calory: [200, 250, 180, 30]
-    // },
-    selectedDishesCount: 0,
-    // selectedDishes: {
-    //   id: [],
-    //   name: [],
-    //   time: [],
-    //   floor: [],
-    //   path: [],
-    //   price: [],
-    //   scoreStars: [],
-    //   score: [],
-    //   description: [],
-    //   cuisine: [],
-    //   taste: [],
-    //   calory: []
-    // },
     star: [],
     dishDetailIndex: "0",
     inputShowed: false,
@@ -66,11 +37,8 @@ Page({
     txt: "测试",
     maxDataLength: 8,
     requestTimes: 0,
-    // isbottom: 0,
-    // isTop: 0,
     isCompleted: 0,
     isHideLoadMore: 1,
-    // toView:0,
     scrollTop: 0,
     isShowTop: 0,
     isShowFilter: 0,
@@ -88,8 +56,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    // canteen = options.canteen;
-    // floor = options.floor;
     this.setData({
       canteen: options.canteen,
       canteenList: getApp().globalData.canteenList,
@@ -98,12 +64,9 @@ Page({
     })
     that.requestDishList();
     new app.WeToast()
-    // that.getDishes();
-    // that.getStars();
   },
 
   requestDishList: function () {
-    // util.showBusy('请求中...')
     var that = this
     var options = {
       url: config.service.dishlistUrl,
@@ -113,8 +76,7 @@ Page({
         table: that.data.canteen
       },
       success(result) {
-        util.showSuccess('请求成功完成')
-        // console.log('request success', result)
+        util.showSuccess('菜品成功加载')
         var objectArray = result.data.data
         that.setData({
           requestDishResult: objectArray
@@ -124,7 +86,6 @@ Page({
       },
       fail(error) {
         util.showModel('请求失败', error);
-        console.log('request fail', error);
       }
     }
     this.data.takeSession = false;
@@ -141,8 +102,6 @@ Page({
     for (var i = 0; i < that.data.requestDishResult.length; i++) {
       starRank = that.data.requestDishResult[i].starRank;
       var scoreStars = 'scoreStars[' + i + ']'
-      // console.log(i)
-      // console.log(that.data.requestDishResult[i].starRank)
       if (starRank >= 4.8) {
         that.setData({
           [scoreStars]: [2, 2, 2, 2, 2]
@@ -196,7 +155,7 @@ Page({
     var that = this
     var database = that.data.database
     for (var i = 0; i < that.data.maxDataLength; i++) {
-      if (i + that.data.requestTimes * that.data.maxDataLength <= that.data.requestDishResult.length) {
+      if (i + that.data.requestTimes * that.data.maxDataLength < that.data.requestDishResult.length) {
         database.push(that.data.requestDishResult[i + that.data.requestTimes * that.data.maxDataLength])
       } else {
         that.setData({
@@ -209,8 +168,6 @@ Page({
       database: database,
       requestTimes: that.data.requestTimes + 1
     })
-    console.log(that.data.requestDishResult)
-    console.log(that.data.database)
   },
 
   tabClick: function (e) {
@@ -263,7 +220,6 @@ Page({
     });
   },
   changeSort: function (e) {
-    console.log("sort")
     this.setData({
       sort: e.detail.value
     });
@@ -276,7 +232,6 @@ Page({
     this.setData({
       canteen: e.detail.value
     });
-    // console.log(this.data.canteenList[this.data.canteen])
   },
   changeTaste: function (e) {
     this.setData({
@@ -300,23 +255,6 @@ Page({
       isShowFilter: 0,
     })
   },
-
-  // changeSort: function (e) {
-  //   console.log(e)
-  //   if (e.currentTarget.id == "window") {
-  //     this.setData({
-  //       sortOrder: this.data.sortOrder == 1 ? 2 : 1
-  //     })
-  //   } else if (e.currentTarget.id == "score") {
-  //     this.setData({
-  //       sortOrder: this.data.sortOrder == 3 ? 4 : 3
-  //     })
-  //   } else if (e.currentTarget.id == "price") {
-  //     this.setData({
-  //       sortOrder: this.data.sortOrder == 5 ? 6 : 5
-  //     })
-  //   }
-  // },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -374,7 +312,6 @@ Page({
       },
       fail(error) {
         util.showModel('请求失败', error);
-        console.log('request fail', error);
       }
     }
     this.data.takeSession = false;
@@ -383,58 +320,12 @@ Page({
     } else {    // 使用 wx.request 则不带登录态
       wx.request(options)
     }
-    //模拟加载
-    // setTimeout(function () {
-    //   // complete
-    //   wx.hideNavigationBarLoading() //完成停止加载
-    //   wx.stopPullDownRefresh() //停止下拉刷新
-    // }, 1500);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    // var that = this
-    // if (that.data.isCompleted == 0) {
-    //   that.setData({
-    //     isHideLoadMore:0
-    //   })
-    //   setTimeout(() => {
-    //   var options = {
-    //     url: config.service.dishlistUrl,
-
-    //     //需要在data里指定所有你需要的查询参数
-    //     data: {
-    //       table: that.data.canteen
-    //     },
-    //     success(result) {
-    //       var objectArray = result.data.data
-    //       that.setData({
-    //         requestDishResult: objectArray,
-    //         isHideLoadMore: 1
-    //       })
-    //       that.getDishes();
-    //       that.getStars();
-    //     },
-    //     fail(error) {
-    //       util.showModel('请求失败', error);
-    //       console.log('request fail', error);
-    //     }
-    //   }
-    //   this.data.takeSession = false;
-    //   if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
-    //     qcloud.request(options)
-    //   } else {    // 使用 wx.request 则不带登录态
-    //     wx.request(options)
-    //   }
-    //   }, 1000)
-    // } else {
-    //   this.wetoast.toast({
-    //     title: '已加载全部菜品',
-    //     duration: 1000
-    //   })
-    // }
   },
 
   lower: function () {
@@ -453,57 +344,15 @@ Page({
         duration: 1000
       })
     }
-    // var that = this
-    // if (that.data.isCompleted == 0) {
-    //   that.setData({
-    //     isHideLoadMore: 0
-    //   })
-    //   setTimeout(() => {
-    //     var options = {
-    //       url: config.service.dishlistUrl,
-
-    //       //需要在data里指定所有你需要的查询参数
-    //       data: {
-    //         table: that.data.canteen
-    //       },
-    //       success(result) {
-    //         var objectArray = result.data.data
-    //         that.setData({
-    //           requestDishResult: objectArray,
-    //           isHideLoadMore: 1
-    //         })
-    //         that.getDishes();
-    //         that.getStars();
-    //       },
-    //       fail(error) {
-    //         util.showModel('请求失败', error);
-    //         console.log('request fail', error);
-    //       }
-    //     }
-    //     this.data.takeSession = false;
-    //     if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
-    //       qcloud.request(options)
-    //     } else {    // 使用 wx.request 则不带登录态
-    //       wx.request(options)
-    //     }
-    //   }, 1000)
-    // } else {
-    //   this.wetoast.toast({
-    //     title: '已加载全部菜品',
-    //     duration: 1000
-    //   })
-    // }
   },
 
   scrollToTop: function () {
-    console.log("scrollToTop")
     this.setData({
       scrollTop: 0,
     })
   },
 
   scroll: function (e) {
-    console.log(e.detail)
     if (e.detail.scrollTop > 300) {
       this.setData({
         isShowTop: 1
@@ -527,25 +376,6 @@ Page({
       isShowDetail: true,
       dishDetailIndex: e.currentTarget.id
     })
-    // var isUserFavoured = 'comments.isUserFavoured[' + e.currentTarget.id + ']'
-    // this.setData({
-    //   [isUserFavoured]: !this.data.comments.isUserFavoured[e.currentTarget.id],
-    // })
-    // var id = 'selectedDishes.id[' + count + ']'
-    // var name = 'selectedDishes.name[' + count + ']'
-    // var time = 'selectedDishes.time[' + count + ']'
-    // var floor = 'selectedDishes.floor[' + count + ']'
-    // var path = 'selectedDishes.path[' + count + ']'
-    // var price = 'selectedDishes.price[' + count + ']'
-    // var scoreStars = 'selectedDishes.scoreStars[' + count + ']'
-    // that.setData({
-    //   [dishDetail.name]: that.data.selectedDishes.id[e.currentTarget.id],
-    //   [dishDetail.score]: that.data.selectedDishes.id[e.currentTarget.id],
-    //   [dishDetail.scoreStars]: that.data.selectedDishes.id[e.currentTarget.id],
-    //   [dishDetail.taste]: that.data.selectedDishes.id[e.currentTarget.id],
-    //   [dishDetail.cuisine]: that.data.selectedDishes.id[e.currentTarget.id],
-    //   [dishDetail.calory]: that.data.selectedDishes.id[e.currentTarget.id],
-    // })
   },
   cancelDetail: function () {
     this.setData({
@@ -554,28 +384,12 @@ Page({
   },
   showComments: function (event) {
     //根据数据库确定餐厅层数
-    // console.log("youtiao")
-    if (event.currentTarget.id == "youtiao") {
-    } else if (event.currentTarget.id == "kaoyu") {
-    } else if (event.currentTarget.id == "xiangguo") {
-    }
     this.setData({
       isShowDetail: false,
     })
     wx.navigateTo({
       url: '/pages/randomDish/randomDish?isRandom=0&id=' + this.data.requestDishResult[this.data.dishDetailIndex].ID + '&canteen=' + this.data.canteen
     })
-    //确定用户吃哪顿饭
-    // wx.showActionSheet({
-    //   itemList: ['早餐', '午餐', '晚餐'],
-    //   success: function (res) {
-    //     if (!res.cancel) {
-    //       wx.navigateTo({
-    //         url: '/pages/dishes/dishes?canteen=1&floor=' + floor + '&' + 'times=' + res.tapIndex,
-    //       })
-    //     }
-    //   }
-    // });
   }
 
 })

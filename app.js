@@ -7,27 +7,9 @@ App({
   WeToast,
 
   globalData: {
-    gradeList: ["大一", "大二", "大三", "大四", "硕一", "硕二", "硕三", "硕士", "博一", "博二", "博三", "博四", "博五", "博士"],
-    hometownList: ["北京", "天津", "上海", "广东", "重庆",],
-    majorList: ["能源与动力工程系", "机械工程系", "经济与信息管理学院", "汽车工程系", "人文学院",],
-    canteenList: ["不限", "紫荆", "桃李"],
-    tasteList: ["不限", "油腻", "清淡", "麻辣", "香辣",],
-    cuisineList: ["不限", "川菜", "京菜", "鲁菜", "东北菜", "淮扬菜", "粤菜", "云贵风味", "西北风味",],
-
-    someoneInfo: {
-      nickname: "斌",
-      name: "刘宏斌",
-      studentID: "2016210481",
-      grade: 6,
-      hometown: 2,
-      major: 1,
-      hobby: "足球",
-      head: '/images/head.jpg',
-      phone: "18920533989",
-      briefInfo: "我就是我，不一样的烟火"
-    },
-
     userInfo: {},
+    userDefinedInfo:{},
+    logging: false,
     logged: false,
     favouredlist: []
   },
@@ -36,27 +18,34 @@ App({
     if (this.globalData.logged) return
 
     var that = this
+    util.showBusy('正在登录')
+    that.globalData.logging = true
 
     // 调用登录接口
     qcloud.login({
       success(result) {
         if (result) {
-          util.showSuccess('登录1成功')
+          util.showSuccess('登录成功')
           that.globalData.userInfo = result
+          that.globalData.userDefinedInfo = result.userDefinedInfo
           that.globalData.logged = true
+          that.globalData.logging = false
           that.getFavouredList()
         } else {
           // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
           qcloud.request({
             url: config.service.requestUrl,
             success(result) {
-              util.showSuccess('登录2成功')
+              util.showSuccess('登录成功')
               that.globalData.userInfo = result.data.data
+              that.globalData.userDefinedInfo = result.data.data.userDefinedInfo
               that.globalData.logged = true
+              that.globalData.logging = false
               that.getFavouredList()
             },
             fail(error) {
-              util.showModel('请求失败', error)
+              util.showModel('登录失败', error)
+              that.globalData.logging = false
             }
           })
         }
@@ -64,6 +53,7 @@ App({
 
       fail(error) {
         util.showModel('登录失败', error)
+        that.globalData.logging = false
       }
     })
   },

@@ -7,19 +7,10 @@ var app = getApp()
 
 Page({
   data: {
-    // icon: '/images/head.jpg',
-    // head: '/images/head.jpg',
-    // // name: "斌",
-    // // studentID: "2016210481",
-    // gradeList: ["大一", "大二", "大三", "大四", "硕一", "硕二", "硕三", "硕士", "博一", "博二", "博三", "博四", "博五", "博士"],
-    // nickname: "斌",
-    // name: "刘宏斌",
-    // studentID: "2016210481",
-    // grade: "硕二",
-    // hobby: "足球",
-    // head: '/images/head.jpg',
-    // phone: "18920533989",
     userInfo: [],
+    userDefinedInfo: {
+      slogan: '我就是我，不一样的烟火'
+    },
     isRefuseLogin: false,
     canIUseInfo: wx.canIUse('button.open-type.getUserInfo')
 
@@ -94,12 +85,14 @@ Page({
     qcloud.login({
       success(result) {
         if (result) {
-          util.showSuccess('登录1成功')
+          util.showSuccess('登录成功')
           app.globalData.userInfo = result
+          app.globalData.userDefinedInfo = result.userDefinedInfo
           app.globalData.logged = true
 
           that.setData({
             "userInfo": app.globalData.userInfo,
+            "userDefinedInfo": app.globalData.userDefinedInfo,
             "isRefuseLogin": false
           });
           app.getFavouredList()
@@ -109,21 +102,21 @@ Page({
           qcloud.request({
             url: config.service.requestUrl,
             success(result) {
-              util.showSuccess('登录2成功')
+              util.showSuccess('登录成功')
               app.globalData.userInfo = result.data.data
-              console.log(result)
+              app.globalData.userDefinedInfo = result.data.data.userDefinedInfo
               app.globalData.logged = true
 
               that.setData({
                 "userInfo": app.globalData.userInfo,
+                "userDefinedInfo": app.globalData.userDefinedInfo,
                 "isRefuseLogin": false
               });
               app.getFavouredList()
             },
 
             fail(error) {
-              util.showModel('请求失败', error)
-              console.log('request fail', error)
+              util.showModel('登录失败', error)
             }
           })
         }
@@ -131,7 +124,6 @@ Page({
 
       fail(error) {
         util.showModel('登录失败', error)
-        console.log('登录失败', error)
       }
     })
   },
@@ -140,9 +132,26 @@ Page({
 
     var that = this
 
-    if (app.globalData.logged) {
+    if (app.globalData.logging) {
+      var promise = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          resolve()
+        }, 2000)
+      })
+
+      promise.then(function () {
+        that.setData({
+          "userInfo": app.globalData.userInfo,
+          "userDefinedInfo": app.globalData.userDefinedInfo,
+          "isRefuseLogin": false
+        });
+      })
+    }
+
+    else if (app.globalData.logged) {
       that.setData({
         "userInfo": app.globalData.userInfo,
+        "userDefinedInfo": app.globalData.userDefinedInfo,
         "isRefuseLogin": false
       });
     }

@@ -24,8 +24,6 @@ Page({
     for (var i = 0; i < that.data.comments.length; i++) {
       starRank = that.data.comments[i].commentStar;
       var scoreStars = 'commentStars[' + i + ']'
-      // console.log(i)
-      // console.log(that.data.requestDishResult[i].starRank)
       if (starRank >= 4.8) {
         that.setData({
           [scoreStars]: [2, 2, 2, 2, 2]
@@ -90,17 +88,13 @@ Page({
         that.setData({
           comments: objectArray,
         })
-        console.log(that.data.comments)
         that.getCommentStars()
-        console.log(that.data.commentStars)
         that.setData({
           commentCount: that.data.comments.length
         })
-        console.log(that.data.commentCount)
       },
       fail(error) {
         util.showModel('加载失败，请检查网络', error);
-        console.log('request fail', error);
       }
     }
     if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
@@ -110,25 +104,55 @@ Page({
     }
   },
 
-  deleteComment: function () {
+  deleteComment: function (e) {
+    var that = this
     wx.showModal({
       title: '删除评论',
       content: '删除后评论及点赞信息将不可恢复，确认删除该条评论吗？',
       confirmText: "确认",
       cancelText: "取消",
       success: function (res) {
-        console.log(res);
         if (res.confirm) {
-          console.log('用户点击主操作')
+          that.postDeleteComment(e.currentTarget.id)
         } else {
-          console.log('用户点击辅助操作')
         }
       }
     });
   },
 
+  postDeleteComment:function(id){
+    var commentid = this.data.comments[id].COMMENT_ID
+    var dishid = this.data.comments[id].dishID
+    var canteen = this.data.comments[id].dishCanteen
+    var commentStar = this.data.comments[id].commentStar
+
+    var that = this
+    var options = {
+      url: config.service.commentDeleteUrl,
+
+      login: true,
+      method: 'POST',
+
+      //需要在data里指定所有你需要的查询参数
+      data: {
+        openid: app.globalData.userInfo.openId,
+        commentid:commentid,
+        dishid:dishid,
+        canteen:canteen,
+        commentStar:commentStar
+      },
+      success(result) {
+        util.showSuccess('删除成功')
+        that.requestCommentList()
+      },
+      fail(error) {
+        util.showModel('删除失败，请检查网络或重新登录', error);
+      }
+    }
+      qcloud.request(options)
+  },
+
   showDish: function (e) {
-    console.log(e.currentTarget.id)
     // wx.navigateTo({
     //   url: '/pages/randomDish/randomDish?isRandom=0&id=' + this.data.comments[e.currentTarget.id].dishID + '&canteen=' + this.data.comments[e.currentTarget.id].dishCanteen
     // )}

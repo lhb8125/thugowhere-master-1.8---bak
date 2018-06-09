@@ -18,7 +18,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    // // console.log(options.name)
     that.setData({
       gradeList: getApp().globalData.gradeList,
       canteenList: getApp().globalData.canteenList,
@@ -38,7 +37,6 @@ Page({
     this.setData({
       canteen: e.detail.value
     });
-    // console.log(this.data.canteenList[this.data.canteen])
   },
   changeTaste: function (e) {
     this.setData({

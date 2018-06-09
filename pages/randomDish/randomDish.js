@@ -14,29 +14,19 @@ Page({
     randomIndex: 0,
     commentStars: [],
     comments: {
-      /*
-      studentID: ["2016210222", "2016310333", "2016010000"],
-      studentNickname: ["张三", "李四", "wangwu",],
-      studentHead: ["/images/head/zhangsan.jpg", "/images/head/lisi.jpg", "/images/head/wangwu.jpg",],
-      studentGrade: [4, 8, 1,],
-      commentDate: ["2017-1-12", "2018-4-21", "2018-2-12"],
-      commentFavour: [12, 23, 34],
-      studentScore: [[2, 2, 2, 2, 0], [2, 2, 2, 2, 2], [2, 2, 2, 1, 0]],
-      studentComment: ["油条的叫法各地不一，东北和华北很多地区称油条为“馃子”；安徽一些地区称“油果子”；广州及周边地区称油炸鬼；潮汕地区等地称油炸果；浙江地区有天罗筋的称法（天罗即丝瓜，老丝瓜干燥后剥去壳会留下丝瓜筋，其形状与油条极像，遂称油条为天罗筋）。", "好吃，很脆！", "还可以吧。。"],
-      isUserFavoured: [false, false, false],
-      */
     },
     gradeList: [],
     isRandom: 1,
     dishID: 0,
     canteen: "",
     canteen_zh: "",
+    commentCount:0,
     windowHeight: 0,
     loadmore: 0,
     refresh: 0,
     btnHeight: 80,
-    image_prefix: "https://tsingwind.top/weapp_img",
-    image_suffix: "/1.jpg",
+    image_prefix: config.service.image_prefix,
+    image_suffix: config.service.image_suffix,
     isCompleted: 1,
     isFavoured: 0,
     favourWidth: "100%",
@@ -72,17 +62,18 @@ Page({
       success(result) {
         util.showSuccess('加载完成')
         var resBundle = result.data.data
-        console.log(resBundle)
         if (that.data.isVoteListNeeded) {
           that.setData({
             comments: resBundle.res,
-            voteList: resBundle.votedlist
+            voteList: resBundle.votedlist,
+            commentCount: resBundle.res.length
           })
           wx.setStorageSync('votelist', resBundle.votedlist)
         }
         else {
           that.setData({
-            comments: resBundle.res
+            comments: resBundle.res,
+            commentCount: resBundle.res.length
           })
         }
         that.getUpvoted()
@@ -90,16 +81,9 @@ Page({
       },
       fail(error) {
         util.showModel('加载失败，请检查网络', error);
-        console.log('request fail', error);
       }
     }
     wx.request(options)
-  },
-
-
-  //消除时区转换带来的日期错误（不是最好的解决方案) by mengql
-  getRightDate: function () {
-
   },
 
 
@@ -130,8 +114,6 @@ Page({
     for (var i = 0; i < that.data.comments.length; i++) {
       starRank = that.data.comments[i].commentStar;
       var scoreStars = 'commentStars[' + i + ']'
-      // console.log(i)
-      // console.log(that.data.requestDishResult[i].starRank)
       if (starRank >= 4.8) {
         that.setData({
           [scoreStars]: [2, 2, 2, 2, 2]
@@ -186,7 +168,6 @@ Page({
   onLoad: function (options) {
     var that = this;
     new app.WeToast()
-    console.log(that.data.isRandom)
     that.setData({
       // name: options.name,
       gradeList: getApp().globalData.gradeList,
@@ -240,7 +221,6 @@ Page({
 
   requestDishList: function () {
     util.showBusy('请求中...')
-    console.log(this.data.dishID)
     var that = this
     var options = {
       url: config.service.dishlistUrl,
@@ -252,17 +232,14 @@ Page({
       },
       success(result) {
         util.showSuccess('请求成功完成')
-        // console.log('request success', result)
         var objectArray = result.data.data
         that.setData({
           requestDishResult: objectArray
         })
         that.getStars(that.data.requestDishResult[0].starRank);
-        console.log(that.data.requestDishResult)
       },
       fail(error) {
         util.showModel('请求失败', error);
-        console.log('request fail', error);
       }
     }
     wx.request(options)
@@ -319,17 +296,12 @@ Page({
 
   getRandomDish: function () {
     var that = this;
-    // wx.showToast({
-    //   title: '数据加载中',
-    //   icon: 'loading',
-    //   duration: 500
-    // });
-    // that.data.randomIndex = Math.round(Math.random() * (that.data.database.length - 1));
-    that.setData({
-      dishID: Math.round(Math.random() * 10) + 1
-    })
-    that.requestDishList()
-    that.requestCommentList()
+    var options = {
+      'canteen':'zijing',
+      'dishID': Math.round(Math.random() * 10) + 1,
+      'isRandom':1
+    }
+    that.onLoad(options)
   },
 
   //加载时设置菜品的收藏状态 by mengql
@@ -371,14 +343,14 @@ Page({
         isDelete: isDelete
       },
       success(result) {
-        util.showSuccess('成功收藏')
+        util.showSuccess('操作成功')
         wx.setStorage({
           key: 'favouredlist',
           data: tempFavouredlist,
         })
       },
       fail(error) {
-        util.showModel('收藏失败，请检查网络', error);
+        util.showModel('操作失败，请检查网络', error);
       }
     }
     qcloud.request(options)
@@ -413,7 +385,6 @@ Page({
         isDelete: isDelete
       },
       success(result) {
-        // util.showSuccess('点赞完成')
         wx.setStorage({
           key: 'votelist',
           data: tempVotelist,
@@ -433,8 +404,6 @@ Page({
       var i = e.currentTarget.id
       var tempVotelist = that.data.voteList
       var isDelete
-      // console.log(that.data.comments[i].isUpvoted)
-      // console.log(that.data.comments[i].upvoteCount)
       if (that.data.comments[i].isUpvoted) {
         that.setData({
           ['comments[' + i + '].isUpvoted']: false,
@@ -486,6 +455,7 @@ Page({
   },
 
   showUserDetail(e) {
+    /*
     console.log("showUserDetail")
     this.setData({
       ['bkgColorList[' + e.currentTarget.id + ']']:"lightgrey"
@@ -493,6 +463,7 @@ Page({
     wx.navigateTo({
       url: '/pages/about/showDetail/showDetail',
     })
+    */
   },
 
   sortTime:function(){
